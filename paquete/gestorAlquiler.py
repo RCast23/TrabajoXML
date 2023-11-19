@@ -4,22 +4,43 @@ Created on 10 nov 2023
 @author: Roberto
 '''
 def crear(top):
-    emp1 = ET.SubElement(top,'empresa')
+    alquiler = ET.SubElement(top,'Alquiler',{'atr1':"ID"})
     
-    nombre = ET.SubElement(emp1, 'nombre')
-    nombre.text =input("dame un nombre")
+    idVehiculo = ET.SubElement(alquiler, 'ID Vehiculo')
+    scan=input("dame un ID de vehiculo")#que llame a utiles con un escaner  que verifique
+    #metodo que te diga si existe el vehiculo(el buscar de vehiculo)
+    idVehiculo.text =scan
     
-    n_empleados = ET.SubElement(emp1, 'N_empleados')
-    n_empleados.text =input("dame un numero de empleados")
+    idCliente = ET.SubElement(alquiler, 'ID Cliente')
+    scan=input("dame un ID de cliente")#que llame a utiles con un escaner  que verifique
+    idCliente.text =scan
     
-    facturacion = ET.SubElement(emp1, 'Facturacion')
-    facturacion.text = input("dame un numero de facturacion")
+    fechaInicio = ET.SubElement(alquiler, 'Fecha Inicio')
+    scan=input("dame una fecha de inicio")#que llame a utiles con un escaner  que verifique
+    fechaInicio.text =scan
     
-    #top.append(emp1)
+    fechaDevolucion = ET.SubElement(alquiler, 'Fecha Devolucion')
+    fechaInicio.text ='Fecha devolucion todavia no dada'
+    
+    kilometrajeInicial = ET.SubElement(alquiler, 'Kilometraje Inicial')
+    scan=input("dame un kilometraje inicial")#que llame a utiles con un escaner  que verifique
+    kilometrajeInicial.text =scan
+    
+    kilometrajeFinal = ET.SubElement(alquiler, 'Kilometraje Final')
+    kilometrajeFinal.text ='Kilometraje final todavia no dado'
+    
+    precioFinal = ET.SubElement(alquiler, 'Precio Final')
+    precioFinal.text ='Precio final todavia no dado'
+    
+    recargo = ET.SubElement(alquiler, 'Recargo')
+    recargo.text ='Recargo de momento 0'
+    
+    #top.append(emp1) al mandar el root no hace falta 
     guardar(top)
     return 0
 
 def modificar(top):
+    #decidir como vamos a hacer los buscar antes de hacer nada
     print("introduce el nombre de la empresa que quieres modificar")
     nodo1,nodo2=buscar(top)
     if(nodo1!=False):
@@ -59,15 +80,5 @@ def mostrar(top):
     #print(prettify(top))
     return 0
 
-
-def prettify(elem):
-    #prettify esta en base de datos
-    from xml.etree import ElementTree
-    from xml.dom import minidom
-    """Return a pretty-printed XML string for the Element.
-    """
-    rough_string = ElementTree.tostring(elem, 'utf-8')
-    reparsed = minidom.parseString(rough_string)
-    return reparsed.toprettyxml(indent="  ")
 
 

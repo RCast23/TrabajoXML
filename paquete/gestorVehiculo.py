@@ -1,17 +1,31 @@
 import xml.etree.ElementTree as ET
 
 def alta(agenda):
-    empresa = ET.SubElement(agenda,'Empresa')
+    scan=input("dame una matricula")#que llame a utiles con un escaner  que verifique
+    vehiculo = ET.SubElement(agenda,'Vehiculo',{'atr1':scan})
     
-    nombre = ET.SubElement(empresa,'Nombre')
-    nombre.text = input("Intoduzca el nombre de la empresa")
+    matricula = ET.SubElement(vehiculo, 'Matricula')
+    scan=input("dame una matricula")#que llame a utiles con un escaner  que verifique
+    matricula.text =scan
     
-    numEmpleados = ET.SubElement(empresa,'NumEmpleados')
-    numEmpleados.text = input("Intoduzca el numero de empleados de la empresa")
+    marcaYmodelo = ET.SubElement(vehiculo, 'Marca y Modelo')
+    scan=input("dame una marca y modela")#que llame a utiles con un escaner  que verifique
+    marcaYmodelo.text =scan
     
-    facturacion = ET.SubElement(empresa,'Facturacion')
-    facturacion.text = input("Introduzca la facturacion de la empresa")
+    annoDeFabricacion = ET.SubElement(vehiculo, 'Anno De Fabricacion')
+    scan=input("dame un Anno De Fabricacion")#que llame a utiles con un escaner  que verifique
+    annoDeFabricacion.text =scan
     
+    tarifa = ET.SubElement(vehiculo, 'Tarifa')
+    scan=input("dame una tarifa por dia")#que llame a utiles con un escaner  que verifique
+    tarifa.text =scan
+    
+    estadoVehiculo = ET.SubElement(vehiculo, 'Estado Vehiculo')
+    scan=input("dame un estado del vehiculo")#que llame a utiles con un escaner  que verifique
+    estadoVehiculo.text =scan
+    
+    #top.append(emp1) al mandar el root no hace falta 
+    guardar(agenda)
 def baja(agenda): #Requiere confirmacion
     empresa = buscar(agenda)
     if(empresa!=None):
