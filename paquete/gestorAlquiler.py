@@ -54,6 +54,11 @@ def buscar(nodo):
         nodo1+=1
     return encontrado,encontrado
 
+def mostrar(top):
+    recorrer(top)
+    #print(prettify(top))
+    return 0
+
 
 def prettify(elem):
     #prettify esta en base de datos
