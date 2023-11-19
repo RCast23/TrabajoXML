@@ -27,8 +27,3 @@ def prettify(elem):
     reparsed = minidom.parseString(rough_string)
     return reparsed.toprettyxml(indent="  ")
 
-#def validacion(): 3 intentos
-
-#def reintentar(): (Para crear, borrar y modificar)
-
-#def modificar(): (Confirmacion)
