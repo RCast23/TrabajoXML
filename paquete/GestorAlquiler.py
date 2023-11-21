@@ -55,25 +55,45 @@ def modificar(top):
     else:
         print("error")
     return 0
-
-def buscar(nodo):
+def buscarMostrarTodosVehiculo(root):
     texto=input()
-    nodo1=0
-    nodo2=0
-    encontrado=False
-    for x in top:
+    for x in root:
         for i in x:
             if(i.text==texto):
                 print("He ecnontrado: ",i.text)
                 print(prettify(x))
-                encontrado=True
+    return 0
+def buscarMostrarTodosDni(root):
+    texto=input()
+    for x in root:
+        for i in x:
+            if(i.text==texto):
+                print("He ecnontrado: ",i.text)
+                print(prettify(x))
+    return 0
+def buscarMostrar(root):
+    texto=input()
+    for x in root:
+        for i in x:
+            if(i.text==texto):
+                print("He ecnontrado: ",i.text)
+                print(prettify(x))
+    return 0
+def buscarPosicion(root):
+    texto=input()
+    nodo1=0
+    nodo2=0
+    for x in root:
+        for i in x:
+            if(i.text==texto):
+                print("He ecnontrado: ",i.text)
+                print(prettify(x))
                 return nodo1,nodo2
             nodo2+=1
         nodo1+=1
-    return encontrado,encontrado
-
-def mostrar(top):
-    recorrer(top)
+    return None,None
+def mostrar(root):
+    recorrer(root)
     #print(prettify(top))
     return 0
 

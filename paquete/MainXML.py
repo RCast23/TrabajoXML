@@ -7,8 +7,7 @@ def submenuAlquiler(root):
         if(opcion=='1'):
             GestorAlquiler.crear(root)
         elif (opcion == '2'):
-            #No se que es nodo
-            GestorAlquiler.buscar(nodo)
+            GestorAlquiler.buscar(root)
         elif(opcion=='3'):
             GestorAlquiler.modificar(root)
         elif(opcion=='4'):
@@ -16,10 +15,13 @@ def submenuAlquiler(root):
                 #No se como lo has montado tu pero esto es lo que dice la practica, cambia lo que veas
                 opcion = input("Como desea consultar Alquileres:\n1.Todos los Alquileres\n2.Alquileres por vehiculo\n3.Alquileres por DNI\n0.Salir")
                 if(opcion=='1'):
+                    GestorAlquiler.mostrar(root)
                 elif (opcion == '2'):
+                    GestorAlquiler.buscarMostrarTodosVehiculo(root)
                 elif (opcion == '3'):
+                    GestorAlquiler.buscarMostrarTodosDni(root)
                 elif (opcion == '0'):
-                    while=False
+                    check=False
         elif(opcion == '0'):
             check = False
         else:
@@ -31,8 +33,7 @@ def submenuVehiculo(root):
         if(opcion=='1'):
             GestorAlquiler.crear(root)
         elif (opcion == '2'):
-            #No se que es nodo
-            GestorAlquiler.buscar(nodo)
+            GestorAlquiler.buscar(root)
         elif(opcion=='3'):
             GestorAlquiler.modificar(root)
         elif(opcion=='4'):

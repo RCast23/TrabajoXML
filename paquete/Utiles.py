@@ -6,7 +6,8 @@
 
 
 def recorrer(nodo):
-    ##
+    #Nodo es bascamente un vehiculo o todos los vehiculos o root ya que es recursivo
+    #printea todos los datos del elemento y si hay subelemento tambien
     print("Tipo nodo: ",nodo.tag,end="")
     #Para recorrer los atributos. Los atributos estan en un diccionario
     for attr in nodo.attrib:
