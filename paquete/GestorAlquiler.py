@@ -1,7 +1,9 @@
 import xml.etree.ElementTree as ET
 
 def crear(top):
-    alquiler = ET.SubElement(top,'Alquiler',{'atr1':"ID"})
+    
+    scan=input("dame un ID de alquiler")
+    alquiler = ET.Element('Alquiler',{'alquilerID':scan})
     
     idVehiculo = ET.SubElement(alquiler, 'ID Vehiculo')
     scan=input("dame un ID de vehiculo")#que llame a utiles con un escaner  que verifique
@@ -32,8 +34,8 @@ def crear(top):
     recargo = ET.SubElement(alquiler, 'Recargo')
     recargo.text ='Recargo de momento 0'
     
-    #top.append(emp1) al mandar el root no hace falta 
-    guardar(top)
+    top.append(alquiler) 
+    guardar(top.getparent())
     return 0
 
 def modificar(top):
@@ -51,50 +53,43 @@ def modificar(top):
             top[nodo1][2].text=input("introduce el nuevo numero de facturacion")
         else:
             print("escribe bien anda")
-        guardar(top)
+        BaseDeDatos.guardar(top)
     else:
         print("error")
     return 0
-def buscarMostrarTodosVehiculo(root):
-    texto=input()
-    for x in root:
-        for i in x:
-            if(i.text==texto):
-                print("He ecnontrado: ",i.text)
-                print(prettify(x))
+def buscarMostrarTodosVehiculo(alquileres):
+    texto=input("Introduce el id del coche que quieres ver los alquileres")
+    for x in alquileres:
+        if(x[0].text.lower()==texto.lower()):
+            print("He ecnontrado: ",i.text)
+            Utiles.recorrer(x)
     return 0
-def buscarMostrarTodosDni(root):
-    texto=input()
-    for x in root:
-        for i in x:
-            if(i.text==texto):
-                print("He ecnontrado: ",i.text)
-                print(prettify(x))
+def buscarMostrarTodosDni(alquileres):
+    texto=input("Introduce el id del cliente que quieres ver los alquileres")
+    for x in alquileres:
+        if(x[1].text.lower()==texto.lower()):
+            print("He ecnontrado: ",i.text)
+            Utiles.recorrer(x)
     return 0
-def buscarMostrar(root):
-    texto=input()
-    for x in root:
-        for i in x:
-            if(i.text==texto):
-                print("He ecnontrado: ",i.text)
-                print(prettify(x))
+def buscarMostrar(alquileres):
+    texto=input("Introduce el id del alquiler que quieres ver")
+    for x in alquileres:
+        if( nodo.attrib['alquilerID'].lower()==texto.lower()):
+            print("He ecnontrado: ",i.text)
+            Utiles.recorrer(x)
     return 0
-def buscarPosicion(root):
-    texto=input()
-    nodo1=0
-    nodo2=0
-    for x in root:
-        for i in x:
-            if(i.text==texto):
-                print("He ecnontrado: ",i.text)
-                print(prettify(x))
-                return nodo1,nodo2
-            nodo2+=1
-        nodo1+=1
-    return None,None
+def buscarPosicion(alquileres):
+    texto=input("Introduce el id del alquiler que quieres ver")
+    nodo=0
+    for x in alquileres:
+        if( nodo.attrib['alquilerID'].lower()==texto.lower()):
+            print("He ecnontrado: ",i.text)
+            Utiles.recorrer(x)
+            return nodo
+        nodo+=1
+    return None
 def mostrar(root):
-    recorrer(root)
-    #print(prettify(top))
+    Utiles.recorrer(root)
     return 0
 
 
