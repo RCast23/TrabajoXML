@@ -4,181 +4,174 @@ import BaseDeDatos
 import Utiles
 
 def crear(alquileres):
-    
-    atributo=input("Dame un ID de alquiler")
     continuar=True
-    if(scan!=None and continuar):
-        if(buscarPosicion(alquileres,atributo)==None):
-            alquiler = ET.Element('Alquiler',{'alquilerID':atributo})
-        else:
-            continuar=False
-            print ('Ya existe ese alquiler')
-    else:
-        continuar=False
-        print ('Has introducido mal 3 veces el ID de Alquiler, saldras de este menu')
+    #---------------------------------------
+    
+    alquiler = ET.Element('Alquiler',{'alquilerID':atributo})
         
-    scan=input("Dame un ID de vehiculo")
+    #-----------------------------------------
+    print("Dame un ID de vehiculo") 
+    scan=Utiles.escanerMatricula()
     if(scan!=None and continuar): 
         if(GestorVehiculo.buscarPosicion(MainXML.root[0],scan)!=None):
-            idVehiculo = ET.SubElement(alquiler, 'ID Vehiculo')
+            idVehiculo = ET.SubElement(alquiler, 'ID_Vehiculo')
             idVehiculo.text =scan
         else:
             continuar=False
             print ('No existe ese vehiculo')
     else:
         continuar=False
-        print ('Has introducido mal 3 veces el ID de Vehiculo, saldras de este menu')
-    scan=input("Dame un ID de cliente")#que llame a utiles con un escaner  que verifique
+    
+    print("Dame un ID de cliente")
+    scan=Utiles.escanerDni()
     if(scan!=None and continuar):
-        idCliente = ET.SubElement(alquiler, 'ID Cliente')
+        idCliente = ET.SubElement(alquiler, 'ID_Cliente')
         idCliente.text =scan
-        
-        scan=input("Dame una fecha de inicio")
-        if(scan!=None and continuar):
-            fechaInicio = ET.SubElement(alquiler, 'Fecha Inicio')
-            fechaInicio.text =scan
-            
-            fechaDevolucion = ET.SubElement(alquiler, 'Fecha Devolucion')
-            fechaInicio.text ='-'
-        else:
-            continuar=False
-            print ('Has introducido mal 3 veces la fecha de inicio, saldras de este menu')
     else:
         continuar=False
-        print ('Has introducido mal 3 veces el ID de Cliente, saldras de este menu')
-        
-    scan=input("Dame un kilometraje inicial")
+            
+    print("Dame una fecha de inicio")
+    scan=Utiles.escanerFecha()
     if(scan!=None and continuar):
-        kilometrajeInicial = ET.SubElement(alquiler, 'Kilometraje Inicial')
+        fechaInicio = ET.SubElement(alquiler, 'Fecha_Inicio')
+        fechaInicio.text =scan
+        
+        fechaDevolucion = ET.SubElement(alquiler, 'Fecha_Devolucion')
+        fechaInicio.text ='-'
+    else:
+        continuar=False
+        
+    print("Dame un kilometraje inicial") 
+    scan=Utiles.escanerNumericoDecimal()
+    if(scan!=None and continuar):
+        kilometrajeInicial = ET.SubElement(alquiler, 'Kilometraje_Inicial')
         kilometrajeInicial.text =scan
         
-        kilometrajeFinal = ET.SubElement(alquiler, 'Kilometraje Final')
+        kilometrajeFinal = ET.SubElement(alquiler, 'Kilometraje_Final')
         kilometrajeFinal.text ='-'
         
-        precioFinal = ET.SubElement(alquiler, 'Precio Final')
+        precioFinal = ET.SubElement(alquiler, 'Precio:Final')
         precioFinal.text ='-'
         
         recargo = ET.SubElement(alquiler, 'Recargo')
         recargo.text ='De momento 0'
         
         alquileres.append(alquiler) 
-        print('Has añadido un nuevo alquiler(',atributo,') a la lista de alquileres')
+        print('Has añadido un nuevo alquilerç a la lista de alquileres')
     else:
         continuar=False
-        print ('Has introducido mal 3 veces el kilometraje inicial, saldras de este menu')
         
     return 0
 
 def modificar(root):
-    idAlquiler=input("introduce el nombre de la empresa que quieres modificar")
-    #nose hace falta una cosa en utiles (los escaneres)
     if(Utiles.validacionIDAlquiler()):
-        nodo=buscar(top,idAlquiler)
-        if(nodo!=None):
-            print("Introcuce el campo que quieres modificar\n1 ID Alquiler\n2 ID Vehiculo\n3 ID Cliente\n4 Fecha Inicio\n5 Fecha Devolucion\n6 Kilometraje Inicial\n7 Kilometraje Final\n8 precio Final\n9 Recargo")
-            opcion=input()
-            if(opcion=="1"):
-                scan=Utiles.validacionIDAlquiler()
-                if(scan!=None):
-                    toot[nodo].attrib['alquilerID']=scan
+        nodo=buscarPosicion(top,vehiculo,dni)
+        continuar=True
+        while(continuar):
+            if(nodo!=None):
+                # por si aaso crear una copia de los datos originales y cambiar el nombre a todos los campos
+                
+                print("Introcuce el campo que quieres modificar\n1 ID Alquiler\n2 ID Vehiculo\n3 ID Cliente\n4 Fecha Inicio\n5 Fecha Devolucion\n6 Kilometraje Inicial\n7 Kilometraje Final\n8 precio Final\n9 Recargo\n0 Salir")
+                opcion=Utiles.escanerNumerico()
+                if(opcion=="1"):
+                    scan=Utiles.escanerNumerico()
+                    if(scan!=None):
+                        root[nodo].attrib['alquilerID']=scan
+                elif(opcion=="2"):
+                    scan=Utiles.escanerMatricula()
+                    if(scan!=None):
+                        root[nodo][0].text=scan
+                elif(opcion=="3"):
+                    scan=Utiles.escanerDni()
+                    if(scan!=None):
+                        root[nodo][1].text=scan
+                elif(opcion=="4"):
+                    scan=Utiles.escanerFecha()
+                    if(scan!=None):
+                        root[nodo][2].text=scan
+                elif(opcion=="5"):
+                    scan=Utiles.escanerFecha()
+                    if(scan!=None):
+                        root[nodo][3].text=scan
+                elif(opcion=="6"):
+                    scan=Utiles.escanerNumericoDecimal()
+                    if(scan!=None):
+                        root[nodo][4].text=scan
+                elif(opcion=="7"):
+                    scan=Utiles.escanerNumericoDecimal()
+                    if(scan!=None):
+                        root[nodo][5].text=scan
+                elif(opcion=="8"):
+                    scan=Utiles.escanerNumericoDecimal()
+                    if(scan!=None):
+                        root[nodo][6].text=scan
+                elif(opcion=="9"):
+                    scan=Utiles.escanerNumericoDecimal()
+                    if(scan!=None):
+                        root[nodo][7].text=scan
+                elif(opcion=="0"):
+                    continuar=False
                 else:
-                    print ('Has introducido mal 3 veces el ID de Alquiler, saldras de este menu')
-            elif(opcion=="2"):
-                scan=Utiles.validacionIDVehiculo()
-                if(scan!=None):
-                    root[nodo][0].text=scan
-                else:
-                    print ('Has introducido mal 3 veces el ID de Alquiler, saldras de este menu')
-            elif(opcion=="3"):
-                scan=Utiles.validacionIDCliente()
-                if(scan!=None):
-                    root[nodo][1].text=scan
-                else:
-                    print ('Has introducido mal 3 veces el ID de Cliente, saldras de este menu')
-            elif(opcion=="4"):
-                scan=Utiles.validacionFechaDeInicio()
-                if(scan!=None):
-                    root[nodo][2].text=scan
-                else:
-                    print ('Has introducido mal 3 veces el fecha de inicio, saldras de este menu')
-            elif(opcion=="5"):
-                scan=Utiles.validacionFechaDevolucion()
-                if(scan!=None):
-                    root[nodo][3].text=scan
-                else:
-                    print ('Has introducido mal 3 veces el fecha de devolucion, saldras de este menu')
-            elif(opcion=="6"):
-                scan=Utiles.validacionKilometrajeInicial()
-                if(scan!=None):
-                    root[nodo][4].text=scan
-                else:
-                    print ('Has introducido mal 3 veces el kilometraje inicial, saldras de este menu')
-            elif(opcion=="7"):
-                scan=Utiles.validacionKilometrajeFinal()
-                if(scan!=None):
-                    root[nodo][5].text=scan
-                else:
-                    print ('Has introducido mal 3 veces el kilometraje final, saldras de este menu')
-            elif(opcion=="8"):
-                scan=Utiles.validacionPrecioFinal()
-                if(scan!=None):
-                    root[nodo][6].text=scan
-                else:
-                    print ('Has introducido mal 3 veces el precio final, saldras de este menu')
-            elif(opcion=="9"):
-                scan=Utiles.validacionRecargo()
-                if(scan!=None):
-                    root[nodo][7].text=scan
-                else:
-                    print ('Has introducido mal 3 veces el recargo, saldras de este menu')
+                    print("Escribe un numero dentro de las opciones posibles")
+                
             else:
-                print("escribe bien anda")
-            BaseDeDatos.guardar(top)
-        else:
-            print("error")
+                print("No encontrado ningun alquiler con la matricula de ese coche y ese dni de cliente")
+            print("Quieres guardar los cambios realizados?")
+            if(Utiles.confirmacion()):
+                #Preguntar a roberto como carajos guardo algo
+                BaseDeDatos.guardar(top)
     return 0
 def buscarMostrarTodosVehiculo(alquileres):
     texto=input("Introduce el id del coche que quieres ver los alquileres")
     for x in alquileres:
         if(x[0].text.lower()==texto.lower()):
-            print("He ecnontrado: ",i.text)
+            print("He ecnontrado: ",x.text)
             Utiles.recorrer(x)
     return 0
 def buscarMostrarTodosDni(alquileres):
     texto=input("Introduce el id del cliente que quieres ver los alquileres")
     for x in alquileres:
         if(x[1].text.lower()==texto.lower()):
-            print("He ecnontrado: ",i.text)
+            print("He ecnontrado: ",x.text)
             Utiles.recorrer(x)
     return 0
 def buscarMostrar(alquileres):
-    texto=input("Introduce el id del alquiler que quieres ver")
+    
+    vehiculo=input("Introduce la matricula del vehiculo que quieres ver")
+    dni=input("Introduce el dni del cliente que quieres ver")
+    
     for x in alquileres:
-        if( nodo.attrib['alquilerID'].lower()==texto.lower()):
-            print("He ecnontrado: ",i.text)
+        if( x[0].text.lower()==vehiculo.lower() and x[1].text.lower()==dni.lower()):
+            print("He ecnontrado: ",x.text)
             Utiles.recorrer(x)
     return 0
-def buscarPosicion(alquileres,texto):
-    nodo=0
+def buscarPosicion(alquileres,vehiculo,dni):
+    #reacer buscando por matricula y dni
+    #con una tupla , tiene que permitir elegir un
+    cont=0
+    opciones=[]
     for x in alquileres:
-        if( nodo.attrib['alquilerID'].lower()==texto.lower()):
-            print("He ecnontrado: ",i.text)
+        if(x[0].text.lower()==vehiculo.lower() and x[1].text.lower()==dni.lower()):
+            print(cont,"-He ecnontrado: ",x.text)
             Utiles.recorrer(x)
-            return nodo
-        nodo+=1
+            opciones.append(cont)
+        cont+=1
+    
+    nodo=0
+    print ("Elige el alquiler que quieres seleccionar")
+    scan=Utiles.escanerNumerico()
+    if(scan in opciones):
+        for x in alquileres:
+            if(x == alquileres[scan]):
+                print(cont,"-He ecnontrado: ",x.text)
+                Utiles.recorrer(x)
+                return nodo
+            nodo+=1
     return None
 def mostrar(root):
     Utiles.recorrer(root)
     return 0
 
-def escanerAlfanumerico():
-    intentos=0
-    while(intentos<3):
-        scan=input()
-        if(scan.isspace()!=False and scan.isalnum() ):
-            return scan
-        print('Porfavor introduce alfanumericos')
-    print()
-    return None
+
 
 
