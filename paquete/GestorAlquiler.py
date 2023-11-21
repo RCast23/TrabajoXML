@@ -162,14 +162,13 @@ def mostrar(root):
     Utiles.recorrer(root)
     return 0
 
-def escanerAlfannumerico
+def escanerAlfannumerico():
     intentos=0
     while(intentos<3):
         scan=imput()
-            if(scan.isspace()!=true and scan.isalnum() ):
-        
-    
-    
-    return scan
+        if(scan.isspace()!=False and scan.isalnum() ):
+            return scan
+        print('Porfavor introduce alfanumericos')
+    return None
 
 
