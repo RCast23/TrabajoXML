@@ -25,7 +25,7 @@ def guardarArchivo(root):
 
 def prettify(elem):
     rough_string = str(ET.tostring(elem,'utf-8'))+"a"
-    print(rough_string.split("'")[1])
-    reparsed = minidom.parseString(rough_string)
+    print("Si soy"+rough_string.split("'")[1])
+    reparsed = minidom.parseString(rough_string.split("'")[1])
     return reparsed.toprettyxml()
 
