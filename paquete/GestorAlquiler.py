@@ -1,8 +1,5 @@
-'''
-Created on 10 nov 2023
+import xml.etree.ElementTree as ET
 
-@author: Roberto
-'''
 def crear(top):
     alquiler = ET.SubElement(top,'Alquiler',{'atr1':"ID"})
     

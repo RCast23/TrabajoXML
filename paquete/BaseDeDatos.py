@@ -1,15 +1,15 @@
 import xml.etree.ElementTree as ET
 
-def comprobarArchivo(arbol,agenda):
+def comprobarArchivo(arbol,root):
     try:
-        arbol = ET.parse('agenda.xml')
-        agenda = arbol.getroot()
+        arbol = ET.parse('root.xml')
+        root = arbol.getroot()
         print("Agenda cargada")
-        return agenda
+        return arbol, root
     except:
-        agenda = ET.Element('Agenda')
+        root = ET.Element('Agenda')
         print("Agenda creada")
-        return agenda
+        return arbol, root
 
 def guardarArchivo(agenda):
     tab = prettify(agenda)
