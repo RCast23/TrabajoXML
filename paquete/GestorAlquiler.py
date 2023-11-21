@@ -6,58 +6,67 @@ import Utiles
 def crear(alquileres):
     
     atributo=input("Dame un ID de alquiler")
-    if(Utiles.validacionIDAlquiler(atributo)):
+    continuar=True
+    if(scan!=None and continuar):
         if(buscarPosicion(alquileres,atributo)==None):
             alquiler = ET.Element('Alquiler',{'alquilerID':atributo})
-            scan=input("Dame un ID de vehiculo")
-            if(Utiles.validacionIDVehiculo(scan)): 
-                if(GestorVehiculo.buscarPosicion(MainXML.root[0],scan)!=None):
-                    idVehiculo = ET.SubElement(alquiler, 'ID Vehiculo')
-                    idVehiculo.text =scan
-                    
-                    scan=input("Dame un ID de cliente")#que llame a utiles con un escaner  que verifique
-                    if(Utiles.validacionIDCliente(scan)):
-                        idCliente = ET.SubElement(alquiler, 'ID Cliente')
-                        idCliente.text =scan
-                        
-                        scan=input("Dame una fecha de inicio")
-                        if(Utiles.ValidacionFechaDeInicio(scan)):
-                            fechaInicio = ET.SubElement(alquiler, 'Fecha Inicio')
-                            fechaInicio.text =scan
-                            
-                            fechaDevolucion = ET.SubElement(alquiler, 'Fecha Devolucion')
-                            fechaInicio.text ='-'
-                            
-                            scan=input("Dame un kilometraje inicial")
-                            if(Utiles.ValidacionKilometrajeInicial(scan)):
-                                kilometrajeInicial = ET.SubElement(alquiler, 'Kilometraje Inicial')
-                                kilometrajeInicial.text =scan
-                                
-                                kilometrajeFinal = ET.SubElement(alquiler, 'Kilometraje Final')
-                                kilometrajeFinal.text ='-'
-                                
-                                precioFinal = ET.SubElement(alquiler, 'Precio Final')
-                                precioFinal.text ='-'
-                                
-                                recargo = ET.SubElement(alquiler, 'Recargo')
-                                recargo.text ='De momento 0'
-                                
-                                alquileres.append(alquiler) 
-                                print('Has añadido un nuevo alquiler(',atributo,') a la lista de alquileres')
-                            else:
-                                print ('Has introducido mal 3 veces el kilometraje inicial, saldras de este menu')
-                        else:
-                            print ('Has introducido mal 3 veces la fecha de inicio, saldras de este menu')
-                    else:
-                        print ('Has introducido mal 3 veces el ID de Cliente, saldras de este menu')
-                else:
-                    print ('No existe ese vehiculo')
-            else:
-                print ('Has introducido mal 3 veces el ID de Vehiculo, saldras de este menu')
         else:
+            continuar=False
             print ('Ya existe ese alquiler')
     else:
+        continuar=False
         print ('Has introducido mal 3 veces el ID de Alquiler, saldras de este menu')
+        
+    scan=input("Dame un ID de vehiculo")
+    if(scan!=None and continuar): 
+        if(GestorVehiculo.buscarPosicion(MainXML.root[0],scan)!=None):
+            idVehiculo = ET.SubElement(alquiler, 'ID Vehiculo')
+            idVehiculo.text =scan
+        else:
+            continuar=False
+            print ('No existe ese vehiculo')
+    else:
+        continuar=False
+        print ('Has introducido mal 3 veces el ID de Vehiculo, saldras de este menu')
+    scan=input("Dame un ID de cliente")#que llame a utiles con un escaner  que verifique
+    if(scan!=None and continuar):
+        idCliente = ET.SubElement(alquiler, 'ID Cliente')
+        idCliente.text =scan
+        
+        scan=input("Dame una fecha de inicio")
+        if(scan!=None and continuar):
+            fechaInicio = ET.SubElement(alquiler, 'Fecha Inicio')
+            fechaInicio.text =scan
+            
+            fechaDevolucion = ET.SubElement(alquiler, 'Fecha Devolucion')
+            fechaInicio.text ='-'
+        else:
+            continuar=False
+            print ('Has introducido mal 3 veces la fecha de inicio, saldras de este menu')
+    else:
+        continuar=False
+        print ('Has introducido mal 3 veces el ID de Cliente, saldras de este menu')
+        
+    scan=input("Dame un kilometraje inicial")
+    if(scan!=None and continuar):
+        kilometrajeInicial = ET.SubElement(alquiler, 'Kilometraje Inicial')
+        kilometrajeInicial.text =scan
+        
+        kilometrajeFinal = ET.SubElement(alquiler, 'Kilometraje Final')
+        kilometrajeFinal.text ='-'
+        
+        precioFinal = ET.SubElement(alquiler, 'Precio Final')
+        precioFinal.text ='-'
+        
+        recargo = ET.SubElement(alquiler, 'Recargo')
+        recargo.text ='De momento 0'
+        
+        alquileres.append(alquiler) 
+        print('Has añadido un nuevo alquiler(',atributo,') a la lista de alquileres')
+    else:
+        continuar=False
+        print ('Has introducido mal 3 veces el kilometraje inicial, saldras de este menu')
+        
     return 0
 
 def modificar(root):
@@ -169,6 +178,7 @@ def escanerAlfanumerico():
         if(scan.isspace()!=False and scan.isalnum() ):
             return scan
         print('Porfavor introduce alfanumericos')
+    print()
     return None
 
 
