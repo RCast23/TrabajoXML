@@ -18,14 +18,12 @@ def comprobarArchivo(arbol,root):
 def guardarArchivo(root):
     tab = prettify(root)
     file=open("agenda.xml","w")
-    ElementTree(root).write(tab)
-    #file.write(str(ET.(root,'utf-8')))
+    file.write(tab)
     file.close()
     file=open("agenda.xml","r")
 
 def prettify(elem):
-    rough_string = str(ET.tostring(elem,'utf-8'))+"a"
-    print("Si soy"+rough_string.split("'")[1])
-    reparsed = minidom.parseString(rough_string.split("'")[1])
-    return reparsed.toprettyxml()
+    rough_string = ET.tostring(elem,encoding='utf-8', method='xml')
+    reparsed = minidom.parseString(rough_string)
+    return '\n'.join([line for line in reparsed.toprettyxml(indent=' '*2).split('\n') if line.strip()])
 

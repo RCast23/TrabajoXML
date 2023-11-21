@@ -9,11 +9,11 @@ def crear(rootVehiculo):
     scan=input("dame una matricula")#que llame a utiles con un escaner  que verifique
     matricula.text = scan
     
-    marcaYmodelo = ET.SubElement(vehiculo, 'Marca y Modelo')
+    marcaYmodelo = ET.SubElement(vehiculo, 'MarcaYModelo')
     scan=input("dame una marca y modela")#que llame a utiles con un escaner  que verifique
     marcaYmodelo.text = scan
     
-    annoDeFabricacion = ET.SubElement(vehiculo, 'Anno De Fabricacion')
+    annoDeFabricacion = ET.SubElement(vehiculo, 'AnnoDeFabricacion')
     scan=input("dame un Anno De Fabricacion")#que llame a utiles con un escaner  que verifique
     annoDeFabricacion.text = scan
     
@@ -21,7 +21,7 @@ def crear(rootVehiculo):
     scan=input("dame una tarifa por dia")#que llame a utiles con un escaner  que verifique
     tarifa.text = scan
     
-    estadoVehiculo = ET.SubElement(vehiculo, 'Estado Vehiculo')
+    estadoVehiculo = ET.SubElement(vehiculo, 'EstadoVehiculo')
     scan=input("dame un estado del vehiculo")#que llame a utiles con un escaner  que verifique
     estadoVehiculo.text = scan
     
