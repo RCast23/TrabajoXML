@@ -1,9 +1,15 @@
 #def validacion(): 3 intentos
-
-#def reintentar(): (Para crear, borrar y modificar)
-
-#def modificar(): (Confirmacion)
-
+    
+def confirmacion():
+    while(True):
+        inputConfirmacion = input()
+        if(inputConfirmacion.lower() == 'si'):
+            return True
+        elif(inputConfirmacion.lower() == 'no'):
+            return False
+        else:
+            print("Valor incorrecto, pruebe otra vez")
+        
 
 def recorrer(nodo):
     #Nodo es bascamente un vehiculo o todos los vehiculos o root ya que es recursivo

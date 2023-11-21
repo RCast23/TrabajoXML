@@ -8,6 +8,8 @@ def comprobarArchivo(arbol,root):
         return arbol, root
     except:
         root = ET.Element('Agenda')
+        vehiculos = ET.SubElement(root,'Vehiculos')
+        alquileres = ET.SubElement(root,'Alquileres')
         print("Agenda creada")
         return arbol, root
 

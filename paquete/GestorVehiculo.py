@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
+from paquete.BaseDeDatos import guardarArchivo
 
-def alta(agenda):
+def crear(agenda):
     scan=input("dame una matricula")#que llame a utiles con un escaner  que verifique
     vehiculo = ET.SubElement(agenda,'Vehiculo',{'atr1':scan})
     
@@ -25,8 +26,9 @@ def alta(agenda):
     estadoVehiculo.text =scan
     
     #top.append(emp1) al mandar el root no hace falta 
-    guardar(agenda)
-def baja(agenda): #Requiere confirmacion
+    guardarArchivo(agenda)
+    
+def borrar(agenda): #Requiere confirmacion
     empresa = buscar(agenda)
     if(empresa!=None):
         mostrarTodos(empresa)
