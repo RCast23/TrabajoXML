@@ -1,8 +1,10 @@
 import xml.etree.ElementTree as ET
+from xml.dom import minidom
+from xml.etree.ElementTree import ElementTree
 
 def comprobarArchivo(arbol,root):
     try:
-        arbol = ET.parse('root.xml')
+        arbol = ET.parse('agenda.xml')
         root = arbol.getroot()
         print("Agenda cargada")
         return arbol, root
@@ -13,19 +15,17 @@ def comprobarArchivo(arbol,root):
         print("Agenda creada")
         return arbol, root
 
-def guardarArchivo(agenda):
-    tab = prettify(agenda)
+def guardarArchivo(root):
+    tab = prettify(root)
     file=open("agenda.xml","w")
-    file.write(tab)
+    ElementTree(root).write(tab)
+    #file.write(str(ET.(root,'utf-8')))
     file.close()
     file=open("agenda.xml","r")
-    fileAux=open('auxXml.xml','w')
-    fileAux.close()
 
 def prettify(elem):
-    from xml.etree import ElementTree
-    from xml.dom import minidom
-    rough_string = ElementTree.tostring(elem,'utf-8')
+    rough_string = str(ET.tostring(elem,'utf-8'))+"a"
+    print(rough_string.split("'")[1])
     reparsed = minidom.parseString(rough_string)
-    return reparsed.toprettyxml(indent="  ")
+    return reparsed.toprettyxml()
 
