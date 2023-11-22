@@ -36,6 +36,13 @@ def crear(alquileres):
     if(scan!=None and continuar):
         fechaInicio = ET.SubElement(alquiler, 'Fecha_Inicio')
         fechaInicio.text =scan
+    else:
+        continuar=False
+    print("Dame una fecha de finalizacion")
+    scan=Utiles.escanerFecha()
+    if(scan!=None and continuar):
+        fechaFinal = ET.SubElement(alquiler, 'Fecha_Final')
+        fechaFinal.text =scan
         
         fechaDevolucion = ET.SubElement(alquiler, 'Fecha_Devolucion')
         fechaInicio.text ='-'
@@ -79,13 +86,14 @@ def modificar(root):
             idVehiculo
             idCliente
             fechaInicio
+            fechaFinal
             fechaDevolucion
             kilometrajeInicial
             kilometrajeFinal
             precioFinal
             recargo
             
-            print("Introcuce el campo que quieres modificar\n1 ID Alquiler\n2 ID Vehiculo\n3 ID Cliente\n4 Fecha Inicio\n5 Fecha Devolucion\n6 Kilometraje Inicial\n7 Kilometraje Final\n8 precio Final\n9 Recargo\n0 Salir")
+            print("Introcuce el campo que quieres modificar\n1 ID Alquiler\n2 ID Vehiculo\n3 ID Cliente\n4 Fecha Inicio\n5 Fecha Final\n6 Fecha Devolucion\n7 Kilometraje Inicial\n8 Kilometraje Final\n9 precio Final\n10 Recargo\n0 Salir")
             opcion=Utiles.escanerNumerico()
             if(opcion=="1"):
                 scan=Utiles.escanerNumerico()#-----------------------------------------------
@@ -112,20 +120,24 @@ def modificar(root):
             elif(opcion=="5"):
                 scan=Utiles.escanerFecha()
                 if(scan!=None):
-                    fechaDevolucion=scan
+                    fechaFinal=scan
             elif(opcion=="6"):
-                scan=Utiles.escanerNumericoDecimal()
+                scan=Utiles.escanerFecha()
                 if(scan!=None):
-                    kilometrajeInicial=scan
+                    fechaDevolucion=scan
             elif(opcion=="7"):
                 scan=Utiles.escanerNumericoDecimal()
                 if(scan!=None):
-                    kilometrajeFinal=scan
+                    kilometrajeInicial=scan
             elif(opcion=="8"):
                 scan=Utiles.escanerNumericoDecimal()
                 if(scan!=None):
-                    precioFinal=scan
+                    kilometrajeFinal=scan
             elif(opcion=="9"):
+                scan=Utiles.escanerNumericoDecimal()
+                if(scan!=None):
+                    precioFinal=scan
+            elif(opcion=="10"):
                 scan=Utiles.escanerNumericoDecimal()
                 if(scan!=None):
                     recargo=scan
@@ -148,16 +160,18 @@ def modificar(root):
                 root[nodo][1].text=idCliente
             if(fechaInicio!=None):
                 root[nodo][2].text=fechaInicio
+            if(fechafinal!=None):
+                root[nodo][3].text=fechafinal
             if(fechaDevolucion!=None):
-                root[nodo][3].text=fechaDevolucion
+                root[nodo][4].text=fechaDevolucion
             if(kilometrajeInicial!=None):
-                root[nodo][4].text=kilometrajeInicial
+                root[nodo][5].text=kilometrajeInicial
             if(kilometrajeFinal!=None):
-                root[nodo][5].text=kilometrajeFinal
+                root[nodo][6].text=kilometrajeFinal
             if(precioFinal!=None):
-                root[nodo][6].text=precioFinal
+                root[nodo][7].text=precioFinal
             if(recargo!=None):
-                root[nodo][7].text=recargo
+                root[nodo][8].text=recargo
     return 0
 def buscarMostrarTodosVehiculo(alquileres):
     print("Introduce la matricula de los alquileres que quieres ver")
