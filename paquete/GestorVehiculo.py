@@ -6,53 +6,42 @@ from paquete.Utiles import recorrer
 def crear(root):
     check = True
     
-    # Preguntar como se estan autoasignando valores
-    # Uso temporal de id introducida manualmente
-    
     print("Dame una matricula")
-    scanMatricula = paquete.Utiles.escanerMatricula()  # que llame a utiles con un escaner  que verifique
+    scanMatricula = paquete.Utiles.escanerMatricula()
     if(scanMatricula == None or buscarMatricula(scanMatricula, root[0]) != None):
         check = False
         
     if(check):
-        print("Dame una marca y modelo")
-        scanMarcaModelo = paquete.Utiles.escanerAlfanumerico()
+        print("Dame una descripcion (Marca y modelo)")
+        scanMarcaModelo = paquete.Utiles.escanerTexto()
         if(scanMarcaModelo == None):
             check = False
     
     if(check):
-        # No termino de entender la diferencia entre numerico y numerico decimal
         print("Dame un Anno De Fabricacion")
         scanAnno = paquete.Utiles.escanerYear()
         if(scanAnno == None):
             check = False
     
     if(check):
-        # No termino de entender la diferencia entre numerico y numerico decimal
         print("Dame una tarifa por dia")
         scanTarifa = paquete.Utiles.escanerNumericoDecimal()
         if(scanTarifa == None):
             check = False
     
     if(check):
-        print("Dame un estado del vehiculo")
-        scan = paquete.Utiles.escanerAlfabetico()
-        if(scan == None):
-            check = False
-    
-    if(check):
         vehiculo = ET.SubElement(root[0], 'Vehiculo', {'vehiculoID':paquete.Utiles.autoasignarIDVehiculo(root)})
         vehiculo.text = ''
         matricula = ET.SubElement(vehiculo, 'Matricula')
-        matricula.text = scanMatricula
-        marcaYmodelo = ET.SubElement(vehiculo, 'Marca_Y_Modelo')
+        matricula.text = scanMatricula.capitalize()
+        marcaYmodelo = ET.SubElement(vehiculo, 'Descripcion')
         marcaYmodelo.text = scanMarcaModelo
         annoDeFabricacion = ET.SubElement(vehiculo, 'Anno_De_Fabricacion')
         annoDeFabricacion.text = scanAnno
         tarifa = ET.SubElement(vehiculo, 'Tarifa')
         tarifa.text = scanTarifa
         estadoVehiculo = ET.SubElement(vehiculo, 'Estado_Vehiculo')
-        estadoVehiculo.text = scan
+        estadoVehiculo.text = 'Disponible'
         print("Coche creado")
         
     
@@ -89,7 +78,7 @@ def modificar(root):  # Requiere confirmacion
                     
             elif(numOpcion == '2'):
                 print("Introduzca la nueva matricula del vehiculo")
-                scan = paquete.Utiles.escanerMatricula()
+                scan = paquete.Utiles.escanerMatricula().capitalize()
                 if(scan != None):
                     print("¿Desea confirmar la modificacion?")
                     if(paquete.Utiles.confirmacion()):
@@ -97,8 +86,8 @@ def modificar(root):  # Requiere confirmacion
                         vehiculo[0].text = scan
                     
             elif(numOpcion == '3'):
-                print("Introduzca la nueva marca y modelo del vehiculo")
-                scan = paquete.Utiles.escanerAlfanumerico()
+                print("Introduzca la nueva descripcion del vehiculo (Marca y modelo)")
+                scan = paquete.Utiles.escanerTexto()
                 if(scan != None):
                     print("¿Desea confirmar la modificacion?")
                     if(paquete.Utiles.confirmacion()):

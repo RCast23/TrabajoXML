@@ -1,7 +1,7 @@
 -Mostrar alquiler id vehiculo = matricula (guardar matricula como atributo)
 -Vehiculos siempre disponible hasta que se modifiquen (Fechas de alquileres lo modifican default)
--Campo descripcion es un gran campo
 -No existe ningun escaner que acepte numeros decimales ni uno que acepte espacios
--La fecha final e inicial no sea menor al inicial 
--Modificacion en cascada de atributos id
--Estado del vehiculo solo permite opciones de un menu
+-La fecha final no sea menor al inicial
+-------------------------------------------------------------------------------------------------
+Preguntas:
+-Hacer disponibilidad un enum en vez de un texto introducido por el usuario

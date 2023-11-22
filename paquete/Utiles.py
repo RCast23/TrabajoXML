@@ -75,6 +75,17 @@ def escanerID(root):
     print("Has superado el numero de intentos")
     return None
 
+def escanerTexto():
+    intentos=0
+    while(intentos<3):
+        scan=input()
+        if(scan.isspace()==False):
+            return scan.
+        intentos+=1
+        print('Porfavor introduce algun caracter')
+    print("Has superado el numero de intentos")
+    return None
+
 def escanerAlfanumerico():
     intentos=0
     while(intentos<3):
