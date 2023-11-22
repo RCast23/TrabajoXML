@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <Agenda>
   <Vehiculos>
-    <Vehiculo vehiculoID="5">
-      <Matricula>1111AAA</Matricula>
+    <Vehiculo vehiculoID="8">
+      <Matricula>9999AAA</Matricula>
       <Marca_Y_Modelo>SeatLeon</Marca_Y_Modelo>
       <Anno_De_Fabricacion>2000</Anno_De_Fabricacion>
       <Tarifa>12</Tarifa>
@@ -24,8 +24,8 @@
     </Vehiculo>
   </Vehiculos>
   <Alquileres>
-    <Alquiler alquilerID="atributo" ID_Vehiculo="5">
-      <ID_Vehiculo matricula="1111AAA">1</ID_Vehiculo>
+    <Alquiler alquilerID="atributo">
+      <ID_Vehiculo matricula="9999AAA">5</ID_Vehiculo>
       <ID_Cliente>12345678a</ID_Cliente>
       <Fecha_Inicio>-</Fecha_Inicio>
       <Fecha_Final>03 03 2020 </Fecha_Final>

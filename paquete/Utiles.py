@@ -52,8 +52,13 @@ def autoasignarIDVehiculo(root):
 
 def modificarIDVehiculoCascada(root,idVieja,idNueva):
     for x in root[1]:
-        if(x.get('ID_Vehiculo')==idVieja):
-            x.set('ID_Vehiculo',idNueva)
+        if(x[0]==idVieja):
+            x[0]=idNueva
+
+def modificarMatriculaVehiculoCascada(root,matriculaVieja,matriculaNueva):
+    for x in root[1]:
+        if(x[0].get('matricula')==matriculaVieja):
+            x[0].set('matricula',matriculaNueva)
 
 def escanerID(root):
     intentos=0

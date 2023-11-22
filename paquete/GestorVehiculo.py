@@ -93,6 +93,7 @@ def modificar(root):  # Requiere confirmacion
                 if(scan != None):
                     print("¿Desea confirmar la modificacion?")
                     if(paquete.Utiles.confirmacion()):
+                        paquete.Utiles.modificarMatriculaVehiculoCascada(root, vehiculo[0].text, scan)
                         vehiculo[0].text = scan
                     
             elif(numOpcion == '3'):
