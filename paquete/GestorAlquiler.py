@@ -13,7 +13,7 @@ def crear(alquileres):
     print("Dame un ID de vehiculo") 
     scan=Utiles.escanerMatricula()
     if(scan!=None and continuar): 
-        if(GestorVehiculo.buscarPosicion(MainXML.root[0],scan)!=None):
+        if(GestorVehiculo.buscarMatricula(scan, MainXML.root[0])!=None):
             idVehiculo = ET.SubElement(alquiler, 'ID_Vehiculo')
             idVehiculo.text =scan
         else:

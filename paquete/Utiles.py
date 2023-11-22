@@ -72,8 +72,8 @@ def escanerMatricula():
     intentos=0
     while(intentos<3):
         scan=input()
-        if(scan.isspace()==False and len(scan)==4):
-            if(scan[0:2].isnumeric() and scan[3].isalpha()):
+        if(scan.isspace()==False and len(scan)==6):
+            if(scan[0:2].isnumeric() and scan[3:6].isalpha()):
                 return scan
         intentos+=1
         print('Porfavor introduce una matricula (Tres numeros y una letra)')
@@ -83,7 +83,7 @@ def escanerDni():
     intentos=0
     while(intentos<3):
         scan=input()
-        if(scan.isspace()==False and scan.len()==8):
+        if(scan.isspace()==False and len(scan)==8):
             if(scan[0:7].isnumeric() and scan[8].isalpha()):
                 return scan
         intentos+=1
