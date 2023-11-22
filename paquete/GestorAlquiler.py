@@ -8,65 +8,77 @@ def crear(alquileres,root):
         #---------------------------------------
         alquiler = ET.Element('Alquiler',{'alquilerID':'atributo'})#llamar al metodo que te crea un identificador automatico
         #-----------------------------------------
-        print("Dame una matricula de vehiculo") 
-        scan=paquete.Utiles.escanerMatricula()
-        if(scan!=None and continuar): 
-            nodo=paquete.GestorVehiculo.buscarMatricula(scan, root[0])
-            if(nodo!=None):
-                idVehiculo = ET.SubElement(alquiler, 'ID_Vehiculo')
-                idVehiculo.text =nodo.attrib['vehiculoID']
+        if(continuar):
+            print("Dame una matricula de vehiculo") 
+            scan=paquete.Utiles.escanerMatricula()
+            if(scan!=None): 
+                nodo=paquete.GestorVehiculo.buscarMatricula(scan, root[0])
+                if(nodo!=None):
+                    idVehiculo = ET.SubElement(alquiler, 'ID_Vehiculo',{'matricula':scan})
+                    idVehiculo.text =nodo.attrib['vehiculoID']
+                else:
+                    continuar=False
+                    print ('No existe ese vehiculo')
+                    print('Se cancelara la creacion de este alquiler')
             else:
                 continuar=False
-                print ('No existe ese vehiculo')
-        else:
-            continuar=False
+                print('Se cancelara la creacion de este alquiler')
         
-        print("Dame un ID de cliente")
-        scan=paquete.Utiles.escanerDni()
-        if(scan!=None and continuar):
-            idCliente = ET.SubElement(alquiler, 'ID_Cliente')
-            idCliente.text =scan
-        else:
-            continuar=False
+        if(continuar):
+            print("Dame un ID de cliente")
+            scan=paquete.Utiles.escanerDni()
+            if(scan!=None):
+                idCliente = ET.SubElement(alquiler, 'ID_Cliente')
+                idCliente.text =scan
+            else:
+                continuar=False
+                print('Se cancelara la creacion de este alquiler')
+        
+        if(continuar):
+            print("Dame una fecha de inicio")
+            scan=paquete.Utiles.escanerFecha()
+            if(scan!=None ):
+                fechaInicio = ET.SubElement(alquiler, 'Fecha_Inicio')
+                fechaInicio.text =scan
+            else:
+                continuar=False
+                print('Se cancelara la creacion de este alquiler')
+        if(continuar):
+            print("Dame una fecha de finalizacion")
+            scan=paquete.Utiles.escanerFecha()
+            if(scan!=None ):
+                fechaFinal = ET.SubElement(alquiler, 'Fecha_Final')
+                fechaFinal.text =scan
                 
-        print("Dame una fecha de inicio")
-        scan=paquete.Utiles.escanerFecha()
-        if(scan!=None and continuar):
-            fechaInicio = ET.SubElement(alquiler, 'Fecha_Inicio')
-            fechaInicio.text =scan
-        else:
-            continuar=False
-        print("Dame una fecha de finalizacion")
-        scan=paquete.Utiles.escanerFecha()
-        if(scan!=None and continuar):
-            fechaFinal = ET.SubElement(alquiler, 'Fecha_Final')
-            fechaFinal.text =scan
-            
-            fechaDevolucion = ET.SubElement(alquiler, 'Fecha_Devolucion')
-            fechaInicio.text ='-'
-        else:
-            continuar=False
-            
-        print("Dame un kilometraje inicial") 
-        scan=paquete.Utiles.escanerNumericoDecimal()
-        if(scan!=None and continuar):
-            kilometrajeInicial = ET.SubElement(alquiler, 'Kilometraje_Inicial')
-            kilometrajeInicial.text =scan
-            
-            kilometrajeFinal = ET.SubElement(alquiler, 'Kilometraje_Final')
-            kilometrajeFinal.text ='-'
-            
-            precioFinal = ET.SubElement(alquiler, 'Precio_Final')
-            precioFinal.text ='-'
-            
-            recargo = ET.SubElement(alquiler, 'Recargo')
-            recargo.text ='De momento 0'
-            
-            alquileres.append(alquiler) 
-            print('Has añadido un nuevo alquilerç a la lista de alquileres')
-        else:
-            continuar=False
-        print ("Quieres continuar crendo alquileres?")
+                fechaDevolucion = ET.SubElement(alquiler, 'Fecha_Devolucion')
+                fechaInicio.text ='-'
+            else:
+                continuar=False
+                print('Se cancelara la creacion de este alquiler')
+        
+        if(continuar):
+            print("Dame un kilometraje inicial") 
+            scan=paquete.Utiles.escanerNumericoDecimal()
+            if(scan!=None ):
+                kilometrajeInicial = ET.SubElement(alquiler, 'Kilometraje_Inicial')
+                kilometrajeInicial.text =scan
+                
+                kilometrajeFinal = ET.SubElement(alquiler, 'Kilometraje_Final')
+                kilometrajeFinal.text ='-'
+                
+                precioFinal = ET.SubElement(alquiler, 'Precio_Final')
+                precioFinal.text ='-'
+                
+                recargo = ET.SubElement(alquiler, 'Recargo')
+                recargo.text ='De momento 0'
+                
+                alquileres.append(alquiler) 
+                print('Has añadido un nuevo alquiler a la lista de alquileres')
+            else:
+                continuar=False
+                print('Se cancelara la creacion de este alquiler')
+                
+        print ("¿Quieres continuar creando alquileres?")
         if(paquete.Utiles.confirmacion()==False):
             continuarCreando=False
     
@@ -180,7 +192,7 @@ def buscarMostrarTodosVehiculo(alquileres):
     if(vehiculo!=None):
         ninguno=True
         for x in alquileres:
-            if(x[0].text.lower()==vehiculo.lower()):
+            if(x[0].attrib['matricula'].lower()==vehiculo.lower()):
                 print("He ecnontrado: ",x.text)
                 paquete.Utiles.recorrer(x)
                 ninguno=False
@@ -209,7 +221,7 @@ def buscarMostrarMatriculaDni(alquileres):
         if(dni!=None):
             ninguno=True
             for x in alquileres:
-                if( x[0].text.lower()==vehiculo.lower() and x[1].text.lower()==dni.lower()):
+                if( x[0].attrib['matricula'].text.lower()==vehiculo.lower() and x[1].text.lower()==dni.lower()):
                     print("He ecnontrado: ",x.text)
                     paquete.Utiles.recorrer(x)
                     ninguno=False
@@ -220,7 +232,7 @@ def buscarPosicionMatriculaDni(alquileres,vehiculo,dni):
     cont=0
     opciones=[]
     for x in alquileres:
-        if(x[0].text.lower()==vehiculo.lower() and x[1].text.lower()==dni.lower()):
+        if(x[0].attrib['matricula'].text.lower()==vehiculo.lower() and x[1].text.lower()==dni.lower()):
             print(cont,"-He ecnontrado: ",x.text)
             paquete.Utiles.recorrer(x)
             opciones.append(cont)
