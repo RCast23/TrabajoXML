@@ -4,3 +4,4 @@
 -No existe ningun escaner que acepte numeros decimales ni uno que acepte espacios
 -La fecha final e inicial no sea menor al inicial 
 -Modificacion en cascada de atributos id
+-Estado del vehiculo solo permite opciones de un menu

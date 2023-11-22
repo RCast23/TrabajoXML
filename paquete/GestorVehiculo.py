@@ -84,6 +84,7 @@ def modificar(root):  # Requiere confirmacion
                 if(scan != None):
                     print("¿Desea confirmar la modificacion")
                     if(paquete.Utiles.confirmacion()):
+                        paquete.Utiles.modificarIDVehiculoCascada(root,vehiculo.get('ID_Vehiculo'),scan)
                         vehiculo.set('vehiculoID', scan)
                     
             elif(numOpcion == '2'):

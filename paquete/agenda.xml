@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<Agenda>
+  <Vehiculos>
+    <Vehiculo vehiculoID="1">
+      <Matricula>1111QQQ</Matricula>
+      <Marca_Y_Modelo>SeatPanda</Marca_Y_Modelo>
+      <Anno_De_Fabricacion>1996</Anno_De_Fabricacion>
+      <Tarifa>12</Tarifa>
+      <Estado_Vehiculo>Piola</Estado_Vehiculo>
+    </Vehiculo>
+    <Vehiculo vehiculoID="2">
+      <Matricula>2222AAA</Matricula>
+      <Marca_Y_Modelo>SeatIbiza</Marca_Y_Modelo>
+      <Anno_De_Fabricacion>2002</Anno_De_Fabricacion>
+      <Tarifa>12</Tarifa>
+      <Estado_Vehiculo>Chevere</Estado_Vehiculo>
+    </Vehiculo>
+  </Vehiculos>
+  <Alquileres/>
+</Agenda>

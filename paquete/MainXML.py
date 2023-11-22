@@ -14,6 +14,7 @@ def submenuAlquiler(rootAlquiler):
             while(Utiles.confirmacion()):
                 GestorAlquiler.crear(rootAlquiler)
                 BaseDeDatos.guardarArchivo(root)
+                print("¿Desea realizar otra alta?(Si o no)")
                 
         elif (opcion == '2'):
             GestorAlquiler.buscarMostrarMatriculaDni(rootAlquiler)
@@ -25,6 +26,7 @@ def submenuAlquiler(rootAlquiler):
             while(Utiles.confirmacion()):
                 GestorAlquiler.modificar(rootAlquiler)
                 BaseDeDatos.guardarArchivo(root)
+                print("¿Desea realizar otra alta?(Si o no)")
                 
         elif(opcion=='4'):
             while (checkTodos):
@@ -56,6 +58,7 @@ def submenuVehiculo(rootVehiculo):
             while(Utiles.confirmacion()):
                 GestorVehiculo.crear(rootVehiculo)
                 BaseDeDatos.guardarArchivo(root)
+                print("¿Desea realizar otra alta?(Si o no)")
                 
         elif (opcion == '2'):
             Utiles.recorrer(GestorVehiculo.buscarVehiculo(rootVehiculo[0]))
@@ -67,6 +70,7 @@ def submenuVehiculo(rootVehiculo):
             while(Utiles.confirmacion()):
                 GestorVehiculo.modificar(rootVehiculo)
                 BaseDeDatos.guardarArchivo(root)
+                print("¿Desea realizar otra modificacion?(Si o no)")
                 
         elif(opcion=='4'):
             GestorVehiculo.borrar(rootVehiculo[0])
@@ -75,6 +79,7 @@ def submenuVehiculo(rootVehiculo):
             while(Utiles.confirmacion()):
                 GestorVehiculo.borrar(rootVehiculo[0])
                 BaseDeDatos.guardarArchivo(root)
+                print("¿Desea realizar otra baja?(Si o no)")
                 
         elif(opcion=='5'):
             GestorVehiculo.mostrarTodos(rootVehiculo[0])

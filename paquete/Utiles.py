@@ -45,10 +45,15 @@ def autoasignarIDVehiculo(root):
     cont = 1
     idList=recolectarIDVehiculo(root)
     while(True):
-        if(idList.get(cont)==None):
+        if(idList.get(str(cont))==None):
             return str(cont)
         else:
             cont+=1
+
+def modificarIDVehiculoCascada(root,idVieja,idNueva):
+    for x in root[1]:
+        if(x.get('ID_Vehiculo')==idVieja):
+            x.set('ID_Vehiculo',idNueva)
 
 def escanerID(root):
     intentos=0
