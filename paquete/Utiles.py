@@ -1,5 +1,5 @@
 import datetime
-import xml.etree.ElementTree as ET
+
 
 #crear metodo para encontrar numero de ID mas alto para la autoasignacion
 def confirmacion():
@@ -27,9 +27,8 @@ def recorrer(nodo):
         recorrer(n)
     return 0
 
-def recolectarIDVehiculo(rootVehiculo):
+def recolectarIDVehiculo(root):
     idList={}
-    root=ET(rootVehiculo).ElementTree.getroot()
     for x in root[0]:
         idList[x.get('vehiculoID')]='a'
         
@@ -38,25 +37,25 @@ def recolectarIDVehiculo(rootVehiculo):
         
     return idList
 
-def comprobarIDVehiculo(idVehiculo,rootVehiculo):
-    return recolectarIDVehiculo().get(idVehiculo,rootVehiculo)
+def comprobarIDVehiculo(idVehiculo,root):
+    return recolectarIDVehiculo().get(idVehiculo,root)
 
-def autoasignarIDVehiculo(rootVehiculo):
+def autoasignarIDVehiculo(root):
     cont = 1
-    idList=recolectarIDVehiculo(rootVehiculo)
+    idList=recolectarIDVehiculo(root)
     while(True):
-        if(idList.get(cont)!=None):
-            return cont
+        if(idList.get(cont)==None):
+            return str(cont)
         else:
             cont+=1
 
-def escanerID(rootVehiculo):
+def escanerID(root):
     intentos=0
     while(intentos<3):
         intentos+=1
         scan=input()
         if(scan.isspace()==False and scan.isnumeric()):
-            if(comprobarIDVehiculo(scan,rootVehiculo)):
+            if(comprobarIDVehiculo(scan,root)):
                 return scan
             else:
                 print("El ID introducido ya esta asigando a otro vehiculo o se encuentra en el registro de alquileres")

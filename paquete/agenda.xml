@@ -16,5 +16,13 @@
       <Estado_Vehiculo>8</Estado_Vehiculo>
     </Vehiculo>
   </Vehiculos>
-  <Alquileres/>
+  <Alquileres>
+    <Vehiculo vehiculoID="1">
+      <Matricula>1111qqq</Matricula>
+      <Marca_Y_Modelo>qwe</Marca_Y_Modelo>
+      <Anno_De_Fabricacion>2000</Anno_De_Fabricacion>
+      <Tarifa>12</Tarifa>
+      <Estado_Vehiculo>Piola</Estado_Vehiculo>
+    </Vehiculo>
+  </Alquileres>
 </Agenda>
