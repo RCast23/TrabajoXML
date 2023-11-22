@@ -8,7 +8,7 @@ def submenuAlquiler(rootAlquiler):
         opcion = input("Seleccione una opcion para Alquileres:\n1.Alta\n2.Buscar\n3.Modificar\n4.Mostrar Todos\n0.Salir")
         
         if(opcion=='1'):
-            GestorAlquiler.crear(rootAlquiler)
+            GestorAlquiler.crear(rootAlquiler,root)
             BaseDeDatos.guardarArchivo(root)
             print("¿Desea realizar otra alta?(Si o no)")
             while(Utiles.confirmacion()):
@@ -19,7 +19,7 @@ def submenuAlquiler(rootAlquiler):
             GestorAlquiler.buscarMostrarMatriculaDni(rootAlquiler)
             
         elif(opcion=='3'):
-            GestorAlquiler.modificar(rootAlquiler)
+            GestorAlquiler.modificar(rootAlquiler,root)
             BaseDeDatos.guardarArchivo(root)
             print("¿Desea realizar otra alta?(Si o no)")
             while(Utiles.confirmacion()):

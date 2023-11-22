@@ -101,7 +101,7 @@ def escanerNumericoDecimal():
     intentos=0
     while(intentos<3):
         scan=input()
-        if(scan.isspace()==False and scan.isdecimal() ):
+        if(scan.isspace()==False and scan.isdigit() ):
             return scan
         intentos+=1
         print('Porfavor introduce numeros')

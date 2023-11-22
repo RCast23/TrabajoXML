@@ -1,9 +1,7 @@
 import xml.etree.ElementTree as ET
-import paquete.MainXML
-import paquete.BaseDeDatos 
 import paquete.Utiles
 
-def crear(alquileres):
+def crear(alquileres,root):
     continuarCreando=True
     while(continuarCreando):
         continuar=True
@@ -13,7 +11,7 @@ def crear(alquileres):
         print("Dame una matricula de vehiculo") 
         scan=paquete.Utiles.escanerMatricula()
         if(scan!=None and continuar): 
-            nodo=paquete.GestorVehiculo.buscarMatricula(scan, paquete.MainXML.root[0])
+            nodo=paquete.GestorVehiculo.buscarMatricula(scan, root[0])
             if(nodo!=None):
                 idVehiculo = ET.SubElement(alquiler, 'ID_Vehiculo')
                 idVehiculo.text =nodo.attrib['vehiculoID']
@@ -74,7 +72,7 @@ def crear(alquileres):
     
     return 0
 
-def modificar(alquileres):
+def modificar(alquileres,root):
     print("Introduce la matricula del vehiculo que quieres ver")
     vehiculo=paquete.Utiles.escanerMatricula()
     if(vehiculo!=None):
@@ -107,7 +105,7 @@ def modificar(alquileres):
                 print("Dame una matricula de vehiculo") 
                 scan=paquete.Utiles.escanerMatricula()
                 if(scan!=None): 
-                    nodo=paquete.GestorVehiculo.buscarMatricula(scan, paquete.MainXML.root[0])
+                    nodo=paquete.GestorVehiculo.buscarMatricula(scan, root[0])
                     if(nodo!=None):
                         idVehiculo =nodo.attrib['vehiculoID']
                     else:
