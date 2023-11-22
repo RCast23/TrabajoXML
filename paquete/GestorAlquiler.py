@@ -90,64 +90,75 @@ def modificar(alquileres,root):
         if(dni!=None):
             nodo=buscarPosicionMatriculaDni(alquileres,vehiculo,dni)
     continuar=True
+    idAlquiler=None
+    idVehiculo=None
+    idCliente=None
+    fechaInicio=None
+    fechaFinal=None
+    fechaDevolucion=None
+    kilometrajeInicial=None
+    kilometrajeFinal=None
+    precioFinal=None
+    recargo=None
     while(continuar):
         if(nodo!=None):
-            idAlquiler=None
-            idVehiculo=None
-            idCliente=None
-            fechaInicio=None
-            fechaFinal=None
-            fechaDevolucion=None
-            kilometrajeInicial=None
-            kilometrajeFinal=None
-            precioFinal=None
-            recargo=None
-            
-            print("Introcuce el campo que quieres modificar\n1 ID Alquiler\n2 ID Vehiculo\n3 ID Cliente\n4 Fecha Inicio\n5 Fecha Final\n6 Fecha Devolucion\n7 Kilometraje Inicial\n8 Kilometraje Final\n9 precio Final\n10 Recargo\n0 Salir")
+            print("Introcuce el campo que quieres modificar\n1.ID Alquiler\n2.ID Vehiculo\n3.ID Cliente\n4.Fecha Inicio\n5.Fecha Final\n6.Fecha Devolucion\n7.Kilometraje Inicial\n8.Kilometraje Final\n9.Precio Final\n10.Recargo\n0.Salir")
             opcion=paquete.Utiles.escanerNumerico()
             if(opcion=="1"):
+                print("Dame una ID de alquiler") 
                 scan=paquete.Utiles.escanerNumerico()#-----------------------------------------------
                 if(scan!=None):
                     if(buscarPosicionId(alquileres,scan)==None):
+                        print("No he encontrado otro alquiler con ID igual, es decir el ID introducido es valido")
                         idAlquiler=scan
+                    else:
+                        print("Ya existe un alquiler con ese ID")
             elif(opcion=="2"):
                 print("Dame una matricula de vehiculo") 
                 scan=paquete.Utiles.escanerMatricula()
                 if(scan!=None): 
-                    nodo=paquete.GestorVehiculo.buscarMatricula(scan, root[0])
-                    if(nodo!=None):
-                        idVehiculo =nodo.attrib['vehiculoID']
+                    nodoVehiculo=paquete.GestorVehiculo.buscarMatricula(scan, root[0])
+                    if(nodoVehiculo!=None):
+                        idVehiculo =nodoVehiculo.attrib['vehiculoID']
                     else:
                         print ('No existe ese vehiculo')
             elif(opcion=="3"):
+                print("Dame una DNI de cliente") 
                 scan=paquete.Utiles.escanerDni()
                 if(scan!=None):
                     idCliente=scan
             elif(opcion=="4"):
+                print("Dame una fecha de inicio") 
                 scan=paquete.Utiles.escanerFecha()
                 if(scan!=None):
                     fechaInicio=scan
             elif(opcion=="5"):
+                print("Dame una fecha final") 
                 scan=paquete.Utiles.escanerFecha()
                 if(scan!=None):
                     fechaFinal=scan
             elif(opcion=="6"):
+                print("Dame una fecha de devolucion") 
                 scan=paquete.Utiles.escanerFecha()
                 if(scan!=None):
                     fechaDevolucion=scan
             elif(opcion=="7"):
+                print("Dame un kilometraje inicial") 
                 scan=paquete.Utiles.escanerNumericoDecimal()
                 if(scan!=None):
                     kilometrajeInicial=scan
             elif(opcion=="8"):
+                print("Dame un kilometraje final") 
                 scan=paquete.Utiles.escanerNumericoDecimal()
                 if(scan!=None):
                     kilometrajeFinal=scan
             elif(opcion=="9"):
+                print("Dame un precio final") 
                 scan=paquete.Utiles.escanerNumericoDecimal()
                 if(scan!=None):
                     precioFinal=scan
             elif(opcion=="10"):
+                print("Dame un recargo") 
                 scan=paquete.Utiles.escanerNumericoDecimal()
                 if(scan!=None):
                     recargo=scan
@@ -155,32 +166,32 @@ def modificar(alquileres,root):
                 continuar=False
             else:
                 print("Escribe un numero dentro de las opciones posibles")
-            
         else:
             continuar=False
     if(nodo!=None):
-        print("Quieres guardar los cambios realizados?")
+        print("¿Quieres guardar los cambios realizados?\n Si o No")
         if(paquete.Utiles.confirmacion()):
+            print("Los cambios realizados tomaran efecto")
             if(idAlquiler != None):
-                alquileres[nodo].attrib['alquilerID']=idAlquiler
+                nodo.attrib['alquilerID']=idAlquiler
             if(idVehiculo!=None):
-                alquileres[nodo][0].text=idVehiculo
+                nodo[0].text=idVehiculo
             if(idCliente!=None):
-                alquileres[nodo][1].text=idCliente
+                nodo[1].text=idCliente
             if(fechaInicio!=None):
-                alquileres[nodo][2].text=fechaInicio
+                nodo[2].text=fechaInicio
             if(fechaFinal!=None):
-                alquileres[nodo][3].text=fechaFinal
+                nodo[3].text=fechaFinal
             if(fechaDevolucion!=None):
-                alquileres[nodo][4].text=fechaDevolucion
+                nodo[4].text=fechaDevolucion
             if(kilometrajeInicial!=None):
-                alquileres[nodo][5].text=kilometrajeInicial
+                nodo[5].text=kilometrajeInicial
             if(kilometrajeFinal!=None):
-                alquileres[nodo][6].text=kilometrajeFinal
+                nodo[6].text=kilometrajeFinal
             if(precioFinal!=None):
-                alquileres[nodo][7].text=precioFinal
+                nodo[7].text=precioFinal
             if(recargo!=None):
-                alquileres[nodo][8].text=recargo
+                nodo[8].text=recargo
     return 0
 def buscarMostrarTodosVehiculo(alquileres):
     print("Introduce la matricula de los alquileres que quieres ver")
@@ -233,23 +244,23 @@ def buscarPosicionMatriculaDni(alquileres,vehiculo,dni):
             paquete.Utiles.recorrer(x)
             opciones.append(cont)
             print(opciones)
+            ninguno=False
         cont+=1
-    
-    nodo=0
-    print ("Elige el alquiler que quieres seleccionar")
-    scan=paquete.Utiles.escanerNumerico()
-    if(scan in opciones):
-        for x in alquileres:
-            if(x == alquileres[scan]):
-                print(cont,"-He ecnontrado: ",x.text)
-                paquete.Utiles.recorrer(x)
-                return nodo
-            nodo+=1
+    if(ninguno):
+        print("No se ha encontrado ningun alquiler con esa Matricula y Dni")
+    else:
+        print ("Elige el alquiler que quieres seleccionar")
+        scan=paquete.Utiles.escanerNumerico()
+        if(scan!=None):
+            if(int(scan) in set(opciones)):
+                for x in alquileres:
+                    if(x == alquileres[int(scan)]):
+                        return x
     return None
-def buscarPosicionId(alquileres,id):
+def buscarPosicionId(alquileres,idAlquiler):
     nodo=0
     for x in alquileres:
-        if(x.attrib['alquilerID'].lower()==id):
+        if(x.attrib['alquilerID'].lower()==idAlquiler):
             print("-He ecnontrado: ",x.text)
             paquete.Utiles.recorrer(x)
             return nodo
