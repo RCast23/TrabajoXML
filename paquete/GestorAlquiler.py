@@ -52,7 +52,7 @@ def crear(alquileres,root):
                 fechaFinal.text =scan
                 
                 fechaDevolucion = ET.SubElement(alquiler, 'Fecha_Devolucion')
-                fechaInicio.text ='-'
+                fechaDevolucion.text ='-'
             else:
                 continuar=False
                 print('Se cancelara la creacion de este alquiler')
@@ -157,7 +157,6 @@ def modificar(alquileres,root):
                 print("Escribe un numero dentro de las opciones posibles")
             
         else:
-            print("No encontrado ningun alquiler con la matricula de ese coche y ese dni de cliente")
             continuar=False
     if(nodo!=None):
         print("Quieres guardar los cambios realizados?")
@@ -218,7 +217,7 @@ def buscarMostrarMatriculaDni(alquileres):
         if(dni!=None):
             ninguno=True
             for x in alquileres:
-                if( x[0].attrib['matricula'].text.lower()==vehiculo.lower() and x[1].text.lower()==dni.lower()):
+                if( x[0].attrib['matricula'].lower()==vehiculo.lower() and x[1].text.lower()==dni.lower()):
                     print("He ecnontrado: ",x.text)
                     paquete.Utiles.recorrer(x)
                     ninguno=False
@@ -229,10 +228,11 @@ def buscarPosicionMatriculaDni(alquileres,vehiculo,dni):
     cont=0
     opciones=[]
     for x in alquileres:
-        if(x[0].attrib['matricula'].text.lower()==vehiculo.lower() and x[1].text.lower()==dni.lower()):
+        if(x[0].attrib['matricula'].lower()==vehiculo.lower() and x[1].text.lower()==dni.lower()):
             print(cont,"-He ecnontrado: ",x.text)
             paquete.Utiles.recorrer(x)
             opciones.append(cont)
+            print(opciones)
         cont+=1
     
     nodo=0

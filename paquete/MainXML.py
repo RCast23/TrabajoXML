@@ -22,11 +22,11 @@ def submenuAlquiler(rootAlquiler):
         elif(opcion=='3'):
             GestorAlquiler.modificar(rootAlquiler,root)
             BaseDeDatos.guardarArchivo(root)
-            print("¿Desea realizar otra alta?(Si o no)")
+            print("¿Desea realizar otra moificacion?(Si o no)")
             while(Utiles.confirmacion()):
                 GestorAlquiler.modificar(rootAlquiler)
                 BaseDeDatos.guardarArchivo(root)
-                print("¿Desea realizar otra alta?(Si o no)")
+                print("¿Desea realizar otra moificacion?(Si o no)")
                 
         elif(opcion=='4'):
             while (checkTodos):
