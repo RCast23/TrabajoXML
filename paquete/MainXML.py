@@ -58,7 +58,7 @@ def submenuVehiculo(rootVehiculo):
                 BaseDeDatos.guardarArchivo(root)
                 
         elif (opcion == '2'):
-            Utiles.recorrer(GestorVehiculo.buscarVehiculo(rootVehiculo[1]))
+            Utiles.recorrer(GestorVehiculo.buscarVehiculo(rootVehiculo[0]))
             
         elif(opcion=='3'):
             GestorVehiculo.modificar(rootVehiculo)
@@ -69,15 +69,15 @@ def submenuVehiculo(rootVehiculo):
                 BaseDeDatos.guardarArchivo(root)
                 
         elif(opcion=='4'):
-            GestorVehiculo.borrar(rootVehiculo[1])
+            GestorVehiculo.borrar(rootVehiculo[0])
             BaseDeDatos.guardarArchivo(root)
             print("¿Desea realizar otra baja?(Si o no)")
             while(Utiles.confirmacion()):
-                GestorVehiculo.borrar(rootVehiculo[1])
+                GestorVehiculo.borrar(rootVehiculo[0])
                 BaseDeDatos.guardarArchivo(root)
                 
         elif(opcion=='5'):
-            GestorVehiculo.mostrarTodos(rootVehiculo[1])
+            GestorVehiculo.mostrarTodos(rootVehiculo[0])
             
         elif(opcion == '0'):
             check = False

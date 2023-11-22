@@ -10,7 +10,7 @@ def crear(root):
     
     print("Dame una matricula")
     scanMatricula = paquete.Utiles.escanerMatricula()  # que llame a utiles con un escaner  que verifique
-    if(scanMatricula == None or buscarMatricula(scanMatricula, root[1]) != None):
+    if(scanMatricula == None or buscarMatricula(scanMatricula, root[0]) != None):
         check = False
         
     if(check):
@@ -40,7 +40,7 @@ def crear(root):
             check = False
     
     if(check):
-        vehiculo = ET.SubElement(root[1], 'Vehiculo', {'vehiculoID':paquete.Utiles.autoasignarIDVehiculo(root)})
+        vehiculo = ET.SubElement(root[0], 'Vehiculo', {'vehiculoID':paquete.Utiles.autoasignarIDVehiculo(root)})
         matricula = ET.SubElement(vehiculo, 'Matricula')
         matricula.text = scanMatricula
         marcaYmodelo = ET.SubElement(vehiculo, 'Marca_Y_Modelo')
@@ -65,7 +65,7 @@ def borrar(rootVehiculo):  # Requiere confirmacion
 
 
 def modificar(root):  # Requiere confirmacion
-    vehiculo = buscarVehiculo(root[1])
+    vehiculo = buscarVehiculo(root[0])
     if(vehiculo != None):
         mostrarTodos(vehiculo)
         check = True

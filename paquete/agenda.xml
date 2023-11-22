@@ -15,14 +15,25 @@
       <Tarifa>12</Tarifa>
       <Estado_Vehiculo>8</Estado_Vehiculo>
     </Vehiculo>
+    <Vehiculo vehiculoID="1">
+      <Matricula>1234AAA</Matricula>
+      <Marca_Y_Modelo>PingaChupa</Marca_Y_Modelo>
+      <Anno_De_Fabricacion>1999</Anno_De_Fabricacion>
+      <Tarifa>12</Tarifa>
+      <Estado_Vehiculo>Si</Estado_Vehiculo>
+    </Vehiculo>
   </Vehiculos>
   <Alquileres>
-    <Vehiculo vehiculoID="1">
-      <Matricula>1111qqq</Matricula>
-      <Marca_Y_Modelo>qwe</Marca_Y_Modelo>
-      <Anno_De_Fabricacion>2000</Anno_De_Fabricacion>
-      <Tarifa>12</Tarifa>
-      <Estado_Vehiculo>Piola</Estado_Vehiculo>
-    </Vehiculo>
+    <Alquiler alquilerID="atributo">
+      <ID_Vehiculo>1</ID_Vehiculo>
+      <ID_Cliente>12345678a</ID_Cliente>
+      <Fecha_Inicio>-</Fecha_Inicio>
+      <Fecha_Final>05 05 2020 </Fecha_Final>
+      <Fecha_Devolucion/>
+      <Kilometraje_Inicial>20000</Kilometraje_Inicial>
+      <Kilometraje_Final>-</Kilometraje_Final>
+      <Precio_Final>-</Precio_Final>
+      <Recargo>De momento 0</Recargo>
+    </Alquiler>
   </Alquileres>
 </Agenda>
