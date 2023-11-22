@@ -7,6 +7,7 @@ def crear(alquileres,root):
         continuar=True
         #---------------------------------------
         alquiler = ET.Element('Alquiler',{'alquilerID':'atributo'})#llamar al metodo que te crea un identificador automatico
+        alquiler.text=''
         #-----------------------------------------
         if(continuar):
             print("Dame una matricula de vehiculo") 
