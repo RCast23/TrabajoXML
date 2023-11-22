@@ -1,6 +1,5 @@
 -Mostrar alquiler id vehiculo = matricula (guardar matricula como atributo)
 -Vehiculos siempre disponible hasta que se modifiquen (Fechas de alquileres lo modifican default)
--No existe ningun escaner que acepte numeros decimales ni uno que acepte espacios
 -La fecha final no sea menor al inicial
 -------------------------------------------------------------------------------------------------
 Preguntas:

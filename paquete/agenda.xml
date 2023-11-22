@@ -5,7 +5,7 @@
       <Matricula>9999AAA</Matricula>
       <Marca_Y_Modelo>SeatLeon</Marca_Y_Modelo>
       <Anno_De_Fabricacion>2000</Anno_De_Fabricacion>
-      <Tarifa>12</Tarifa>
+      <Tarifa>12.50</Tarifa>
       <Estado_Vehiculo>Si</Estado_Vehiculo>
     </Vehiculo>
     <Vehiculo vehiculoID="2">

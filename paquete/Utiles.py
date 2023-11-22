@@ -80,7 +80,7 @@ def escanerTexto():
     while(intentos<3):
         scan=input()
         if(scan.isspace()==False):
-            return scan.
+            return scan
         intentos+=1
         print('Porfavor introduce algun caracter')
     print("Has superado el numero de intentos")
@@ -122,11 +122,22 @@ def escanerNumerico():
 def escanerNumericoDecimal():
     intentos=0
     while(intentos<3):
-        scan=input()
-        if(scan.isspace()==False and scan.isdigit() ):
-            return scan
         intentos+=1
-        print('Porfavor introduce numeros')
+        scan=input()
+        scanSplitPunto=scan.split('.')
+        if(scan.isspace()==False and len(scanSplitPunto)==1 or len(scanSplitPunto)==2):
+            if(len(scanSplitPunto)==1 and scan.isnumeric()):
+                return scan+'.00'
+            elif(len(scanSplitPunto)==2 and scanSplitPunto[0].isnumeric() and scanSplitPunto[1].isnumeric()):
+                if(len(scanSplitPunto[1])==1):
+                    return scanSplitPunto[0]+'.'+scanSplitPunto[1]+'0'
+                elif(len(scanSplitPunto[1])==2):
+                    return scanSplitPunto[0]+'.'+scanSplitPunto[1]
+                else:
+                    print('Porfavor introduce solo 2 decimales')
+            else:
+                print('Formato de decimales incorrecto')
+        print('Porfavor introduce numeros y los decimales con punto')
     print("Has superado el numero de intentos")
     return None
 

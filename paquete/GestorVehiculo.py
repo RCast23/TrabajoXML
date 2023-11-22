@@ -62,7 +62,7 @@ def modificar(root):  # Requiere confirmacion
         check = True
         while(check):
             print('''Introduzca el campo que se quiere modificar:
-1.ID vehiculo\n2.Matricula\n3.Marca y modelo\n4.Anno de fabricacion
+1.ID vehiculo\n2.Matricula\n3.Descripcion(Marca y modelo)\n4.Anno de fabricacion
 5.Tarifa\n6.Estado del vehiculo\n0.Salir''')
             
             numOpcion = paquete.Utiles.escanerNumerico()
