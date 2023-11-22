@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as ET
 import paquete.Utiles
+from paquete.Utiles import recorrer
 
 
 def crear(root):
@@ -41,6 +42,7 @@ def crear(root):
     
     if(check):
         vehiculo = ET.SubElement(root[0], 'Vehiculo', {'vehiculoID':paquete.Utiles.autoasignarIDVehiculo(root)})
+        vehiculo.text = ''
         matricula = ET.SubElement(vehiculo, 'Matricula')
         matricula.text = scanMatricula
         marcaYmodelo = ET.SubElement(vehiculo, 'Marca_Y_Modelo')
@@ -155,12 +157,4 @@ def buscarMatricula(matricula, vehiculo):
     
 
 def mostrarTodos(rootVehiculo):
-    print(rootVehiculo.tag, end="")
-    # Para recorrer los atributos. Los atributos estan en un diccionario
-    for attr in rootVehiculo.attrib:
-        attrName = attr
-        attrValue = rootVehiculo.attrib[attr]
-        print("\t", attrName, ":", attrValue, " ", end="")
-    print("\n\t", rootVehiculo.text)
-    for n in rootVehiculo:
-        mostrarTodos(n)
+    recorrer(rootVehiculo)

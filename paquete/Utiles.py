@@ -22,7 +22,8 @@ def recorrer(nodo):
         attrName = attr
         attrValue = nodo.attrib[attr]
         print("\t","Nombre atributo: ",attrName,"/ Valor atributo: ",attrValue," ",end="")
-    print("\nNodo:","\t",nodo.text)
+    if(nodo.text != ''):
+        print("\nNodo:",nodo.text)
     for n in nodo:
         recorrer(n)
     return 0
