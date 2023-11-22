@@ -17,7 +17,7 @@ def submenuAlquiler(rootAlquiler):
                 BaseDeDatos.guardarArchivo(root)
                 
         elif (opcion == '2'):
-            GestorAlquiler.buscarMostrar(rootAlquiler)
+            GestorAlquiler.buscarMostrarMatriculaDni(rootAlquiler)
             
         elif(opcion=='3'):
             GestorAlquiler.modificar(rootAlquiler)

@@ -1,7 +1,6 @@
-import re
 import datetime
+import xml.etree.ElementTree as ET
 
-#Seria interesante crear escaner para anno (4 digitos entre 1900 y la actualidad)
 #crear metodo para encontrar numero de ID mas alto para la autoasignacion
 def confirmacion():
     while(True):
@@ -27,6 +26,45 @@ def recorrer(nodo):
     for n in nodo:
         recorrer(n)
     return 0
+
+def recolectarIDVehiculo(rootVehiculo):
+    idList={}
+    root=ET(rootVehiculo).ElementTree.getroot()
+    for x in root[0]:
+        idList[x.get('vehiculoID')]='a'
+        
+    for x in root[1]:
+        idList[x.get('ID_Vehiculo')]='a'
+        
+    return idList
+
+def comprobarIDVehiculo(idVehiculo,rootVehiculo):
+    return recolectarIDVehiculo().get(idVehiculo,rootVehiculo)
+
+def autoasignarIDVehiculo(rootVehiculo):
+    cont = 1
+    idList=recolectarIDVehiculo(rootVehiculo)
+    while(True):
+        if(idList.get(cont)!=None):
+            return cont
+        else:
+            cont+=1
+
+def escanerID(rootVehiculo):
+    intentos=0
+    while(intentos<3):
+        intentos+=1
+        scan=input()
+        if(scan.isspace()==False and scan.isnumeric()):
+            if(comprobarIDVehiculo(scan,rootVehiculo)):
+                return scan
+            else:
+                print("El ID introducido ya esta asigando a otro vehiculo o se encuentra en el registro de alquileres")
+        else:
+            print('Porfavor introduce numeros no decimales')
+    print("Has superado el numero de intentos")
+    return None
+
 def escanerAlfanumerico():
     intentos=0
     while(intentos<3):
@@ -37,6 +75,7 @@ def escanerAlfanumerico():
         print('Porfavor introduce alfanumericos')
     print("Has superado el numero de intentos")
     return None
+
 def escanerAlfabetico():
     intentos=0
     while(intentos<3):
@@ -47,6 +86,7 @@ def escanerAlfabetico():
         print('Porfavor introduce alfabeticos')
     print("Has superado el numero de intentos")
     return None
+
 def escanerNumerico():
     intentos=0
     while(intentos<3):
@@ -57,32 +97,35 @@ def escanerNumerico():
         print('Porfavor introduce numeros no decimales')
     print("Has superado el numero de intentos")
     return None
+
 def escanerNumericoDecimal():
     intentos=0
     while(intentos<3):
         scan=input()
-        if(scan.isspace()==False and scan.isdigit() ):
+        if(scan.isspace()==False and scan.isdecimal() ):
             return scan
         intentos+=1
         print('Porfavor introduce numeros')
     print("Has superado el numero de intentos")
     return None
+
 def escanerMatricula():
     #tres numeros y una letra
     intentos=0
     while(intentos<3):
         scan=input()
-        if(scan.isspace()==False and len(scan)==6):
-            if(scan[0:2].isnumeric() and scan[3:6].isalpha()):
+        if(scan.isspace()==False and len(scan)==7):
+            if(scan[0:3].isnumeric() and scan[4:6].isalpha()):
                 return scan
         intentos+=1
-        print('Porfavor introduce una matricula (Tres numeros y una letra)')
+        print('Porfavor introduce una matricula (Cuatro numeros y tres letras)')
     print("Has superado el numero de intentos")
     return None
+
 def escanerDni():
     intentos=0
     while(intentos<3):
-        scan=input()
+        scan=input().capitalize()
         if(scan.isspace()==False and len(scan)==8):
             if(scan[0:7].isnumeric() and scan[8].isalpha()):
                 return scan
@@ -90,6 +133,7 @@ def escanerDni():
         print('Porfavor introduce un DNI (Ocho numeros y una letra)')
     print("Has superado el numero de intentos")
     return None
+
 def escanerFecha():
     intentos=0
     while(intentos<3):
@@ -100,7 +144,7 @@ def escanerFecha():
             continuar=False
             print("Dame un mes")
             mes=input()
-        if(mes.isspace() or mes.isnumeric()==False or scan>12 or mes==0 or continuar==False):
+        if(mes.isspace() or mes.isnumeric()==False or mes>12 or mes==0 or continuar==False):
             continuar=False   
             print("Dame un anno") 
             anno=input()
@@ -111,5 +155,17 @@ def escanerFecha():
             return x.strftime("%d %m %Y ")
         intentos+=1
         print('Porfavor introduce una fecha correcta (Dia 1-31 mes 1-12 anno 2000-3000)')
+    print("Has superado el numero de intentos")
+    return None
+
+def escanerYear():
+    intentos=0
+    while(intentos<3):
+        anno=input()
+        hoy = datetime.date.today()
+        if(anno.isnumeric() and len(anno)==4 and int(anno) <=hoy.year and int(anno)>1886):
+            return anno+''
+        intentos+=1
+        print("Porfavor introduce un anno correcto (4 digitos entre 1886 y el anno actual)")
     print("Has superado el numero de intentos")
     return None
