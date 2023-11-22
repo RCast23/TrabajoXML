@@ -1,7 +1,8 @@
-#def validacion(): 3 intentos
-
 import re
 import datetime
+
+#Seria interesante crear escaner para anno (4 digitos entre 1900 y la actualidad)
+#crear metodo para encontrar numero de ID mas alto para la autoasignacion
 def confirmacion():
     while(True):
         inputConfirmacion = input()
@@ -71,7 +72,7 @@ def escanerMatricula():
     intentos=0
     while(intentos<3):
         scan=input()
-        if(scan.isspace()==False and scan.len()==3):
+        if(scan.isspace()==False and len(scan)==4):
             if(scan[0:2].isnumeric() and scan[3].isalpha()):
                 return scan
         intentos+=1

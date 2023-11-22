@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as ET
 from paquete import BaseDeDatos, GestorAlquiler, GestorVehiculo,Utiles
+from paquete.Utiles import recorrer
 
 def submenuAlquiler(rootAlquiler):
     check=True
@@ -58,7 +59,7 @@ def submenuVehiculo(rootVehiculo):
                 BaseDeDatos.guardarArchivo(root)
                 
         elif (opcion == '2'):
-            GestorVehiculo.buscarVehiculo(rootVehiculo)
+            recorrer(GestorVehiculo.buscarVehiculo(rootVehiculo))
             
         elif(opcion=='3'):
             GestorVehiculo.modificar(rootVehiculo)
@@ -85,6 +86,7 @@ def submenuVehiculo(rootVehiculo):
         else:
             print("Valor no valido")
     
+#Al salir vuelve a iniciarse solo una vez, no se por que
 print('Inicio del programa')
 arbol = ""
 root = ""
@@ -98,7 +100,6 @@ while (check):
     elif (opcion == '2'):
         submenuAlquiler(root[1])
     elif(opcion == '0'):
-        BaseDeDatos.guardarArchivo(root)
         check = False
     else:
         print("Valor no valido")

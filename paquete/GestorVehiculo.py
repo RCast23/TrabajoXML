@@ -1,68 +1,168 @@
 import xml.etree.ElementTree as ET
-from paquete.BaseDeDatos import guardarArchivo
+from paquete.Utiles import escanerMatricula, escanerAlfanumerico, \
+    escanerNumerico, escanerAlfabetico, escanerNumericoDecimal, confirmacion
+
 
 def crear(rootVehiculo):
-    scan=input("dame el ID")#que llame a utiles con un escaner  que verifique
-    vehiculo = ET.SubElement(rootVehiculo,'Vehiculo',{'vehiculoID':scan})
+    check = True
     
-    matricula = ET.SubElement(vehiculo, 'Matricula')
-    scan=input("dame una matricula")#que llame a utiles con un escaner  que verifique
-    matricula.text = scan
+    # Preguntar como se estan autoasignando valores
+    # Uso temporal de id introducida manualmente
     
-    marcaYmodelo = ET.SubElement(vehiculo, 'MarcaYModelo')
-    scan=input("dame una marca y modela")#que llame a utiles con un escaner  que verifique
-    marcaYmodelo.text = scan
+    print("Dame una matricula")
+    scanMatricula = escanerMatricula()  # que llame a utiles con un escaner  que verifique
+    if(scanMatricula == None or buscarMatricula(scanMatricula, rootVehiculo) != None):
+        check = False
+        
+    if(check):
+        print("Dame una marca y modelo")
+        scanMarcaModelo = escanerAlfanumerico()
+        if(scanMarcaModelo == None):
+            check = False
     
-    annoDeFabricacion = ET.SubElement(vehiculo, 'AnnoDeFabricacion')
-    scan=input("dame un Anno De Fabricacion")#que llame a utiles con un escaner  que verifique
-    annoDeFabricacion.text = scan
+    if(check):
+        # No termino de entender la diferencia entre numerico y numerico decimal
+        print("Dame un Anno De Fabricacion")
+        scanAnno = escanerNumerico()
+        if(scanAnno == None):
+            check = False
     
-    tarifa = ET.SubElement(vehiculo, 'Tarifa')
-    scan=input("dame una tarifa por dia")#que llame a utiles con un escaner  que verifique
-    tarifa.text = scan
+    if(check):
+        # No termino de entender la diferencia entre numerico y numerico decimal
+        print("Dame una tarifa por dia")
+        scanTarifa = escanerNumerico()
+        if(scanTarifa == None):
+            check = False
     
-    estadoVehiculo = ET.SubElement(vehiculo, 'EstadoVehiculo')
-    scan=input("dame un estado del vehiculo")#que llame a utiles con un escaner  que verifique
-    estadoVehiculo.text = scan
+    if(check):
+        print("Dame un estado del vehiculo")
+        scan = escanerAlfabetico()
+        if(scan == None):
+            check = False
     
-def borrar(agenda): #Requiere confirmacion
-    empresa = buscar(agenda)
-    if(empresa!=None):
-        mostrarTodos(empresa)
-        confirm=input("¿Seguro que desea borrar esta empresa?")
-        if(confirm=='si'):
-            agenda.remove(empresa)
-            print("Empresa eliminada")
+    if(check):
+        scan=input("dame el ID")
+        vehiculo = ET.SubElement(rootVehiculo, 'Vehiculo', {'vehiculoID':scan})
+        matricula = ET.SubElement(vehiculo, 'Matricula')
+        matricula.text = scanMatricula
+        marcaYmodelo = ET.SubElement(vehiculo, 'Marca_Y_Modelo')
+        marcaYmodelo.text = scanMarcaModelo
+        annoDeFabricacion = ET.SubElement(vehiculo, 'Anno_De_Fabricacion')
+        annoDeFabricacion.text = scanAnno
+        tarifa = ET.SubElement(vehiculo, 'Tarifa')
+        tarifa.text = scanTarifa
+        estadoVehiculo = ET.SubElement(vehiculo, 'Estado_Vehiculo')
+        estadoVehiculo.text = scan
+        print("Coche creado")
+        
+    
+def borrar(rootVehiculo):  # Requiere confirmacion
+    vehiculo = buscarVehiculo(rootVehiculo)
+    if(vehiculo != None):
+        mostrarTodos(vehiculo)
+        print("¿Desea confirmar la baja del vehiculo?")
+        if(confirmacion()):
+            rootVehiculo.remove(vehiculo)
+            print("Vehiculo eliminado")
 
-def modificar(agenda): #Requiere confirmacion
-    empresa = buscarVehiculo(agenda)
-    if(empresa!=None):
-        mostrarTodos(empresa)
-        empresa[0].text=input("Introduzca el nuevo nombre de la empresa")
-        empresa[1].text=input("Introduzca el nuevo numero de empleados de la empresa")
-        empresa[2].text=input("Introduzca la nueva facturacion de la empresa")
+
+def modificar(rootVehiculo):  # Requiere confirmacion
+    vehiculo = buscarVehiculo(rootVehiculo)
+    if(vehiculo != None):
+        mostrarTodos(vehiculo)
+        check = True
+        while(check):
+            print('''Introduzca el campo que se quiere modificar:
+1.ID vehiculo\n2. Matricula\n3.Marca y modelo\n4.Anno de fabricacion
+5.Tarifa\n6.Estado del vehiculo\n0.Salir''')
+            
+            numOpcion = escanerNumerico()
+            if(numOpcion == '1'):
+                print("Introduzca la nueva ID del vehiculo")
+                scan = escanerNumerico()
+                #Introducir comprobacion de atributo ya existente
+                if(scan != None):
+                    print("¿Desea confirmar la modificacion")
+                    if(confirmacion()):
+                        vehiculo.set('vehiculoID', scan)
+                    
+            elif(numOpcion == '2'):
+                print("Introduzca la nueva matricula del vehiculo")
+                scan = escanerMatricula()
+                if(scan != None):
+                    print("¿Desea confirmar la modificacion?")
+                    if(confirmacion()):
+                        vehiculo[0].text = scan
+                    
+            elif(numOpcion == '3'):
+                print("Introduzca la nueva marca y modelo del vehiculo")
+                scan = escanerAlfanumerico()
+                if(scan != None):
+                    print("¿Desea confirmar la modificacion?")
+                    if(confirmacion()):
+                        vehiculo[1].text = scan
+                    
+            elif(numOpcion == '4'):
+                # Los Annos probablemente necesiten su propio scanner
+                print("Introduzca el nuevo anno de fabricacion del vehiculo")
+                scan = escanerNumericoDecimal()()
+                if(scan != None):
+                    print("¿Desea confirmar la modificacion?")
+                    if(confirmacion()):
+                        vehiculo[2].text = scan
+                    
+            elif(numOpcion == '5'):
+                print("Introduzca la nueva tarifa del vehiculo")
+                scan = escanerNumerico()
+                if(scan != None):
+                    print("¿Desea confirmar la modificacion?")
+                    if(confirmacion()):
+                        vehiculo[3].text = scan
+                    
+            elif(numOpcion == '6'):
+                print("Introduzca el nuevo estado del vehiculo")
+                scan = escanerAlfabetico()
+                if(scan != None):
+                    print("¿Desea confirmar la modificacion?")
+                    if(confirmacion()):
+                        vehiculo[4].text = scan
+                    
+            elif(numOpcion == '0'):
+                check = False
+                
+            else:
+                print("Valor no valido")
+        
+    else:
+        print("No se ha encontrado el vehiculo")
+
     
 def buscarVehiculo(agenda):
-    nom = input("Introduzca el nombre de la empresa")
-    i=0;
+    matricula = input("Introduzca la matricula del vehiculo")
+    return buscarMatricula(matricula, agenda)
+
+    
+def buscarMatricula(matricula, vehiculo):
+    i = 0;
     try:
         while(True):
-            aux=agenda[i][0].text            
-            if(nom==aux):
-                print("Empresa encontrada")
-                return agenda[i]
-            i+=1
+            aux = vehiculo[i][0].text            
+            if(matricula == aux):
+                print("Vehiculo encontrado")
+                return vehiculo[i]
+            i += 1
     except:
-        print("No se ha encontrado la empresa")
+        print("No se ha encontrado el vehiculo")
+        return None
     
 
-def mostrarTodos(agenda):
-    print(agenda.tag,end="")
-    #Para recorrer los atributos. Los atributos estan en un diccionario
-    for attr in agenda.attrib:
+def mostrarTodos(rootVehiculo):
+    print(rootVehiculo.tag, end="")
+    # Para recorrer los atributos. Los atributos estan en un diccionario
+    for attr in rootVehiculo.attrib:
         attrName = attr
-        attrValue = agenda.attrib[attr]
-        print("\t",attrName,":",attrValue," ",end="")
-    print("\n\t",agenda.text)
-    for n in agenda:
+        attrValue = rootVehiculo.attrib[attr]
+        print("\t", attrName, ":", attrValue, " ", end="")
+    print("\n\t", rootVehiculo.text)
+    for n in rootVehiculo:
         mostrarTodos(n)

@@ -1,19 +1,19 @@
 <?xml version="1.0" ?>
 <Agenda>
   <Vehiculos>
-    <Vehiculo vehiculoID="1">
-      <Matricula>1</Matricula>
-      <MarcaYModelo>1</MarcaYModelo>
-      <AnnoDeFabricacion>1</AnnoDeFabricacion>
-      <Tarifa>1</Tarifa>
-      <EstadoVehiculo>1</EstadoVehiculo>
+    <Vehiculo vehiculoID="5">
+      <Matricula>222f</Matricula>
+      <MarcaYModelo>A</MarcaYModelo>
+      <AnnoDeFabricacion>1999</AnnoDeFabricacion>
+      <Tarifa>12</Tarifa>
+      <EstadoVehiculo>Disponible</EstadoVehiculo>
     </Vehiculo>
-    <Vehiculo vehiculoID="2">
-      <Matricula>2</Matricula>
-      <MarcaYModelo>2</MarcaYModelo>
-      <AnnoDeFabricacion>2</AnnoDeFabricacion>
-      <Tarifa>2</Tarifa>
-      <EstadoVehiculo>2</EstadoVehiculo>
+    <Vehiculo vehiculoID="8">
+      <Matricula>123a</Matricula>
+      <Marca_Y_Modelo>a</Marca_Y_Modelo>
+      <Anno_De_Fabricacion>1234</Anno_De_Fabricacion>
+      <Tarifa>12</Tarifa>
+      <Estado_Vehiculo>8</Estado_Vehiculo>
     </Vehiculo>
   </Vehiculos>
   <Alquileres/>
