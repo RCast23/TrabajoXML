@@ -10,11 +10,11 @@ def submenuAlquiler(rootAlquiler):
         if(opcion=='1'):
             GestorAlquiler.crear(rootAlquiler,root)
             BaseDeDatos.guardarArchivo(root)
-            print("¿Desea realizar otra alta?(Si o no)")
+            print("¿Desea realizar otro alquiler?(Si o no)")
             while(Utiles.confirmacion()):
                 GestorAlquiler.crear(rootAlquiler)
                 BaseDeDatos.guardarArchivo(root)
-                print("¿Desea realizar otra alta?(Si o no)")
+                print("¿Desea realizar otro alquiler?(Si o no)")
                 
         elif (opcion == '2'):
             GestorAlquiler.buscarMostrarMatriculaDni(rootAlquiler)

@@ -78,10 +78,6 @@ def crear(alquileres,root):
             else:
                 continuar=False
                 print('Se cancelara la creacion de este alquiler')
-                
-        print ("¿Quieres continuar creando alquileres?")
-        if(paquete.Utiles.confirmacion()==False):
-            continuarCreando=False
     
     return 0
 

@@ -39,7 +39,7 @@ def recolectarIDVehiculo(root):
     return idList
 
 def comprobarIDVehiculo(idVehiculo,root):
-    return recolectarIDVehiculo().get(idVehiculo,root)
+    return recolectarIDVehiculo(root).get(idVehiculo,root)
 
 def autoasignarIDVehiculo(root):
     cont = 1

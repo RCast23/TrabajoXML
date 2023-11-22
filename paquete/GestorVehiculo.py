@@ -82,7 +82,7 @@ def modificar(root):  # Requiere confirmacion
                 scan = paquete.Utiles.escanerID(root)
                 #Introducir comprobacion de atributo ya existente
                 if(scan != None):
-                    print("¿Desea confirmar la modificacion")
+                    print("¿Desea confirmar la modificacion?")
                     if(paquete.Utiles.confirmacion()):
                         paquete.Utiles.modificarIDVehiculoCascada(root,vehiculo.get('ID_Vehiculo'),scan)
                         vehiculo.set('vehiculoID', scan)
