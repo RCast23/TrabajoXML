@@ -125,7 +125,7 @@ def escanerDni():
     intentos=0
     while(intentos<3):
         scan=input().capitalize()
-        if(scan.isspace()==False and len(scan)==8):
+        if(scan.isspace()==False and len(scan)==9):
             if(scan[0:7].isnumeric() and scan[8].isalpha()):
                 return scan
         intentos+=1
@@ -139,18 +139,18 @@ def escanerFecha():
         continuar=True
         print("Dame un dia")
         dia=input()
-        if(dia.isspace() or dia.isnumeric()==False or dia>31 or dia==0):
+        if(dia.isspace() or dia.isnumeric()==False or int(dia)>31 or int(dia)==0):
             continuar=False
-            print("Dame un mes")
-            mes=input()
-        if(mes.isspace() or mes.isnumeric()==False or mes>12 or mes==0 or continuar==False):
+        print("Dame un mes")
+        mes=input()
+        if(mes.isspace() or mes.isnumeric()==False or int(mes)>12 or int(mes)==0 or continuar==False):
             continuar=False   
-            print("Dame un anno") 
-            anno=input()
-        if(anno.isspace() or anno.isnumeric()==False or anno>3000 or anno<2000 or continuar==False):
+        print("Dame un anno") 
+        anno=input()
+        if(anno.isspace() or anno.isnumeric()==False or int(anno)>3000 or int(anno)<2000 or continuar==False):
             continuar=False 
         if(continuar):
-            x = datetime.datetime(anno, mes, dia)
+            x = datetime.datetime(int(anno), int(mes), int(dia))
             return x.strftime("%d %m %Y ")
         intentos+=1
         print('Porfavor introduce una fecha correcta (Dia 1-31 mes 1-12 anno 2000-3000)')
