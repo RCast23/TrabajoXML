@@ -211,7 +211,12 @@ def escanerYear():
 
 #necesito en utiles fechaDevolucionSuperior(fecha1, fecha2) un metodo en el cual mandes(fecha1, fecha2) y si la fecha 2 es superior a la 1 devuelve la diferencia si no, devuelve None
 def fechaDevolucionSuperior(fecha1, fecha2):
-    print(datetime(fecha2.split()[2],fecha2.split()[1],fecha2.split()[0])-datetime.datetime(fecha1.split()[2],fecha1.split()[1],fecha1.split()[0]))
-    
+    fechaConvertida1 = datetime.datetime(int(fecha1.split('-')[2]),int(fecha1.split('-')[1]),int(fecha1.split('-')[0]))
+    fechaConvertida2 = datetime.datetime(int(fecha2.split('-')[2]),int(fecha2.split('-')[1]),int(fecha2.split('-')[0]))
+    if(fechaConvertida2>fechaConvertida1):
+        return str(fechaConvertida2-fechaConvertida1).split(' ')[0]
+    else:
+        return None
+        
         
     

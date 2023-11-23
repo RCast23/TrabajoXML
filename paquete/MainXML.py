@@ -1,4 +1,3 @@
-import xml.etree.ElementTree as ET
 from paquete import BaseDeDatos, GestorAlquiler, GestorVehiculo,Utiles
 
 def submenuAlquiler(rootAlquiler):

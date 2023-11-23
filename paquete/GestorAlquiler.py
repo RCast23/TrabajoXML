@@ -2,88 +2,86 @@ import xml.etree.ElementTree as ET
 import paquete.Utiles
 
 def crear(alquileres,root):
-    continuarCreando=True
-    while(continuarCreando):
-        continuar=True
-        #---------------------------------------
-        alquiler = ET.Element('Alquiler',{'alquilerID':'atributo'})#llamar al metodo que te crea un identificador automatico
-        alquiler.text=''
-        #-----------------------------------------
-        if(continuar):
-            print("Dame una matricula de vehiculo") 
-            scan=paquete.Utiles.escanerMatricula()
-            if(scan!=None): 
-                nodo=paquete.GestorVehiculo.buscarMatricula(scan, root[0])
-                if(nodo!=None):
-                    idVehiculo = ET.SubElement(alquiler, 'ID_Vehiculo',{'matricula':scan})
-                    idVehiculo.text =nodo.attrib['vehiculoID']
-                else:
-                    continuar=False
-                    print ('No existe ese vehiculo')
-                    print('Se cancelara la creacion de este alquiler')
+    continuar=True
+    #---------------------------------------
+    alquiler = ET.Element('Alquiler',{'alquilerID':'atributo'})#llamar al metodo que te crea un identificador automatico
+    alquiler.text=''
+    #-----------------------------------------
+    if(continuar):
+        print("Dame una matricula de vehiculo") 
+        scan=paquete.Utiles.escanerMatricula()
+        if(scan!=None): 
+            nodo=paquete.GestorVehiculo.buscarMatricula(scan, root[0])
+            if(nodo!=None):
+                idVehiculo = ET.SubElement(alquiler, 'ID_Vehiculo',{'matricula':scan})
+                idVehiculo.text =nodo.attrib['vehiculoID']
             else:
                 continuar=False
+                print ('No existe ese vehiculo')
                 print('Se cancelara la creacion de este alquiler')
-        
-        if(continuar):
-            print("Dame un ID de cliente")
-            scan=paquete.Utiles.escanerDni()
-            if(scan!=None):
-                idCliente = ET.SubElement(alquiler, 'ID_Cliente')
-                idCliente.text =scan
-            else:
-                continuar=False
-                print('Se cancelara la creacion de este alquiler')
-        
-        if(continuar):
-            print("Dame una fecha de inicio")
-            fInicio=paquete.Utiles.escanerFecha()
-            if(fInicio!=None ):
-                fechaInicio = ET.SubElement(alquiler, 'Fecha_Inicio')
-                fechaInicio.text =fInicio
-            else:
-                continuar=False
-                print('Se cancelara la creacion de este alquiler')
-        if(continuar):
-            print("Dame una fecha de finalizacion")
-            fFinal=paquete.Utiles.escanerFecha()
-            if(fFinal!=None ):
-                if(paquete.Utiles.fechaDevolucionSuperior(fInicio,fFinal)!=None):
-                    fechaFinal = ET.SubElement(alquiler, 'Fecha_Final')
-                    fechaFinal.text =fFinal
-                    
-                    fechaDevolucion = ET.SubElement(alquiler, 'Fecha_Devolucion')
-                    fechaDevolucion.text ='-'
-                else:
-                    print('Se cancelara la creacion de este alquiler')
-                    print('Porque has introducido una fecha final inferior a la de inicio')
-                    continuar=False
-            else:
-                continuar=False
-                print('Se cancelara la creacion de este alquiler')
-        
-        if(continuar):
-            print("Dame un kilometraje inicial") 
-            scan=paquete.Utiles.escanerNumericoDecimal()
-            if(scan!=None ):
-                kilometrajeInicial = ET.SubElement(alquiler, 'Kilometraje_Inicial')
-                kilometrajeInicial.text =scan
+        else:
+            continuar=False
+            print('Se cancelara la creacion de este alquiler')
+    
+    if(continuar):
+        print("Dame un ID de cliente")
+        scan=paquete.Utiles.escanerDni()
+        if(scan!=None):
+            idCliente = ET.SubElement(alquiler, 'ID_Cliente')
+            idCliente.text =scan
+        else:
+            continuar=False
+            print('Se cancelara la creacion de este alquiler')
+    
+    if(continuar):
+        print("Dame una fecha de inicio")
+        fInicio=paquete.Utiles.escanerFecha()
+        if(fInicio!=None ):
+            fechaInicio = ET.SubElement(alquiler, 'Fecha_Inicio')
+            fechaInicio.text =fInicio
+        else:
+            continuar=False
+            print('Se cancelara la creacion de este alquiler')
+    if(continuar):
+        print("Dame una fecha de finalizacion")
+        fFinal=paquete.Utiles.escanerFecha()
+        if(fFinal!=None ):
+            if(paquete.Utiles.fechaDevolucionSuperior(fInicio,fFinal)!=None):
+                fechaFinal = ET.SubElement(alquiler, 'Fecha_Final')
+                fechaFinal.text =fFinal
                 
-                kilometrajeFinal = ET.SubElement(alquiler, 'Kilometraje_Final')
-                kilometrajeFinal.text ='-'
-                
-                precioFinal = ET.SubElement(alquiler, 'Precio_Final')
-                dias=paquete.Utiles.fechaDevolucionSuperior(nodo[3].text,fechaDevolucion)
-                precioFinal.text =""+int(nodo[3].text)*int(dias)
-                
-                recargo = ET.SubElement(alquiler, 'Recargo')
-                recargo.text ='De momento 0'
-                
-                alquileres.append(alquiler) 
-                print('Has añadido un nuevo alquiler a la lista de alquileres')
+                fechaDevolucion = ET.SubElement(alquiler, 'Fecha_Devolucion')
+                fechaDevolucion.text ='-'
             else:
-                continuar=False
                 print('Se cancelara la creacion de este alquiler')
+                print('Porque has introducido una fecha final inferior a la de inicio')
+                continuar=False
+        else:
+            continuar=False
+            print('Se cancelara la creacion de este alquiler')
+    
+    if(continuar):
+        print("Dame un kilometraje inicial") 
+        scan=paquete.Utiles.escanerNumericoDecimal()
+        if(scan!=None ):
+            kilometrajeInicial = ET.SubElement(alquiler, 'Kilometraje_Inicial')
+            kilometrajeInicial.text =scan
+            
+            kilometrajeFinal = ET.SubElement(alquiler, 'Kilometraje_Final')
+            kilometrajeFinal.text ='-'
+            
+            precioFinal = ET.SubElement(alquiler, 'Precio_Final')
+            dias=paquete.Utiles.fechaDevolucionSuperior(fInicio,fFinal)
+            precioFinal.text =str(float(nodo[3].text)*float(dias))
+            
+            recargo = ET.SubElement(alquiler, 'Recargo')
+            recargo.text ='De momento 0'
+            
+            alquileres.append(alquiler) 
+            print('Has añadido un nuevo alquiler a la lista de alquileres')
+        else:
+            continuar=False
+            print('Se cancelara la creacion de este alquiler')
     
     return 0
 def finalizarAlquiler(alquileres,root):
