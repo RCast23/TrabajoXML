@@ -37,8 +37,12 @@ def crear(alquileres,root):
         print("Dame una fecha de inicio")
         fInicio=paquete.Utiles.escanerFecha()
         if(fInicio!=None ):
-            fechaInicio = ET.SubElement(alquiler, 'Fecha_Inicio')
-            fechaInicio.text =fInicio
+            if(paquete.Utiles.confirmarFecha(fInicio)):
+                fechaInicio = ET.SubElement(alquiler, 'Fecha_Inicio')
+                fechaInicio.text =fInicio
+            else:
+                continuar=False
+                print("No puedes introducir una fecha que sea inferior a hoy")
         else:
             continuar=False
             print('Se cancelara la creacion de este alquiler')
@@ -115,21 +119,21 @@ def finalizarAlquiler(alquileres,root):
                 continuar=False
             extra=paquete.Utiles.fechaDevolucionSuperior(nodo[3].text,fechaDevolucion)
             precio=paquete.Utiles.fechaDevolucionSuperior(nodo[2].text,nodo[3].text)
-            if(extra!=None):#necesito en utiles fechaDevolucionSuperior(fecha1, fecha2) un metodo en el cual mandes(fecha1, fecha2) y si la fecha 2 es superior a la 1 devuelve la diferencia si no, devuelve None
-                recargo=22+int(tarifa)*int(extra)
+            if(extra!=None):
+                recargo=float(22)+float(tarifa)*float(extra)
             if(precio!=None):
-                precioFinal=int(tarifa)*int(precio)
+                precioFinal=float(tarifa)*float(precio)
         if(continuar):
             print("¿Seguro que quieres finalizar el alquiler?")
             if(paquete.Utiles.confirmacion()):
                 nodo[4].text=fechaDevolucion
                 nodo[6].text=kilometrajeFinal
                 if(recargo!=None):
-                    nodo[8].text=""+recargo
+                    nodo[8].text=str(recargo)
                 else:
                     recargo=0
                 if(precioFinal!=None):
-                    nodo[7].text=""+precioFinal
+                    nodo[7].text=str(precioFinal)
             
     return 0
 def modificar(alquileres,root):

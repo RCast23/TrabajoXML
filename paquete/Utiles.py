@@ -217,6 +217,13 @@ def fechaDevolucionSuperior(fecha1, fecha2):
         return str(fechaConvertida2-fechaConvertida1).split(' ')[0]
     else:
         return None
+def confirmarFecha(fecha1):
+    fechaConvertida1 = datetime.datetime(int(fecha1.split('-')[2]),int(fecha1.split('-')[1]),int(fecha1.split('-')[0]))
+    hoy=datetime.date.today()
+    if(fechaConvertida1>=hoy):
+        return True
+    else:
+        return False
         
         
     
