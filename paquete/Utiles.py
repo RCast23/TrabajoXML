@@ -12,18 +12,25 @@ def confirmacion():
         else:
             print("Valor incorrecto, pruebe otra vez")
         
-
 def recorrer(nodo):
     #Nodo es bascamente un vehiculo o todos los vehiculos o root ya que es recursivo
     #printea todos los datos del elemento y si hay subelemento tambien
+    
     print("Tipo nodo: ",nodo.tag,end="")
     #Para recorrer los atributos. Los atributos estan en un diccionario
+    attrName=''
+    attrValue=''
     for attr in nodo.attrib:
         attrName = attr
         attrValue = nodo.attrib[attr]
-        print("\t","Nombre atributo: ",attrName,"/ Valor atributo: ",attrValue," ",end="")
+        if(attrName!='matricula'):
+            print("\t","Nombre atributo: ",attrName,"/ Valor atributo: ",attrValue," ",end="")
+        
     if(nodo.text != ''):
-        print("\nNodo:",nodo.text)
+        if(attrName=='matricula'):
+            print("\nNodo:",attrValue)
+        else:
+            print("\nNodo:",nodo.text)
     for n in nodo:
         recorrer(n)
     return 0
