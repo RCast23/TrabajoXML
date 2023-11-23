@@ -37,22 +37,27 @@ def crear(alquileres,root):
         
         if(continuar):
             print("Dame una fecha de inicio")
-            scan=paquete.Utiles.escanerFecha()
-            if(scan!=None ):
+            fInicio=paquete.Utiles.escanerFecha()
+            if(fInicio!=None ):
                 fechaInicio = ET.SubElement(alquiler, 'Fecha_Inicio')
-                fechaInicio.text =scan
+                fechaInicio.text =fInicio
             else:
                 continuar=False
                 print('Se cancelara la creacion de este alquiler')
         if(continuar):
             print("Dame una fecha de finalizacion")
-            scan=paquete.Utiles.escanerFecha()
-            if(scan!=None ):
-                fechaFinal = ET.SubElement(alquiler, 'Fecha_Final')
-                fechaFinal.text =scan
-                
-                fechaDevolucion = ET.SubElement(alquiler, 'Fecha_Devolucion')
-                fechaDevolucion.text ='-'
+            fFinal=paquete.Utiles.escanerFecha()
+            if(fFinal!=None ):
+                if(paquete.Utiles.fechaDevolucionSuperior(fInicio,fFinal)!=None):
+                    fechaFinal = ET.SubElement(alquiler, 'Fecha_Final')
+                    fechaFinal.text =fFinal
+                    
+                    fechaDevolucion = ET.SubElement(alquiler, 'Fecha_Devolucion')
+                    fechaDevolucion.text ='-'
+                else:
+                    print('Se cancelara la creacion de este alquiler')
+                    print('Porque has introducido una fecha final inferior a la de inicio')
+                    continuar=False
             else:
                 continuar=False
                 print('Se cancelara la creacion de este alquiler')
@@ -68,7 +73,8 @@ def crear(alquileres,root):
                 kilometrajeFinal.text ='-'
                 
                 precioFinal = ET.SubElement(alquiler, 'Precio_Final')
-                precioFinal.text ='-'
+                dias=paquete.Utiles.fechaDevolucionSuperior(nodo[3].text,fechaDevolucion)
+                precioFinal.text =""+int(nodo[3].text)*int(dias)
                 
                 recargo = ET.SubElement(alquiler, 'Recargo')
                 recargo.text ='De momento 0'
@@ -80,7 +86,6 @@ def crear(alquileres,root):
                 print('Se cancelara la creacion de este alquiler')
     
     return 0
-
 def finalizarAlquiler(alquileres,root):
     print("Introduce la matricula del vehiculo que quieres ver")
     vehiculo=paquete.Utiles.escanerMatricula()
@@ -111,25 +116,24 @@ def finalizarAlquiler(alquileres,root):
             else:
                 continuar=False
             extra=paquete.Utiles.fechaDevolucionSuperior(nodo[3].text,fechaDevolucion)
-            precio=paquete.Utiles.fechaDevolucionSuperior(nodo[2].text,nodo[2].text)
+            precio=paquete.Utiles.fechaDevolucionSuperior(nodo[2].text,nodo[3].text)
             if(extra!=None):#necesito en utiles fechaDevolucionSuperior(fecha1, fecha2) un metodo en el cual mandes(fecha1, fecha2) y si la fecha 2 es superior a la 1 devuelve la diferencia si no, devuelve None
                 recargo=22+int(tarifa)*int(extra)
             if(precio!=None):
                 precioFinal=int(tarifa)*int(precio)
         if(continuar):
-            print("Â¿Seguro que quieres finalizar el alquiler?")
+            print("¿Seguro que quieres finalizar el alquiler?")
             if(paquete.Utiles.confirmacion()):
                 nodo[4].text=fechaDevolucion
                 nodo[6].text=kilometrajeFinal
                 if(recargo!=None):
-                    nodo[8].text=recargo
+                    nodo[8].text=""+recargo
                 else:
                     recargo=0
                 if(precioFinal!=None):
-                    nodo[7].text=int(precioFinal)+int(recargo)
+                    nodo[7].text=""+precioFinal
             
     return 0
-
 def modificar(alquileres,root):
     print("Introduce la matricula del vehiculo que quieres ver")
     vehiculo=paquete.Utiles.escanerMatricula()
@@ -180,12 +184,30 @@ def modificar(alquileres,root):
                 print("Dame una fecha de inicio") 
                 scan=paquete.Utiles.escanerFecha()
                 if(scan!=None):
-                    fechaInicio=scan
+                    if(fechaFinal!=None):
+                        if(paquete.Utiles.fechaDevolucionSuperior(scan,fechaFinal)!=None):
+                            fechaInicio=scan
+                        else:
+                            print("La fecha de inicio es mayor que la final, cambia antes la final a una mayor") 
+                    else:
+                        if(paquete.Utiles.fechaDevolucionSuperior(scan,nodo[3].text)!=None):
+                            fechaInicio=scan
+                        else:
+                            print("La fecha de inicio es mayor que la final, cambia antes la final a una mayor") 
             elif(opcion=="5"):
                 print("Dame una fecha final") 
                 scan=paquete.Utiles.escanerFecha()
                 if(scan!=None):
-                    fechaFinal=scan
+                    if(fechaInicio!=None):
+                        if(paquete.Utiles.fechaDevolucionSuperior(fechaInicio,scan)!=None):
+                            fechaFinal=scan
+                        else:
+                            print("La fecha de inicio es mayor que la final, cambia antes la final a una mayor") 
+                    else:
+                        if(paquete.Utiles.fechaDevolucionSuperior(nodo[2].text,scan)!=None):
+                            fechaFinal=scan
+                        else:
+                            print("La fecha de inicio es mayor que la final, cambia antes la final a una mayor") 
             elif(opcion=="6"):
                 print("Dame una fecha de devolucion") 
                 scan=paquete.Utiles.escanerFecha()
