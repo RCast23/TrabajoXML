@@ -72,11 +72,11 @@ def submenuVehiculo(rootVehiculo):
         elif(opcion=='3'):
             GestorVehiculo.modificar(rootVehiculo)
             BaseDeDatos.guardarArchivo(root)
-            print("¿Desea realizar otra modificacion?(Si o no)")
+            print("¿Desea realizar la modificacion de otro vehiculo?(Si o no)")
             while(Utiles.confirmacion()):
                 GestorVehiculo.modificar(rootVehiculo)
                 BaseDeDatos.guardarArchivo(root)
-                print("¿Desea realizar otra modificacion?(Si o no)")
+                print("¿Desea realizar la modificacion de otro vehiculo?(Si o no)")
                 
         elif(opcion=='4'):
             GestorVehiculo.borrar(rootVehiculo[0])

@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET
 import paquete.Utiles
-from paquete.Utiles import recorrer
+from paquete.Utiles import recorrer, escanerMatricula
 
 
 def crear(root):
@@ -79,11 +79,13 @@ def modificar(root):  # Requiere confirmacion
             elif(numOpcion == '2'):
                 print("Introduzca la nueva matricula del vehiculo")
                 scan = paquete.Utiles.escanerMatricula() 
-                if(scan != None):
+                if(scan != None and buscarMatricula(scan, root[0]) == None):
                     print("¿Desea confirmar la modificacion?")
                     if(paquete.Utiles.confirmacion()):
                         paquete.Utiles.modificarMatriculaVehiculoCascada(root, vehiculo[0].text, scan)
                         vehiculo[0].text = scan
+                else:
+                    print("No se ha modificado la matricula")
                     
             elif(numOpcion == '3'):
                 print("Introduzca la nueva descripcion del vehiculo (Marca y modelo)")
@@ -129,7 +131,8 @@ def modificar(root):  # Requiere confirmacion
 
     
 def buscarVehiculo(root):
-    matricula = input("Introduzca la matricula del vehiculo")
+    print("Introduzca la matricula del vehiculo")
+    matricula = escanerMatricula();
     return buscarMatricula(matricula, root)
 
     

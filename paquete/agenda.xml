@@ -1,5 +1,20 @@
 <?xml version="1.0" ?>
 <Agenda>
-  <Vehiculos/>
+  <Vehiculos>
+    <Vehiculo vehiculoID="2">
+      <Matricula>1111AAA</Matricula>
+      <Descripcion>Seat Ibiza</Descripcion>
+      <Anno_De_Fabricacion>2001</Anno_De_Fabricacion>
+      <Tarifa>15.50</Tarifa>
+      <Estado_Vehiculo>Disponible</Estado_Vehiculo>
+    </Vehiculo>
+    <Vehiculo vehiculoID="1">
+      <Matricula>2222AAA</Matricula>
+      <Descripcion>Coche Seat</Descripcion>
+      <Anno_De_Fabricacion>2004</Anno_De_Fabricacion>
+      <Tarifa>154.40</Tarifa>
+      <Estado_Vehiculo>Disponible</Estado_Vehiculo>
+    </Vehiculo>
+  </Vehiculos>
   <Alquileres/>
 </Agenda>
