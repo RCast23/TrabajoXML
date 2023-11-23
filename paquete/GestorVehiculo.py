@@ -33,7 +33,7 @@ def crear(root):
         vehiculo = ET.SubElement(root[0], 'Vehiculo', {'vehiculoID':paquete.Utiles.autoasignarIDVehiculo(root)})
         vehiculo.text = ''
         matricula = ET.SubElement(vehiculo, 'Matricula')
-        matricula.text = scanMatricula.capitalize()
+        matricula.text = scanMatricula 
         marcaYmodelo = ET.SubElement(vehiculo, 'Descripcion')
         marcaYmodelo.text = scanMarcaModelo
         annoDeFabricacion = ET.SubElement(vehiculo, 'Anno_De_Fabricacion')
@@ -69,16 +69,16 @@ def modificar(root):  # Requiere confirmacion
             if(numOpcion == '1'):
                 print("Introduzca la nueva ID del vehiculo")
                 scan = paquete.Utiles.escanerID(root)
-                #Introducir comprobacion de atributo ya existente
+                # Introducir comprobacion de atributo ya existente
                 if(scan != None):
                     print("¿Desea confirmar la modificacion?")
                     if(paquete.Utiles.confirmacion()):
-                        paquete.Utiles.modificarIDVehiculoCascada(root,vehiculo.get('ID_Vehiculo'),scan)
+                        paquete.Utiles.modificarIDVehiculoCascada(root, vehiculo.get('ID_Vehiculo'), scan)
                         vehiculo.set('vehiculoID', scan)
                     
             elif(numOpcion == '2'):
                 print("Introduzca la nueva matricula del vehiculo")
-                scan = paquete.Utiles.escanerMatricula().capitalize()
+                scan = paquete.Utiles.escanerMatricula() 
                 if(scan != None):
                     print("¿Desea confirmar la modificacion?")
                     if(paquete.Utiles.confirmacion()):

@@ -5,7 +5,7 @@ def submenuAlquiler(rootAlquiler):
     check=True
     checkTodos=True
     while (check):
-        opcion = input("Seleccione una opcion para Alquileres:\n1.Alta\n2.Buscar\n3.Modificar\n4.Mostrar Todos\n0.Salir")
+        opcion = input("Seleccione una opcion para Alquileres:\n1.Alta\n2.Buscar\n3.Modificar\n4.Mostrar Todos\n5.Finalizar alquiler\n0.Salir")
         
         if(opcion=='1'):
             GestorAlquiler.crear(rootAlquiler,root)
@@ -40,7 +40,13 @@ def submenuAlquiler(rootAlquiler):
                     GestorAlquiler.buscarMostrarTodosDni(rootAlquiler)
                 elif (opcion == '0'):
                     checkTodos=False
-                    
+        elif(opcion == 5):
+            #GestorAlquiler.finalizarAlquiler(rootAlquiler,root)
+            BaseDeDatos.guardarArchivo(root)
+            print("¿Desea finalizar otro alquiler?(Si o no)")
+            while(Utiles.confirmacion()):
+                #GestorAlquiler.finalizarAlquiler(rootAlquiler,root)
+                print("¿Desea finalizar otro alquiler?(Si o no)")
         elif(opcion == '0'):
             check = False
         else:

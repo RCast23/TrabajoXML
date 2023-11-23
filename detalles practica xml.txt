@@ -1,4 +1,3 @@
--Mostrar alquiler id vehiculo = matricula (guardar matricula como atributo)
 -Vehiculos siempre disponible hasta que se modifiquen (Fechas de alquileres lo modifican default)
 -La fecha final no sea menor al inicial
 -------------------------------------------------------------------------------------------------

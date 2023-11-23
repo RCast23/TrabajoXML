@@ -144,18 +144,18 @@ def escanerNumericoDecimal():
                     print('Porfavor introduce solo 2 decimales')
             else:
                 print('Formato de decimales incorrecto')
-        print('Porfavor introduce numeros y los decimales con punto')
+        else:
+            print('Porfavor introduce numeros y los decimales con punto')
     print("Has superado el numero de intentos")
     return None
 
 def escanerMatricula():
-    #tres numeros y una letra
     intentos=0
     while(intentos<3):
         scan=input()
         if(scan.isspace()==False and len(scan)==7):
             if(scan[0:3].isnumeric() and scan[4:6].isalpha()):
-                return scan
+                return scan.upper()
         intentos+=1
         print('Porfavor introduce una matricula (Cuatro numeros y tres letras)')
     print("Has superado el numero de intentos")
@@ -164,10 +164,10 @@ def escanerMatricula():
 def escanerDni():
     intentos=0
     while(intentos<3):
-        scan=input().capitalize()
+        scan=input()
         if(scan.isspace()==False and len(scan)==9):
             if(scan[0:7].isnumeric() and scan[8].isalpha()):
-                return scan
+                return scan.upper()
         intentos+=1
         print('Porfavor introduce un DNI (Ocho numeros y una letra)')
     print("Has superado el numero de intentos")
@@ -191,7 +191,7 @@ def escanerFecha():
             continuar=False 
         if(continuar):
             x = datetime.datetime(int(anno), int(mes), int(dia))
-            return x.strftime("%d %m %Y ")
+            return x.strftime("%d-%m-%Y")
         intentos+=1
         print('Porfavor introduce una fecha correcta (Dia 1-31 mes 1-12 anno 2000-3000)')
     print("Has superado el numero de intentos")

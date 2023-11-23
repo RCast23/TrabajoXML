@@ -1,39 +1,5 @@
 <?xml version="1.0" ?>
 <Agenda>
-  <Vehiculos>
-    <Vehiculo vehiculoID="8">
-      <Matricula>9999AAA</Matricula>
-      <Marca_Y_Modelo>SeatLeon</Marca_Y_Modelo>
-      <Anno_De_Fabricacion>2000</Anno_De_Fabricacion>
-      <Tarifa>12.50</Tarifa>
-      <Estado_Vehiculo>Si</Estado_Vehiculo>
-    </Vehiculo>
-    <Vehiculo vehiculoID="2">
-      <Matricula>2222AAA</Matricula>
-      <Marca_Y_Modelo>a a aa  a</Marca_Y_Modelo>
-      <Anno_De_Fabricacion>2002</Anno_De_Fabricacion>
-      <Tarifa>12</Tarifa>
-      <Estado_Vehiculo>Perffe</Estado_Vehiculo>
-    </Vehiculo>
-    <Vehiculo vehiculoID="3">
-      <Matricula>3333AAA</Matricula>
-      <Marca_Y_Modelo>SeatCordoba</Marca_Y_Modelo>
-      <Anno_De_Fabricacion>2004</Anno_De_Fabricacion>
-      <Tarifa>12</Tarifa>
-      <Estado_Vehiculo>Todo</Estado_Vehiculo>
-    </Vehiculo>
-  </Vehiculos>
-  <Alquileres>
-    <Alquiler alquilerID="atributo">
-      <ID_Vehiculo matricula="9999AAA">5</ID_Vehiculo>
-      <ID_Cliente>12345678a</ID_Cliente>
-      <Fecha_Inicio>-</Fecha_Inicio>
-      <Fecha_Final>03 03 2020 </Fecha_Final>
-      <Fecha_Devolucion/>
-      <Kilometraje_Inicial>20000</Kilometraje_Inicial>
-      <Kilometraje_Final>-</Kilometraje_Final>
-      <Precio_Final>-</Precio_Final>
-      <Recargo>De momento 0</Recargo>
-    </Alquiler>
-  </Alquileres>
+  <Vehiculos/>
+  <Alquileres/>
 </Agenda>
