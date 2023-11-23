@@ -208,3 +208,5 @@ def escanerYear():
         print("Porfavor introduce un anno correcto (4 digitos entre 1886 y el anno actual)")
     print("Has superado el numero de intentos")
     return None
+
+#necesito en utiles fechaDevolucionSuperior(fecha1, fecha2) un metodo en el cual mandes(fecha1, fecha2) y si la fecha 2 es superior a la 1 devuelve la diferencia si no, devuelve None

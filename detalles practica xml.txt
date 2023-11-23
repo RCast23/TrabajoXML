@@ -1,5 +1,6 @@
 -Vehiculos siempre disponible hasta que se modifiquen (Fechas de alquileres lo modifican default)
 -La fecha final no sea menor al inicial
+-Comprobacion de fecha en fecha inicio y fecha final
 -------------------------------------------------------------------------------------------------
 Preguntas:
 -Hacer disponibilidad un enum en vez de un texto introducido por el usuario

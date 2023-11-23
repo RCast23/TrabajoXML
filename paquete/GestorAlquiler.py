@@ -81,6 +81,55 @@ def crear(alquileres,root):
     
     return 0
 
+def finalizarAlquiler(alquileres,root):
+    print("Introduce la matricula del vehiculo que quieres ver")
+    vehiculo=paquete.Utiles.escanerMatricula()
+    nodoVehiculo=paquete.GestorVehiculo.buscarMatricula(vehiculo, root[0])
+    if(vehiculo!=None and nodoVehiculo!=None):
+        print("Introduce el dni del cliente que quieres ver")
+        dni=paquete.Utiles.escanerDni()
+        if(dni!=None):
+            nodo=buscarPosicionMatriculaDni(alquileres,vehiculo,dni)
+    fechaDevolucion=None
+    kilometrajeFinal=None
+    precioFinal=None
+    recargo=None
+    tarifa=nodoVehiculo[3].text
+    continuar=True
+    if(nodo!=None):
+        print("Dame una fecha de devolucion") 
+        scan=paquete.Utiles.escanerFecha()
+        if(scan!=None):
+            fechaDevolucion=scan
+        else:
+            continuar=False
+        if(continuar):
+            print("Dame un kilometraje final") 
+            scan=paquete.Utiles.escanerNumericoDecimal()
+            if(scan!=None):
+                kilometrajeFinal=scan
+            else:
+                continuar=False
+            extra=paquete.Utiles.fechaDevolucionSuperior(nodo[3].text,fechaDevolucion)
+            precio=paquete.Utiles.fechaDevolucionSuperior(nodo[2].text,nodo[2].text)
+            if(extra!=None):#necesito en utiles fechaDevolucionSuperior(fecha1, fecha2) un metodo en el cual mandes(fecha1, fecha2) y si la fecha 2 es superior a la 1 devuelve la diferencia si no, devuelve None
+                recargo=22+int(tarifa)*int(extra)
+            if(precio!=None):
+                precioFinal=int(tarifa)*int(precio)
+        if(continuar):
+            print("Â¿Seguro que quieres finalizar el alquiler?")
+            if(paquete.Utiles.confirmacion()):
+                nodo[4].text=fechaDevolucion
+                nodo[6].text=kilometrajeFinal
+                if(recargo!=None):
+                    nodo[8].text=recargo
+                else:
+                    recargo=0
+                if(precioFinal!=None):
+                    nodo[7].text=int(precioFinal)+int(recargo)
+            
+    return 0
+
 def modificar(alquileres,root):
     print("Introduce la matricula del vehiculo que quieres ver")
     vehiculo=paquete.Utiles.escanerMatricula()
