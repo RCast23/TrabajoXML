@@ -13,8 +13,12 @@ def crear(alquileres,root):
         if(scan!=None): 
             nodo=paquete.GestorVehiculo.buscarMatricula(scan, root[0])
             if(nodo!=None):
-                idVehiculo = ET.SubElement(alquiler, 'ID_Vehiculo',{'matricula':scan})
-                idVehiculo.text =nodo.attrib['vehiculoID']
+                if(nodo[4].text=='Disponible'):
+                    idVehiculo = ET.SubElement(alquiler, 'ID_Vehiculo',{'matricula':scan})
+                    idVehiculo.text =nodo.attrib['vehiculoID']
+                else:
+                    continuar=False
+                    print("Lo sentimos pero ese vehiculo no esta disponible actualmente")
             else:
                 continuar=False
                 print ('No existe ese vehiculo')
@@ -38,8 +42,12 @@ def crear(alquileres,root):
         fInicio=paquete.Utiles.escanerFecha()
         if(fInicio!=None ):
             if(paquete.Utiles.confirmarFecha(fInicio)):
-                fechaInicio = ET.SubElement(alquiler, 'Fecha_Inicio')
-                fechaInicio.text =fInicio
+                if(paquete.Utiles.comprobarDisponibilidad(fInicio, root)):
+                    fechaInicio = ET.SubElement(alquiler, 'Fecha_Inicio')
+                    fechaInicio.text =fInicio
+                else:
+                    continuar=False
+                    print("Lo sentimos pero el vehiculo esta ocupado en esa fecha")
             else:
                 continuar=False
                 print("No puedes introducir una fecha que sea inferior a hoy")
@@ -51,11 +59,15 @@ def crear(alquileres,root):
         fFinal=paquete.Utiles.escanerFecha()
         if(fFinal!=None ):
             if(paquete.Utiles.fechaDevolucionSuperior(fInicio,fFinal)!=None):
-                fechaFinal = ET.SubElement(alquiler, 'Fecha_Final')
-                fechaFinal.text =fFinal
-                
-                fechaDevolucion = ET.SubElement(alquiler, 'Fecha_Devolucion')
-                fechaDevolucion.text ='-'
+                if(paquete.Utiles.comprobarDisponibilidad(fInicio, root)):
+                    fechaFinal = ET.SubElement(alquiler, 'Fecha_Final')
+                    fechaFinal.text =fFinal
+                    
+                    fechaDevolucion = ET.SubElement(alquiler, 'Fecha_Devolucion')
+                    fechaDevolucion.text ='-'
+                else:
+                    continuar=False
+                    print("Lo sentimos pero el vehiculo esta ocupado en esa fecha")
             else:
                 print('Se cancelara la creacion de este alquiler')
                 print('Porque has introducido una fecha final inferior a la de inicio')
@@ -106,8 +118,13 @@ def finalizarAlquiler(alquileres,root):
     if(nodo!=None):
         print("Dame una fecha de devolucion") 
         scan=paquete.Utiles.escanerFecha()
+        #que la fecha no pueda ser inferior a la de inicio
         if(scan!=None):
-            fechaDevolucion=scan
+            if(paquete.Utiles.fechaDevolucionSuperior(scan,nodo[2].text)!=None):
+                fechaDevolucion=scan
+            else:
+                continuar=False
+                print("La fecha de devolucion no puede ser inferior a la de inicio")
         else:
             continuar=False
         if(continuar):
@@ -174,7 +191,10 @@ def modificar(alquileres,root):
                 if(scan!=None): 
                     nodoVehiculo=paquete.GestorVehiculo.buscarMatricula(scan, root[0])
                     if(nodoVehiculo!=None):
-                        idVehiculo =nodoVehiculo.attrib['vehiculoID']
+                        if(nodoVehiculo[4].text=='Disponible'):
+                            idVehiculo =nodoVehiculo.attrib['vehiculoID']
+                        else:
+                            print("Lo sentimos pero ese vehiculo no esta disponible actualmente")
                     else:
                         print ('No existe ese vehiculo')
             elif(opcion=="3"):
@@ -188,12 +208,21 @@ def modificar(alquileres,root):
                 if(scan!=None):
                     if(fechaFinal!=None):
                         if(paquete.Utiles.fechaDevolucionSuperior(scan,fechaFinal)!=None):
-                            fechaInicio=scan
+                            if(paquete.Utiles.comprobarDisponibilidad(scan, root)):
+                                fechaInicio=scan
+                            else:
+                                print("Lo sentimos pero el vehiculo esta ocupado en esa fecha")
                         else:
                             print("La fecha de inicio es mayor que la final, cambia antes la final a una mayor") 
                     else:
                         if(paquete.Utiles.fechaDevolucionSuperior(scan,nodo[3].text)!=None):
-                            fechaInicio=scan
+                            if(paquete.Utiles.comprobarDisponibilidad(scan, root)):
+                                if(paquete.Utiles.comprobarDisponibilidad(scan, root)):
+                                    fechaInicio=scan
+                                else:
+                                    print("Lo sentimos pero el vehiculo esta ocupado en esa fecha")
+                            else:
+                                print("Lo sentimos pero el vehiculo esta ocupado en esa fecha")
                         else:
                             print("La fecha de inicio es mayor que la final, cambia antes la final a una mayor") 
             elif(opcion=="5"):
@@ -202,7 +231,10 @@ def modificar(alquileres,root):
                 if(scan!=None):
                     if(fechaInicio!=None):
                         if(paquete.Utiles.fechaDevolucionSuperior(fechaInicio,scan)!=None):
-                            fechaFinal=scan
+                            if(paquete.Utiles.comprobarDisponibilidad(scan, root)):
+                                fechaFinal=scan
+                            else:
+                                print("Lo sentimos pero el vehiculo esta ocupado en esa fecha")
                         else:
                             print("La fecha de inicio es mayor que la final, cambia antes la final a una mayor") 
                     else:

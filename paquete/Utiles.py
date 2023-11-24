@@ -247,7 +247,6 @@ def confirmarFecha(fecha1):
         return False
     
 def comprobarDisponibilidad(fecha, root):
-    print('No estoy disponible')
     for i in root[1]:
         if((fechaDevolucionSuperior(fecha, i[2])!=None)or(fechaDevolucionSuperior(fecha, i[3])==None)):
             return False
