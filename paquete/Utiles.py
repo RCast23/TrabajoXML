@@ -221,6 +221,7 @@ def escanerEstadoVehiculo():
         elif(numOpcion=='3'):
             return 'Averiado'
         elif(numOpcion=='4'):
+            print('Introduzca el nuevo estado del vehiculo')
             return escanerAlfabetico()
         else:
             print('Opcion no valida')
@@ -243,6 +244,9 @@ def confirmarFecha(fecha1):
         return True
     else:
         return False
+    
+def comprobarDisponibilidad(fecha, root):
+    print('No estoy disponible')
         
         
     

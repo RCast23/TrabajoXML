@@ -113,7 +113,7 @@ def modificar(root):  # Requiere confirmacion
                         vehiculo[3].text = scan
                     
             elif(numOpcion == '6'):
-                scan = escanerEstadoVehiculo(vehiculo)
+                scan = escanerEstadoVehiculo()
                 if(scan != None):
                     print("¿Desea confirmar la modificacion?")
                     if(paquete.Utiles.confirmacion()):
