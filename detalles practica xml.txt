@@ -1,6 +1,5 @@
 -Vehiculos siempre disponible hasta que se modifiquen (Fechas de alquileres lo modifican default)
 -Comprobar que la fecha del alquiler no sea anterior al año de fabricacion
--Enum en la el campo de disponibilidad de vehiculos con campo de otros
 -Comprobar si el coche esta disponible
 -------------------------------------------------------------------------------------------------
 Preguntas:

@@ -209,6 +209,25 @@ def escanerYear():
     print("Has superado el numero de intentos")
     return None
 
+def escanerEstadoVehiculo():
+    intentos=0
+    while(intentos<3):
+        print("Introduzca el nuevo estado del vehiculo:\n1.Disponible\n2.Ocupado\n3.Averiado\n4.Otro")
+        numOpcion = escanerNumerico();
+        if(numOpcion=='1'):
+            return 'Disponible'
+        elif(numOpcion=='2'):
+            return 'Ocupado'
+        elif(numOpcion=='3'):
+            return 'Averiado'
+        elif(numOpcion=='4'):
+            return escanerAlfabetico()
+        else:
+            print('Opcion no valida')
+    print('Has superado el numero de intentos')
+    return None
+        
+
 #necesito en utiles fechaDevolucionSuperior(fecha1, fecha2) un metodo en el cual mandes(fecha1, fecha2) y si la fecha 2 es superior a la 1 devuelve la diferencia si no, devuelve None
 def fechaDevolucionSuperior(fecha1, fecha2):
     fechaConvertida1 = datetime.datetime(int(fecha1.split('-')[2]),int(fecha1.split('-')[1]),int(fecha1.split('-')[0]))

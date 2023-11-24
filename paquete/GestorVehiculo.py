@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET
 import paquete.Utiles
-from paquete.Utiles import recorrer, escanerMatricula
+from paquete.Utiles import recorrer, escanerMatricula, escanerEstadoVehiculo
 
 
 def crear(root):
@@ -113,8 +113,7 @@ def modificar(root):  # Requiere confirmacion
                         vehiculo[3].text = scan
                     
             elif(numOpcion == '6'):
-                print("Introduzca el nuevo estado del vehiculo")
-                scan = paquete.Utiles.escanerAlfabetico()
+                scan = escanerEstadoVehiculo(vehiculo)
                 if(scan != None):
                     print("¿Desea confirmar la modificacion?")
                     if(paquete.Utiles.confirmacion()):
