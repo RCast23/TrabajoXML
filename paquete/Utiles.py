@@ -1,4 +1,5 @@
 import datetime
+from paquete.MainXML import check
 
 
 #crear metodo para encontrar numero de ID mas alto para la autoasignacion
@@ -58,14 +59,14 @@ def autoasignarIDVehiculo(root):
             cont+=1
 
 def modificarIDVehiculoCascada(root,idVieja,idNueva):
-    for x in root[1]:
-        if(x[0]==idVieja):
-            x[0]=idNueva
+    for i in root[1]:
+        if(i[0]==idVieja):
+            i[0]=idNueva
 
 def modificarMatriculaVehiculoCascada(root,matriculaVieja,matriculaNueva):
-    for x in root[1]:
-        if(x[0].get('matricula')==matriculaVieja):
-            x[0].set('matricula',matriculaNueva)
+    for i in root[1]:
+        if(i[0].get('matricula')==matriculaVieja):
+            i[0].set('matricula',matriculaNueva)
 
 def escanerID(root):
     intentos=0
@@ -247,6 +248,10 @@ def confirmarFecha(fecha1):
     
 def comprobarDisponibilidad(fecha, root):
     print('No estoy disponible')
+    for i in root[1]:
+        if((fechaDevolucionSuperior(fecha, i[2])!=None)or(fechaDevolucionSuperior(fecha, i[3])!=None)):
+            return False
+    return True
         
         
     
