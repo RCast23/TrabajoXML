@@ -254,6 +254,6 @@ def comprobarDisponibilidad(fecha, root):
         
 def comprobarKilometraje(kilometraje, root):
     for i in root[1]:
-        if(i[7].text!='-' and float(kilometraje)<float(i[7].text)):
+        if((i[6].text!='-' and float(kilometraje)<float(i[6].text)) or float(kilometraje)<float(i[5].text)):
             return False
     return True

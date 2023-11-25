@@ -81,7 +81,7 @@ def crear(alquileres,root):
         print("Dame un kilometraje inicial") 
         scan=paquete.Utiles.escanerNumericoDecimal()
         if(scan!=None):
-            if(comprobarKilometraje(scan,root)==False):
+            if(comprobarKilometraje(scan,root)):
                 kilometrajeInicial = ET.SubElement(alquiler, 'Kilometraje_Inicial')
                 kilometrajeInicial.text =scan
                 
@@ -132,10 +132,14 @@ def finalizarAlquiler(alquileres,root):
         else:
             continuar=False
         if(continuar):
-            print("Dame un kilometraje final") 
+            print("Dame un kilometraje final")
             scan=paquete.Utiles.escanerNumericoDecimal()
             if(scan!=None):
-                kilometrajeFinal=scan
+                if(comprobarKilometraje(scan, root)):
+                    kilometrajeFinal=scan
+                else:
+                    print('El kilometraje introducido es inferior al maximo kilometraje introducido')
+                    continuar=False
             else:
                 continuar=False
             extra=paquete.Utiles.fechaDevolucionSuperior(nodo[3].text,fechaDevolucion)
@@ -152,7 +156,7 @@ def finalizarAlquiler(alquileres,root):
                 if(recargo!=None):
                     nodo[8].text=str(recargo)
                 else:
-                    recargo=0
+                    nodo[8].text=str(0)
                 if(precioFinal!=None):
                     nodo[7].text=str(precioFinal)
             
