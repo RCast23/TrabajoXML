@@ -5,7 +5,7 @@ from paquete.Utiles import comprobarKilometraje
 def crear(alquileres,root):
     continuar=True
     #---------------------------------------
-    alquiler = ET.Element('Alquiler',{'alquilerID':'atributo'})#llamar al metodo que te crea un identificador automatico
+    alquiler = ET.Element('Alquiler',{'alquilerID':'atributo'})
     alquiler.text=''
     #-----------------------------------------
     if(continuar):
@@ -14,7 +14,7 @@ def crear(alquileres,root):
         if(scan!=None): 
             nodo=paquete.GestorVehiculo.buscarMatricula(scan, root[0])
             if(nodo!=None):
-                if(nodo[4].text=='Disponible'):
+                if(nodo[4].text!='Averiado'):
                     idVehiculo = ET.SubElement(alquiler, 'ID_Vehiculo',{'matricula':scan})
                     idVehiculo.text =nodo.attrib['vehiculoID']
                 else:
@@ -95,6 +95,7 @@ def crear(alquileres,root):
                 recargo = ET.SubElement(alquiler, 'Recargo')
                 recargo.text ='De momento 0'
                 
+                nodo[4].text='Ocupado'
                 alquileres.append(alquiler) 
                 print('Has añadido un nuevo alquiler a la lista de alquileres')
             else:
@@ -151,6 +152,7 @@ def finalizarAlquiler(alquileres,root):
         if(continuar):
             print("¿Seguro que quieres finalizar el alquiler?")
             if(paquete.Utiles.confirmacion()):
+                nodoVehiculo[4].text='Disponible'
                 nodo[4].text=fechaDevolucion
                 nodo[6].text=kilometrajeFinal
                 if(recargo!=None):
@@ -187,7 +189,7 @@ def modificar(alquileres,root):
             opcion=paquete.Utiles.escanerNumerico()
             if(opcion=="1"):
                 print("Dame una ID de alquiler") 
-                scan=paquete.Utiles.escanerNumerico()#-----------------------------------------------
+                scan=paquete.Utiles.escanerNumerico()
                 if(scan!=None):
                     if(buscarPosicionId(alquileres,scan)==None):
                         print("No he encontrado otro alquiler con ID igual, es decir el ID introducido es valido")
@@ -200,7 +202,7 @@ def modificar(alquileres,root):
                 if(scan!=None): 
                     nodoVehiculo=paquete.GestorVehiculo.buscarMatricula(scan, root[0])
                     if(nodoVehiculo!=None):
-                        if(nodoVehiculo[4].text=='Disponible'):
+                        if(nodoVehiculo[4].text!='Averiado'):
                             idVehiculo =nodoVehiculo.attrib['vehiculoID']
                         else:
                             print("Lo sentimos pero ese vehiculo no esta disponible actualmente")

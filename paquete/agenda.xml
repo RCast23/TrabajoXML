@@ -15,11 +15,11 @@
       <ID_Cliente>12345678A</ID_Cliente>
       <Fecha_Inicio>01-01-2024</Fecha_Inicio>
       <Fecha_Final>02-02-2024</Fecha_Final>
-      <Fecha_Devolucion>-</Fecha_Devolucion>
+      <Fecha_Devolucion>07-07-2024</Fecha_Devolucion>
       <Kilometraje_Inicial>5.00</Kilometraje_Inicial>
-      <Kilometraje_Final>-</Kilometraje_Final>
+      <Kilometraje_Final>6.00</Kilometraje_Final>
       <Precio_Final>480.0</Precio_Final>
-      <Recargo>De momento 0</Recargo>
+      <Recargo>2362.0</Recargo>
     </Alquiler>
   </Alquileres>
 </Agenda>
