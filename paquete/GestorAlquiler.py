@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as ET
 import paquete.Utiles
+from paquete.Utiles import comprobarKilometraje
 
 def crear(alquileres,root):
     continuar=True
@@ -79,22 +80,26 @@ def crear(alquileres,root):
     if(continuar):
         print("Dame un kilometraje inicial") 
         scan=paquete.Utiles.escanerNumericoDecimal()
-        if(scan!=None ):
-            kilometrajeInicial = ET.SubElement(alquiler, 'Kilometraje_Inicial')
-            kilometrajeInicial.text =scan
-            
-            kilometrajeFinal = ET.SubElement(alquiler, 'Kilometraje_Final')
-            kilometrajeFinal.text ='-'
-            
-            precioFinal = ET.SubElement(alquiler, 'Precio_Final')
-            dias=paquete.Utiles.fechaDevolucionSuperior(fInicio,fFinal)
-            precioFinal.text =str(float(nodo[3].text)*float(dias))
-            
-            recargo = ET.SubElement(alquiler, 'Recargo')
-            recargo.text ='De momento 0'
-            
-            alquileres.append(alquiler) 
-            print('Has añadido un nuevo alquiler a la lista de alquileres')
+        if(scan!=None):
+            if(comprobarKilometraje(scan,root)==False):
+                kilometrajeInicial = ET.SubElement(alquiler, 'Kilometraje_Inicial')
+                kilometrajeInicial.text =scan
+                
+                kilometrajeFinal = ET.SubElement(alquiler, 'Kilometraje_Final')
+                kilometrajeFinal.text ='-'
+                
+                precioFinal = ET.SubElement(alquiler, 'Precio_Final')
+                dias=paquete.Utiles.fechaDevolucionSuperior(fInicio,fFinal)
+                precioFinal.text =str(float(nodo[3].text)*float(dias))
+                
+                recargo = ET.SubElement(alquiler, 'Recargo')
+                recargo.text ='De momento 0'
+                
+                alquileres.append(alquiler) 
+                print('Has añadido un nuevo alquiler a la lista de alquileres')
+            else:
+                continuar=False
+                print('El kilometraje inicial es inferior a un kilometraje final anterior')
         else:
             continuar=False
             print('Se cancelara la creacion de este alquiler')

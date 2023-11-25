@@ -72,5 +72,27 @@
       <Precio_Final>5657.5</Precio_Final>
       <Recargo>De momento 0</Recargo>
     </Alquiler>
+    <Alquiler alquilerID="atributo">
+      <ID_Vehiculo matricula="1111AAA">2</ID_Vehiculo>
+      <ID_Cliente>12345678A</ID_Cliente>
+      <Fecha_Inicio>12-12-2030</Fecha_Inicio>
+      <Fecha_Final>01-01-2031</Fecha_Final>
+      <Fecha_Devolucion>-</Fecha_Devolucion>
+      <Kilometraje_Inicial>1.00</Kilometraje_Inicial>
+      <Kilometraje_Final>-</Kilometraje_Final>
+      <Precio_Final>310.0</Precio_Final>
+      <Recargo>De momento 0</Recargo>
+    </Alquiler>
+    <Alquiler alquilerID="atributo">
+      <ID_Vehiculo matricula="1111AAA">2</ID_Vehiculo>
+      <ID_Cliente>12345678A</ID_Cliente>
+      <Fecha_Inicio>03-03-2031</Fecha_Inicio>
+      <Fecha_Final>04-04-2031</Fecha_Final>
+      <Fecha_Devolucion>-</Fecha_Devolucion>
+      <Kilometraje_Inicial>0.00</Kilometraje_Inicial>
+      <Kilometraje_Final>-</Kilometraje_Final>
+      <Precio_Final>496.0</Precio_Final>
+      <Recargo>De momento 0</Recargo>
+    </Alquiler>
   </Alquileres>
 </Agenda>

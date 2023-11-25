@@ -40,7 +40,7 @@ def submenuAlquiler(rootAlquiler):
                     GestorAlquiler.buscarMostrarTodosDni(rootAlquiler)
                 elif (opcion == '0'):
                     checkTodos=False
-        elif(opcion == 5):
+        elif(opcion == '5'):
             GestorAlquiler.finalizarAlquiler(rootAlquiler,root)
             BaseDeDatos.guardarArchivo(root)
             print("¿Desea finalizar otro alquiler?(Si o no)")
