@@ -124,7 +124,7 @@ def finalizarAlquiler(alquileres,root):
         print("Dame una fecha de devolucion") 
         scan=paquete.Utiles.escanerFecha()
         if(scan!=None):
-            if(paquete.Utiles.fechaDevolucionSuperior(scan,nodo[2].text)!=None):
+            if(paquete.Utiles.fechaDevolucionSuperior(nodo[2].text,scan)!=None):
                 fechaDevolucion=scan
             else:
                 continuar=False
