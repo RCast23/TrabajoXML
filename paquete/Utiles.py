@@ -1,5 +1,5 @@
 import datetime
-from paquete.MainXML import check
+
 
 
 #crear metodo para encontrar numero de ID mas alto para la autoasignacion
@@ -240,7 +240,7 @@ def fechaDevolucionSuperior(fecha1, fecha2):
         return None
 def confirmarFecha(fecha1):
     fechaConvertida1 = datetime.datetime(int(fecha1.split('-')[2]),int(fecha1.split('-')[1]),int(fecha1.split('-')[0]))
-    hoy=datetime.date.today()
+    hoy=datetime.datetime.today()
     if(fechaConvertida1>=hoy):
         return True
     else:
@@ -248,7 +248,7 @@ def confirmarFecha(fecha1):
     
 def comprobarDisponibilidad(fecha, root):
     for i in root[1]:
-        if((fechaDevolucionSuperior(fecha, i[2])!=None)or(fechaDevolucionSuperior(fecha, i[3])==None)):
+        if(fechaDevolucionSuperior(fecha, i[2].text)==None and fechaDevolucionSuperior(fecha, i[3].text)!=None):
             return False
     return True
         

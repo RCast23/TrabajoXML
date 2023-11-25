@@ -118,7 +118,6 @@ def finalizarAlquiler(alquileres,root):
     if(nodo!=None):
         print("Dame una fecha de devolucion") 
         scan=paquete.Utiles.escanerFecha()
-        #que la fecha no pueda ser inferior a la de inicio
         if(scan!=None):
             if(paquete.Utiles.fechaDevolucionSuperior(scan,nodo[2].text)!=None):
                 fechaDevolucion=scan
@@ -154,6 +153,7 @@ def finalizarAlquiler(alquileres,root):
             
     return 0
 def modificar(alquileres,root):
+    nodo=None
     print("Introduce la matricula del vehiculo que quieres ver")
     vehiculo=paquete.Utiles.escanerMatricula()
     if(vehiculo!=None):
@@ -246,7 +246,16 @@ def modificar(alquileres,root):
                 print("Dame una fecha de devolucion") 
                 scan=paquete.Utiles.escanerFecha()
                 if(scan!=None):
-                    fechaDevolucion=scan
+                    if(fechaInicio!=None):
+                        if(paquete.Utiles.fechaDevolucionSuperior(fechaInicio,scan)!=None):
+                            fechaDevolucion=scan
+                        else:
+                            print("La fecha de devolucion no puede ser inferior a la de inicio") 
+                    else:
+                        if(paquete.Utiles.fechaDevolucionSuperior(nodo[2].text,scan)!=None):
+                            fechaDevolucion=scan
+                        else:
+                            print("La fecha de devolucion no puede ser inferior a la de inicio")  
             elif(opcion=="7"):
                 print("Dame un kilometraje inicial") 
                 scan=paquete.Utiles.escanerNumericoDecimal()
@@ -273,6 +282,7 @@ def modificar(alquileres,root):
                 print("Escribe un numero dentro de las opciones posibles")
         else:
             continuar=False
+            
     if(nodo!=None):
         print("¿Quieres guardar los cambios realizados?\n Si o No")
         if(paquete.Utiles.confirmacion()):
@@ -348,12 +358,12 @@ def buscarPosicionMatriculaDni(alquileres,vehiculo,dni):
             print(cont,"-He ecnontrado: ",x.text)
             paquete.Utiles.recorrer(x)
             opciones.append(cont)
-            print(opciones)
             ninguno=False
         cont+=1
     if(ninguno):
         print("No se ha encontrado ningun alquiler con esa Matricula y Dni")
     else:
+        print(opciones)
         print ("Elige el alquiler que quieres seleccionar")
         scan=paquete.Utiles.escanerNumerico()
         if(scan!=None):

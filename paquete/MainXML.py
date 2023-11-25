@@ -2,7 +2,7 @@ from paquete import BaseDeDatos, GestorAlquiler, GestorVehiculo,Utiles
 
 def submenuAlquiler(rootAlquiler):
     check=True
-    checkTodos=True
+    
     while (check):
         opcion = input("Seleccione una opcion para Alquileres:\n1.Alta\n2.Buscar\n3.Modificar\n4.Mostrar Todos\n5.Finalizar alquiler\n0.Salir")
         
@@ -11,7 +11,7 @@ def submenuAlquiler(rootAlquiler):
             BaseDeDatos.guardarArchivo(root)
             print("¿Desea realizar otro alquiler?(Si o no)")
             while(Utiles.confirmacion()):
-                GestorAlquiler.crear(rootAlquiler)
+                GestorAlquiler.crear(rootAlquiler,root)
                 BaseDeDatos.guardarArchivo(root)
                 print("¿Desea realizar otro alquiler?(Si o no)")
                 
@@ -23,11 +23,12 @@ def submenuAlquiler(rootAlquiler):
             BaseDeDatos.guardarArchivo(root)
             print("¿Desea realizar la modificacion de otro alquiler?(Si o no)")
             while(Utiles.confirmacion()):
-                GestorAlquiler.modificar(rootAlquiler)
+                GestorAlquiler.modificar(rootAlquiler,root)
                 BaseDeDatos.guardarArchivo(root)
                 print("¿Desea realizar la modificacion de otro alquiler?(Si o no)")
                 
         elif(opcion=='4'):
+            checkTodos=True
             while (checkTodos):
                 #No se como lo has montado tu pero esto es lo que dice la practica, cambia lo que veas
                 opcion = input("Como desea consultar Alquileres:\n1.Todos los Alquileres\n2.Alquileres por vehiculo\n3.Alquileres por DNI\n0.Salir")
@@ -40,11 +41,11 @@ def submenuAlquiler(rootAlquiler):
                 elif (opcion == '0'):
                     checkTodos=False
         elif(opcion == 5):
-            #GestorAlquiler.finalizarAlquiler(rootAlquiler,root)
+            GestorAlquiler.finalizarAlquiler(rootAlquiler,root)
             BaseDeDatos.guardarArchivo(root)
             print("¿Desea finalizar otro alquiler?(Si o no)")
             while(Utiles.confirmacion()):
-                #GestorAlquiler.finalizarAlquiler(rootAlquiler,root)
+                GestorAlquiler.finalizarAlquiler(rootAlquiler,root)
                 print("¿Desea finalizar otro alquiler?(Si o no)")
         elif(opcion == '0'):
             check = False
