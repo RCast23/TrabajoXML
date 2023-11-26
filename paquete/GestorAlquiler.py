@@ -125,6 +125,7 @@ def finalizarAlquiler(alquileres,root):
         dni=paquete.Utiles.escanerDni()
         if(dni!=None):
             nodo=buscarPosicionMatriculaDni(alquileres,vehiculo,dni)
+    nodo=None
     fechaDevolucion=None
     kilometrajeFinal=None
     precioFinal=None
@@ -238,7 +239,7 @@ def modificar(alquileres,root):
                 if(scan!=None):
                     if(fechaFinal!=None):
                         if(paquete.Utiles.fechaDevolucionSuperior(scan,fechaFinal)!=None):#Comprobamos que introduces una feha inferior a la final
-                            if(paquete.Utiles.comprobarDisponibilidad(scan, root,vehiculo.attrib['alquilerID'])):#Comprobamos que el vehiculo esta disponible en esa fecha
+                            if(paquete.Utiles.comprobarDisponibilidad(scan, root,nodo.attrib['alquilerID'])):#Comprobamos que el vehiculo esta disponible en esa fecha
                                 fechaInicio=scan
                             else:
                                 print("Lo sentimos pero el vehiculo esta ocupado en esa fecha")
@@ -246,7 +247,7 @@ def modificar(alquileres,root):
                             print("La fecha de inicio es mayor que la final, cambia antes la final a una mayor") 
                     else:
                         if(paquete.Utiles.fechaDevolucionSuperior(scan,nodo[3].text)!=None):#Comprobamos que introduces una feha inferior a la final
-                            if(paquete.Utiles.comprobarDisponibilidad(scan, root,vehiculo.attrib['alquilerID'])):#Comprobamos que el vehiculo esta disponible en esa fecha
+                            if(paquete.Utiles.comprobarDisponibilidad(scan, root,nodo.attrib['alquilerID'])):#Comprobamos que el vehiculo esta disponible en esa fecha
                                 fechaInicio=scan
                             else:
                                 print("Lo sentimos pero el vehiculo esta ocupado en esa fecha")
@@ -258,7 +259,7 @@ def modificar(alquileres,root):
                 if(scan!=None):
                     if(fechaInicio!=None):
                         if(paquete.Utiles.fechaDevolucionSuperior(fechaInicio,scan)!=None):#Comprobamos que introduces una feha superior a la inicial
-                            if(paquete.Utiles.comprobarDisponibilidad(scan, root,vehiculo.attrib['alquilerID'])):#Comprobamos que el vehiculo esta disponible en esa fecha
+                            if(paquete.Utiles.comprobarDisponibilidad(scan, root,nodo.attrib['alquilerID'])):#Comprobamos que el vehiculo esta disponible en esa fecha
                                 fechaFinal=scan
                             else:
                                 print("Lo sentimos pero el vehiculo esta ocupado en esa fecha")
@@ -266,7 +267,7 @@ def modificar(alquileres,root):
                             print("La fecha de inicio es mayor que la final, cambia antes la final a una mayor") 
                     else:
                         if(paquete.Utiles.fechaDevolucionSuperior(nodo[2].text,scan)!=None):#Comprobamos que introduces una feha superior a la inicial
-                            if(paquete.Utiles.comprobarDisponibilidad(scan, root,vehiculo.attrib['alquilerID'])):#Comprobamos que el vehiculo esta disponible en esa fecha
+                            if(paquete.Utiles.comprobarDisponibilidad(scan, root,nodo.attrib['alquilerID'])):#Comprobamos que el vehiculo esta disponible en esa fecha
                                 fechaFinal=scan
                             else:
                                 print("Lo sentimos pero el vehiculo esta ocupado en esa fecha")
