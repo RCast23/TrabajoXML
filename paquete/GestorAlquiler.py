@@ -11,7 +11,7 @@ def crear(alquileres,root):
     continuar=True#Variable que se usa para en el caso de que algun campo sea introducido mal el programa no te pregunte los demas campos 
     #---------------------------------------
     alquiler = ET.Element('Alquiler',{'alquilerID':paquete.Utiles.autoasignarIDAlquier(root)})#Creamos un nuevo elemento sobre el cual trabajaremos
-    alquiler.text=''
+    alquiler.text='_'
     #-----------------------------------------
     if(continuar):
         print("Dame una matricula de vehiculo") 
@@ -204,7 +204,7 @@ def modificar(alquileres,root):
     while(continuar):#Este bucle nos permite modificar todos los datos de un mismo alquiler hasta que queramos finalizar y nos pedira confirmacion para que los cambios se realicen
         if(nodo!=None):
             print("Introcuce el campo que quieres modificar\n1.ID Alquiler\n2.ID Vehiculo\n3.ID Cliente\n4.Fecha Inicio\n5.Fecha Final\n6.Fecha Devolucion\n7.Kilometraje Inicial\n8.Kilometraje Final\n9.Precio Final\n10.Recargo\n0.Salir")
-            opcion=paquete.Utiles.escanerNumerico()
+            opcion=input()
             if(opcion=="1"):#Este Switch es el que nos permite elegir que campo queremos modificar
                 print("Dame una ID de alquiler") 
                 scan=paquete.Utiles.escanerNumerico()

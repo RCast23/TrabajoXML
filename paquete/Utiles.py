@@ -21,23 +21,27 @@ def recorrer(nodo):
     '''
     #Nodo es bascamente un vehiculo o todos los vehiculos o root ya que es recursivo
     #printea todos los datos del elemento y si hay subelemento tambien
-    
-    print("Tipo nodo: ",nodo.tag,end="")
-    #Para recorrer los atributos. Los atributos estan en un diccionario
     attrName=''
     attrValue=''
+    if(nodo.tag=='Alquiler' or nodo.tag=='Vehiculo'):
+        print('====='*10)
+    print("Nodo:",nodo.tag)
+    #Para recorrer los atributos. Los atributos estan en un diccionario
+    
     for attr in nodo.attrib:
         attrName = attr
         attrValue = nodo.attrib[attr]
-        if(attrName!='matricula' or attrName!='tarifa'):
-            print("\t","Nombre atributo: ",attrName,"/ Valor atributo: ",attrValue," ",end="")
+        if(attrName!='matricula' and attrName!='tarifa'):
+            print(attrName,"/ ",attrValue)
         
-    if(nodo.text != ''):
-        if(attrName=='matricula'):
-            print("\nNodo:",attrValue)
+    if(attrName!='vehiculoID' and attrName!='alquilerID'):
+        if(attrName!='matricula' and attrName!='tarifa'):
+            print(nodo.text)
         else:
-            print("\nNodo:",nodo.text)
+            print(nodo.attrib['matricula'])
+    
     for n in nodo:
+        print()
         recorrer(n)
     return 0
 
@@ -414,7 +418,7 @@ def confirmarFecha(fecha1):
     else:
         return False
     
-def comprobarDisponibilidad(fecha, root,id):
+def comprobarDisponibilidad(fecha, root,idAlquiler):
     '''
     Metodo para comprobar si un vehiculo esta disponible en una fecha determinada
     :param fecha: Fecha a comprobar
@@ -424,8 +428,10 @@ def comprobarDisponibilidad(fecha, root,id):
     '''
     #Bucle que recorre todo el nodo Alquileres y comprueba que la fecha introducida no este entre las fechas de inicio y fin de alquiler
     for i in root[1]:
-        if(fechaDevolucionSuperior(fecha, i[2].text)==None and fechaDevolucionSuperior(fecha, i[3].text)!=None and i.attrib['alquilerID'].lower()!=id.lower):
-            return False
+        if(fechaDevolucionSuperior(fecha, i[2].text)==None and fechaDevolucionSuperior(fecha, i[3].text)!=None):
+            print(idAlquiler)
+            if(i.attrib['alquilerID'].lower!=idAlquiler.lower):
+                return False
     return True
         
 def comprobarKilometraje(kilometraje, root):

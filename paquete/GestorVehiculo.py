@@ -42,7 +42,7 @@ def crear(root):
     #Si todos los datos han sido introducidos correctamente se crea el nuevo vehiculo y se guardan
     if(check):
         vehiculo = ET.SubElement(root[0], 'Vehiculo', {'vehiculoID':paquete.Utiles.autoasignarIDVehiculo(root)})
-        vehiculo.text = ''
+        vehiculo.text = '_'
         matricula = ET.SubElement(vehiculo, 'Matricula')
         matricula.text = scanMatricula 
         marcaYmodelo = ET.SubElement(vehiculo, 'Descripcion')
