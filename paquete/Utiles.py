@@ -29,7 +29,7 @@ def recorrer(nodo):
     for attr in nodo.attrib:
         attrName = attr
         attrValue = nodo.attrib[attr]
-        if(attrName!='matricula'):
+        if(attrName!='matricula' or attrName!='tarifa'):
             print("\t","Nombre atributo: ",attrName,"/ Valor atributo: ",attrValue," ",end="")
         
     if(nodo.text != ''):
@@ -414,16 +414,17 @@ def confirmarFecha(fecha1):
     else:
         return False
     
-def comprobarDisponibilidad(fecha, root):
+def comprobarDisponibilidad(fecha, root,id):
     '''
     Metodo para comprobar si un vehiculo esta disponible en una fecha determinada
     :param fecha: Fecha a comprobar
     :param root: Elemento raiz del documento XML
+    :param fecha: la id del vehiculo a comprobar para que no se compare consigo mismo
     :return Devuelve un boolean que sera True si el vehiculo no esta alquilado en esa fecha y False si si lo esta
     '''
     #Bucle que recorre todo el nodo Alquileres y comprueba que la fecha introducida no este entre las fechas de inicio y fin de alquiler
     for i in root[1]:
-        if(fechaDevolucionSuperior(fecha, i[2].text)==None and fechaDevolucionSuperior(fecha, i[3].text)!=None):
+        if(fechaDevolucionSuperior(fecha, i[2].text)==None and fechaDevolucionSuperior(fecha, i[3].text)!=None and i.attrib['alquilerID'].lower()!=id.lower):
             return False
     return True
         
