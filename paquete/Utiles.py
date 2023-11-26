@@ -76,6 +76,26 @@ def autoasignarIDVehiculo(root):
     #Se hace un contador que se ira modificando en funcion a las ID existentes que se encuentren
     cont = 1
     #Se obtiene una lista con todas las ID de vehiculos y se hace un bucle para comprobar si exite la ID a introducir
+    idList={}
+    for x in root[1]:
+        idList[x.get('ID_Alquiler')]='a'
+    
+    while(True):
+        if(idList.get(str(cont))==None):
+            return str(cont)
+        else:
+            #Si la ID existe se suma 1
+            cont+=1
+            
+def autoasignarIDAlquier(root):
+    '''
+    Metodo para asignar automaticamente la ID de un Alquiler
+    :param root: Elemento raiz del documento XML
+    :return Nueva ID para el Alquiler
+    '''
+    #Se hace un contador que se ira modificando en funcion a las ID existentes que se encuentren
+    cont = 1
+    #Se obtiene una lista con todas las ID alquileres y se hace un bucle para comprobar si ya exite
     idList=recolectarIDVehiculo(root)
     while(True):
         if(idList.get(str(cont))==None):
@@ -216,7 +236,7 @@ def escanerNumericoDecimal():
         #Se comprueba que la cadena no esta vacia y si el split ha creado uno o dos valores
         if(scan.isspace()==False and len(scanSplitPunto)==1 or len(scanSplitPunto)==2):
             
-            #Si el split solo crea un valor se comprueba si es un numero y  se le agrega '.00' y se devuelve
+            #Si el split solo crea un valor se comprueba si es un numero y se le agrega '.00' y se devuelve
             if(len(scanSplitPunto)==1 and scan.isnumeric()):
                 return scan+'.00'
             
@@ -317,11 +337,13 @@ def escanerFecha():
 
 def escanerYear():
     '''
-    Metodo para escanear el dia, mes y anno de un alquiler
-    :return Si la cadena es valida devuelve una fecha, si no devuelve None
+    Metodo para escanear el anno de fabricacion de un vehiculo
+    :return Si la cadena es valida devuelve un anno, si no devuelve None
     '''
+    #Se crea un contador de intentos para el bucle que solo iterara hasta 3 intentos
     intentos=0
     while(intentos<3):
+        #Se introduce el anno y se comprueba el formato y si el anno esta entre el anno actual y 1886, si cumple se devuelve
         anno=input()
         hoy = datetime.date.today()
         if(anno.isnumeric() and len(anno)==4 and int(anno) <=hoy.year and int(anno)>1886):
@@ -333,23 +355,32 @@ def escanerYear():
 
 def escanerEstadoVehiculo():
     '''
-    
+    Metodo para escanear el anno de fabricacion de un vehiculo
+    :return Si la cadena es valida devuelve la cadena, si no devuelve None
     '''
+    #Se crea un contador de intentos para el bucle que solo iterara hasta 3 intentos
     intentos=0
     while(intentos<3):
+        #Se crea un bucle con todas las opciones para el estado
         print("Introduzca el nuevo estado del vehiculo:\n1.Disponible\n2.Ocupado\n3.Averiado\n4.Otro")
         numOpcion = escanerNumerico();
+        
         if(numOpcion=='1'):
             return 'Disponible'
+        
         elif(numOpcion=='2'):
             return 'Ocupado'
+        
         elif(numOpcion=='3'):
             return 'Averiado'
+        
         elif(numOpcion=='4'):
             print('Introduzca el nuevo estado del vehiculo')
             return escanerAlfabetico()
+        
         else:
             print('Opcion no valida')
+            
     print('Has superado el numero de intentos')
     return None
         
@@ -357,10 +388,12 @@ def escanerEstadoVehiculo():
 #necesito en utiles fechaDevolucionSuperior(fecha1, fecha2) un metodo en el cual mandes(fecha1, fecha2) y si la fecha 2 es superior a la 1 devuelve la diferencia si no, devuelve None
 def fechaDevolucionSuperior(fecha1, fecha2):
     '''
-    
-    :param fecha1:
-    :param fecha2:
+    Metodo en el cual se mandan 2 fechas y se comprueba que la fecha 2 es superior a la 1
+    :param fecha1: Primera fecha a comprobar
+    :param fecha2: Segunda fecha a comprobar
+    :return Si la fecha 2 es superior a la 1 se devuelve la cantidad de dias de diferencia, si no se devuelve none
     '''
+    #Se convierten las cadenas de fechas en fechas datetime y se comparan
     fechaConvertida1 = datetime.datetime(int(fecha1.split('-')[2]),int(fecha1.split('-')[1]),int(fecha1.split('-')[0]))
     fechaConvertida2 = datetime.datetime(int(fecha2.split('-')[2]),int(fecha2.split('-')[1]),int(fecha2.split('-')[0]))
     if(fechaConvertida2>fechaConvertida1):
@@ -370,8 +403,9 @@ def fechaDevolucionSuperior(fecha1, fecha2):
     
 def confirmarFecha(fecha1):
     '''
-    
-    :param fecha1:
+    Metodo para comprobar si la fecha introducida es inferior o igual a la fecha actual
+    :param fecha1: Fecha a comprobar
+    :return Boolean True si la fecha introducida es inferior o igual a la fecha acutal y False si no
     '''
     fechaConvertida1 = datetime.datetime(int(fecha1.split('-')[2]),int(fecha1.split('-')[1]),int(fecha1.split('-')[0]))
     hoy=datetime.datetime.today()
@@ -382,10 +416,12 @@ def confirmarFecha(fecha1):
     
 def comprobarDisponibilidad(fecha, root):
     '''
-    
-    :param fecha:
-    :param root:
+    Metodo para comprobar si un vehiculo esta disponible en una fecha determinada
+    :param fecha: Fecha a comprobar
+    :param root: Elemento raiz del documento XML
+    :return Devuelve un boolean que sera True si el vehiculo no esta alquilado en esa fecha y False si si lo esta
     '''
+    #Bucle que recorre todo el nodo Alquileres y comprueba que la fecha introducida no este entre las fechas de inicio y fin de alquiler
     for i in root[1]:
         if(fechaDevolucionSuperior(fecha, i[2].text)==None and fechaDevolucionSuperior(fecha, i[3].text)!=None):
             return False
@@ -393,10 +429,12 @@ def comprobarDisponibilidad(fecha, root):
         
 def comprobarKilometraje(kilometraje, root):
     '''
-    
-    :param kilometraje:
-    :param root:
+    Metodo para comprobar si el kilometraje introducido es inferior a otro anterior de ese mismo vehiculo
+    :param kilometraje: Kilometraje de un vehiculo
+    :param root: Elemento raiz del documento XML
+    :return Boolean que devuelve True si ese es el maximo kilometraje registrado de un vehiculo y False si no
     '''
+    #Bucle que recorre todo el nodo Alquileres y comprueba que el kilometraje introducida no sea inferior a otro registrado
     for i in root[1]:
         if((i[6].text!='-' and float(kilometraje)<float(i[6].text)) or float(kilometraje)<float(i[5].text)):
             return False
