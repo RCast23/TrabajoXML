@@ -54,7 +54,9 @@ def crear(root):
         estadoVehiculo = ET.SubElement(vehiculo, 'Estado_Vehiculo')
         #El vehiculo creado tendra el estado Disponible de forma predeterminada
         estadoVehiculo.text = 'Disponible'
-        print("Coche creado")
+        print("Vehiculo creado")
+    else:
+        print('No se ha creado vehiculo')
         
     
 def borrar(rootVehiculo):  # Requiere confirmacion
@@ -71,7 +73,8 @@ def borrar(rootVehiculo):  # Requiere confirmacion
         if(paquete.Utiles.confirmacion()):
             rootVehiculo.remove(vehiculo)
             print("Vehiculo eliminado")
-
+        else:
+            print("Vehiculo no eliminado")
 
 def modificar(root):  # Requiere confirmacion
     '''
@@ -164,6 +167,7 @@ def modificar(root):  # Requiere confirmacion
         
     else:
         print("No se ha encontrado el vehiculo")
+    print('Fin modificacion vehiculo')
 
     
 def buscarVehiculo(root):
