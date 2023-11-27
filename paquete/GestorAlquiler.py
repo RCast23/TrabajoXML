@@ -11,7 +11,6 @@ def crear(alquileres,root):
     continuar=True#Variable que se usa para en el caso de que algun campo sea introducido mal el programa no te pregunte los demas campos 
     #---------------------------------------
     alquiler = ET.Element('Alquiler',{'alquilerID':paquete.Utiles.autoasignarIDAlquier(root)})#Creamos un nuevo elemento sobre el cual trabajaremos
-    alquiler.text='_'
     #-----------------------------------------
     if(continuar):
         print("Dame una matricula de vehiculo") 
@@ -117,24 +116,25 @@ def finalizarAlquiler(alquileres,root):
     :param alquileres:Un diccionario con todos los alquileres 
     :param root:Un diccionario que contiene todos los alquileres y vehiculos
     '''
-    print("Introduce la matricula del vehiculo que quieres ver")
-    vehiculo=paquete.Utiles.escanerMatricula()
-    nodoVehiculo=paquete.GestorVehiculo.buscarMatricula(vehiculo, root[0])
-    
-    if(vehiculo!=None ):
-        print("Introduce el dni del cliente que quieres ver")
-        dni=paquete.Utiles.escanerDni()
-        if(dni!=None):
-            nodo=buscarPosicionMatriculaDni(alquileres,vehiculo,dni)
     nodo=None
     fechaDevolucion=None
     kilometrajeFinal=None
     precioFinal=None
     recargo=None
     continuar=True
+    print("Introduce la matricula del vehiculo que quieres ver")
+    vehiculo=paquete.Utiles.escanerMatricula()
+    nodoVehiculo=paquete.GestorVehiculo.buscarMatricula(vehiculo, root[0])
+    if(vehiculo!=None):
+        print("Introduce el dni del cliente que quieres ver")
+        dni=paquete.Utiles.escanerDni()
+        if(dni!=None):
+            nodo=buscarPosicionMatriculaDni(alquileres,vehiculo,dni)
+    
+    
     if(nodo!=None):
         if(nodoVehiculo==None):
-            print("Ha pesar de que el vehiculo ya no existe puedes finalizar el alquiler")
+            print("A pesar de que el vehiculo ya no existe puedes finalizar el alquiler")
         tarifa=nodo[0].attrib['tarifa']#Obtenemos la tarifa del vehiculo buscado
         print("Dame una fecha de devolucion") 
         scan=paquete.Utiles.escanerFecha()
@@ -161,6 +161,8 @@ def finalizarAlquiler(alquileres,root):
             precio=paquete.Utiles.fechaDevolucionSuperior(nodo[2].text,nodo[3].text)#Calculamos la cantidad de dias que hay entre la fecha inicio y final del alquiler
             if(extra!=None):
                 recargo=float(22)+float(tarifa)*float(extra)#Calculamos el recargo
+            else:
+                recargo=0
             if(precio!=None):
                 precioFinal=float(tarifa)*float(precio)#Volvemos a calcular el precio final
         if(continuar):
@@ -172,10 +174,8 @@ def finalizarAlquiler(alquileres,root):
                 nodo[6].text=kilometrajeFinal
                 if(recargo!=None):#Si hay recargo ponemos el recargo adecuado si no el recargo sera 0
                     nodo[8].text=str(recargo)
-                else:
-                    nodo[8].text=str(0)
                 if(precioFinal!=None):
-                    nodo[7].text=str(precioFinal)
+                    nodo[7].text=str(precioFinal+recargo)
             
     return 0
 def modificar(alquileres,root):
@@ -355,7 +355,7 @@ def buscarMostrarTodosVehiculo(alquileres):
         ninguno=True#Variable para que informe de que no ha encontrado nada
         for x in alquileres:#Recorremos todos los alquileres en busca de concordancias
             if(x[0].attrib['matricula'].lower()==vehiculo.lower()):
-                print("He ecnontrado: ",x.text)
+                print("He ecnontrado: ")
                 paquete.Utiles.recorrer(x)
                 ninguno=False
         if(ninguno):
@@ -372,7 +372,7 @@ def buscarMostrarTodosDni(alquileres):
         ninguno=True#Variable para que informe de que no ha encontrado nada
         for x in alquileres:#Recorremos todos los alquileres en busca de concordancias
             if(x[1].text.lower()==dni.lower()):
-                print("He ecnontrado: ",x.text)
+                print("He ecnontrado: ")
                 paquete.Utiles.recorrer(x)
                 ninguno=False
         if(ninguno):
@@ -392,7 +392,7 @@ def buscarMostrarMatriculaDni(alquileres):
             ninguno=True#Variable para que informe de que no ha encontrado nada
             for x in alquileres:#Recorremos todos los alquileres en busca de concordancias
                 if( x[0].attrib['matricula'].lower()==vehiculo.lower() and x[1].text.lower()==dni.lower()):
-                    print("He ecnontrado: ",x.text)
+                    print("He ecnontrado: ")
                     paquete.Utiles.recorrer(x)
                     ninguno=False
             if(ninguno):
@@ -410,7 +410,7 @@ def buscarPosicionMatriculaDni(alquileres,vehiculo,dni):
     opciones=[]
     for x in alquileres:#Recorremos todos los alquileres en busca de concordancias
         if(x[0].attrib['matricula'].lower()==vehiculo.lower() and x[1].text.lower()==dni.lower()):
-            print(cont,"-He ecnontrado: ",x.text)
+            print(cont,"-He ecnontrado: ")
             paquete.Utiles.recorrer(x)
             opciones.append(cont)
             ninguno=False
