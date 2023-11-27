@@ -120,7 +120,8 @@ def finalizarAlquiler(alquileres,root):
     print("Introduce la matricula del vehiculo que quieres ver")
     vehiculo=paquete.Utiles.escanerMatricula()
     nodoVehiculo=paquete.GestorVehiculo.buscarMatricula(vehiculo, root[0])
-    if(vehiculo!=None and nodoVehiculo!=None):
+    
+    if(vehiculo!=None ):
         print("Introduce el dni del cliente que quieres ver")
         dni=paquete.Utiles.escanerDni()
         if(dni!=None):
@@ -132,6 +133,8 @@ def finalizarAlquiler(alquileres,root):
     recargo=None
     continuar=True
     if(nodo!=None):
+        if(nodoVehiculo==None):
+            print("Ha pesar de que el vehiculo ya no existe puedes finalizar el alquiler")
         tarifa=nodo[0].attrib['tarifa']#Obtenemos la tarifa del vehiculo buscado
         print("Dame una fecha de devolucion") 
         scan=paquete.Utiles.escanerFecha()
@@ -163,8 +166,8 @@ def finalizarAlquiler(alquileres,root):
         if(continuar):
             print("¿Seguro que quieres finalizar el alquiler?")
             if(paquete.Utiles.confirmacion()):
-                nodoVehiculo[4].text='Disponible'#Ponemos el vehiculo en disponible 
-                
+                if(nodoVehiculo!=None):
+                    nodoVehiculo[4].text='Disponible'#Ponemos el vehiculo en disponible 
                 nodo[4].text=fechaDevolucion
                 nodo[6].text=kilometrajeFinal
                 if(recargo!=None):#Si hay recargo ponemos el recargo adecuado si no el recargo sera 0
