@@ -2,57 +2,53 @@
 <Alquiler>
   <Vehiculos>
     <Vehiculo vehiculoID="1">
+      _
       <Matricula>1111AAA</Matricula>
-      <Descripcion>Seat Ibiza</Descripcion>
-      <Anno_De_Fabricacion>2000</Anno_De_Fabricacion>
-      <Tarifa>12.00</Tarifa>
+      <Descripcion>Seat</Descripcion>
+      <Anno_De_Fabricacion>2020</Anno_De_Fabricacion>
+      <Tarifa>10.00</Tarifa>
       <Estado_Vehiculo>Ocupado</Estado_Vehiculo>
+    </Vehiculo>
+    <Vehiculo vehiculoID="2">
+      _
+      <Matricula>2222AAA</Matricula>
+      <Descripcion>Fiat</Descripcion>
+      <Anno_De_Fabricacion>2018</Anno_De_Fabricacion>
+      <Tarifa>1.00</Tarifa>
+      <Estado_Vehiculo>Ocupado</Estado_Vehiculo>
+    </Vehiculo>
+    <Vehiculo vehiculoID="3">
+      _
+      <Matricula>1234AAA</Matricula>
+      <Descripcion>Coche</Descripcion>
+      <Anno_De_Fabricacion>2006</Anno_De_Fabricacion>
+      <Tarifa>5.00</Tarifa>
+      <Estado_Vehiculo>Disponible</Estado_Vehiculo>
     </Vehiculo>
   </Vehiculos>
   <Alquileres>
-    <Alquiler alquilerID="2">
-      <ID_Vehiculo matricula="1111AAA" tarifa="12.00">1</ID_Vehiculo>
-      <ID_Cliente>12345678A</ID_Cliente>
-      <Fecha_Inicio>10-10-2024</Fecha_Inicio>
-      <Fecha_Final>10-10-2025</Fecha_Final>
+    <Alquiler alquilerID="1">
+      _
+      <ID_Vehiculo matricula="1111AAA" tarifa="10.00">1</ID_Vehiculo>
+      <ID_Cliente>12341234A</ID_Cliente>
+      <Fecha_Inicio>01-12-2023</Fecha_Inicio>
+      <Fecha_Final>12-12-2023</Fecha_Final>
       <Fecha_Devolucion>-</Fecha_Devolucion>
-      <Kilometraje_Inicial>123.00</Kilometraje_Inicial>
+      <Kilometraje_Inicial>1.00</Kilometraje_Inicial>
       <Kilometraje_Final>-</Kilometraje_Final>
-      <Precio_Final>4392.0</Precio_Final>
-      <Recargo>De momento 0</Recargo>
-    </Alquiler>
-    <Alquiler alquilerID="2">
-      <ID_Vehiculo matricula="1111AAA" tarifa="12.00">1</ID_Vehiculo>
-      <ID_Cliente>12345678A</ID_Cliente>
-      <Fecha_Inicio>11-11-2024</Fecha_Inicio>
-      <Fecha_Final>11-11-2025</Fecha_Final>
-      <Fecha_Devolucion>-</Fecha_Devolucion>
-      <Kilometraje_Inicial>5432.00</Kilometraje_Inicial>
-      <Kilometraje_Final>-</Kilometraje_Final>
-      <Precio_Final>4380.0</Precio_Final>
-      <Recargo>De momento 0</Recargo>
-    </Alquiler>
-    <Alquiler alquilerID="2">
-      <ID_Vehiculo matricula="1111AAA" tarifa="12.00">1</ID_Vehiculo>
-      <ID_Cliente>12345678A</ID_Cliente>
-      <Fecha_Inicio>12-12-2025</Fecha_Inicio>
-      <Fecha_Final>10-10-2026</Fecha_Final>
-      <Fecha_Devolucion>-</Fecha_Devolucion>
-      <Kilometraje_Inicial>5432.00</Kilometraje_Inicial>
-      <Kilometraje_Final>-</Kilometraje_Final>
-      <Precio_Final>4380.0</Precio_Final>
+      <Precio_Final>110.0</Precio_Final>
       <Recargo>De momento 0</Recargo>
     </Alquiler>
     <Alquiler alquilerID="2">
       _
-      <ID_Vehiculo matricula="1111AAA" tarifa="12.00">1</ID_Vehiculo>
+      <ID_Vehiculo matricula="2222AAA" tarifa="1.00">2</ID_Vehiculo>
       <ID_Cliente>12345678A</ID_Cliente>
-      <Fecha_Inicio>10-10-2030</Fecha_Inicio>
-      <Fecha_Final>10-10-2031</Fecha_Final>
+      <Fecha_Inicio>03-01-2024</Fecha_Inicio>
+      <Fecha_Final>08-01-2024</Fecha_Final>
       <Fecha_Devolucion>-</Fecha_Devolucion>
-      <Kilometraje_Inicial>9999.00</Kilometraje_Inicial>
+      <Kilometraje_Inicial>1.00</Kilometraje_Inicial>
       <Kilometraje_Final>-</Kilometraje_Final>
-      <Precio_Final>4380.0</Precio_Final>
+      <Precio_Final>5.0</Precio_Final>
       <Recargo>De momento 0</Recargo>
     </Alquiler>
   </Alquileres>

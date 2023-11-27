@@ -80,9 +80,7 @@ def autoasignarIDVehiculo(root):
     #Se hace un contador que se ira modificando en funcion a las ID existentes que se encuentren
     cont = 1
     #Se obtiene una lista con todas las ID de vehiculos y se hace un bucle para comprobar si exite la ID a introducir
-    idList={}
-    for x in root[1]:
-        idList[x.get('ID_Alquiler')]='a'
+    idList=recolectarIDVehiculo(root)
     
     while(True):
         if(idList.get(str(cont))==None):
@@ -100,7 +98,10 @@ def autoasignarIDAlquier(root):
     #Se hace un contador que se ira modificando en funcion a las ID existentes que se encuentren
     cont = 1
     #Se obtiene una lista con todas las ID alquileres y se hace un bucle para comprobar si ya exite
-    idList=recolectarIDVehiculo(root)
+    idList={}
+    for x in root[1]:
+        idList[x.get('alquilerID')]='a'
+    
     while(True):
         if(idList.get(str(cont))==None):
             return str(cont)
