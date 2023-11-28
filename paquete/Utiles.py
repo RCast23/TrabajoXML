@@ -315,19 +315,19 @@ def escanerFecha():
         #Se crea un boolean para comprobar si se debe continuar introduciendo datos
         continuar=True
         #Se introduce un dia y se comprueba que sea un numero entre 1 y 31, si no continuar se cambia a false
-        print("Dame un dia")
+        print("Introduzca un dia")
         dia=input()
         if(dia.isspace() or dia.isnumeric()==False or int(dia)>31 or int(dia)<=0):
             continuar=False
         #Se introduce un mes y se comprueba que continuar sea true y que sea un numero entre 1 y 12, si no continuar se cambia a false
         if(continuar):
-            print("Dame un mes")
+            print("Introduzca un mes")
             mes=input()
             if(mes.isspace() or mes.isnumeric()==False or int(mes)>12 or int(mes)<=0 or continuar==False):
                 continuar=False   
         #Se introduce un anno y se comprueba que continuar sea true y que sea un numero entre 2000 y 3000, si no continuar se cambia a false
         if(continuar):
-            print("Dame un anno") 
+            print("Introduzca un anno") 
             anno=input()
             if(anno.isspace() or anno.isnumeric()==False or int(anno)>3000 or int(anno)<2000 or continuar==False):
                 continuar=False 

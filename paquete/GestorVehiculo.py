@@ -13,28 +13,28 @@ def crear(root):
     check = True
     
     #Se escanea la matricula y si el valor devuelto es None o ya hay un vehiculo con esa matricula se para el alta
-    print("Dame una matricula")
+    print("Introduzca una matricula")
     scanMatricula = paquete.Utiles.escanerMatricula()
     if(scanMatricula == None or buscarMatricula(scanMatricula, root[0]) != None):
         check = False
         
     #Se escanea la descripcion del vehiculo y si el valor devuelto es None se para el alta
     if(check):
-        print("Dame una descripcion (Marca y modelo)")
+        print("Introduzca una descripcion (Marca y modelo)")
         scanMarcaModelo = paquete.Utiles.escanerTexto()
         if(scanMarcaModelo == None):
             check = False
     
     #Se escanea el anno de fabricacion del vehiculo y si el valor devuelto es None se para el alta
     if(check):
-        print("Dame un Anno De Fabricacion")
+        print("Introduzca un Anno De Fabricacion")
         scanAnno = paquete.Utiles.escanerYear()
         if(scanAnno == None):
             check = False
     
     #Se escanea la tarifa de alquiler del vehiculo y si el valor devuelto es None se para el alta
     if(check):
-        print("Dame una tarifa por dia")
+        print("Introduzca una tarifa por dia")
         scanTarifa = paquete.Utiles.escanerNumericoDecimal()
         if(scanTarifa == None):
             check = False
@@ -68,7 +68,7 @@ def borrar(rootVehiculo):  # Requiere confirmacion
     if(vehiculo != None):
         mostrarTodos(vehiculo)
         #Se pide confirmacion para borrar el vehiculo
-        print("¿Desea confirmar la baja del vehiculo?")
+        print("¿Desea confirmar la baja del vehiculo?(Si o no)")
         if(paquete.Utiles.confirmacion()):
             rootVehiculo.remove(vehiculo)
             print("Vehiculo eliminado")
@@ -100,7 +100,7 @@ def modificar(root):  # Requiere confirmacion
                 scan = paquete.Utiles.escanerID(root)
                 #Se comprueba que el ID es valido y se pide confirmacion de la modificacion
                 if(scan != None):
-                    print("¿Desea confirmar la modificacion?")
+                    print("¿Desea confirmar la modificacion?(Si o no)")
                     if(paquete.Utiles.confirmacion()):
                         paquete.Utiles.modificarIDVehiculoCascada(root, vehiculo.get('ID_Vehiculo'), scan)
                         vehiculo.set('vehiculoID', scan)
@@ -111,7 +111,7 @@ def modificar(root):  # Requiere confirmacion
                 scan = paquete.Utiles.escanerMatricula() 
                 #Se comprueba que la matricula es valida y se pide confirmacion de la modificacion
                 if(scan != None and buscarMatricula(scan, root[0]) == None):
-                    print("¿Desea confirmar la modificacion?")
+                    print("¿Desea confirmar la modificacion?(Si o no)")
                     if(paquete.Utiles.confirmacion()):
                         paquete.Utiles.modificarMatriculaVehiculoCascada(root, vehiculo[0].text, scan)
                         vehiculo[0].text = scan
@@ -124,7 +124,7 @@ def modificar(root):  # Requiere confirmacion
                 scan = paquete.Utiles.escanerTexto()
                 #Se comprueba que la descripcion es valida y se pide confirmacion de la modificacion
                 if(scan != None):
-                    print("¿Desea confirmar la modificacion?")
+                    print("¿Desea confirmar la modificacion?(Si o no)")
                     if(paquete.Utiles.confirmacion()):
                         vehiculo[1].text = scan
                     
@@ -134,7 +134,7 @@ def modificar(root):  # Requiere confirmacion
                 scan = paquete.Utiles.escanerYear()
                 #Se comprueba que el anno de fabricacion es valido y se pide confirmacion de la modificacion
                 if(scan != None):
-                    print("¿Desea confirmar la modificacion?")
+                    print("¿Desea confirmar la modificacion?(Si o no)")
                     if(paquete.Utiles.confirmacion()):
                         vehiculo[2].text = scan
                     
@@ -144,7 +144,7 @@ def modificar(root):  # Requiere confirmacion
                 scan = paquete.Utiles.escanerNumericoDecimal()
                 #Se comprueba que la tarifa es valida y se pide confirmacion de la modificacion
                 if(scan != None):
-                    print("¿Desea confirmar la modificacion?")
+                    print("¿Desea confirmar la modificacion?(Si o no)")
                     if(paquete.Utiles.confirmacion()):
                         vehiculo[3].text = scan
                     
@@ -153,7 +153,7 @@ def modificar(root):  # Requiere confirmacion
                 scan = escanerEstadoVehiculo()
                 if(scan != None):
                     #Se comprueba que el estado es valido y se pide confirmacion de la modificacion
-                    print("¿Desea confirmar la modificacion?")
+                    print("¿Desea confirmar la modificacion?(Si o no)")
                     if(paquete.Utiles.confirmacion()):
                         vehiculo[4].text = scan
                     

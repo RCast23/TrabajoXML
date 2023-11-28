@@ -13,7 +13,7 @@ def crear(alquileres,root):
     alquiler = ET.Element('Alquiler',{'alquilerID':paquete.Utiles.autoasignarIDAlquier(root)})#Creamos un nuevo elemento sobre el cual trabajaremos
     #-----------------------------------------
     if(continuar):
-        print("Dame una matricula de vehiculo") 
+        print("Introduzca una matricula de vehiculo") 
         scan=paquete.Utiles.escanerMatricula()
         if(scan!=None): 
             nodo=paquete.GestorVehiculo.buscarMatricula(scan, root[0])#Comprobamos que el vehiculo existe
@@ -33,7 +33,7 @@ def crear(alquileres,root):
             print('Se cancelara la creacion de este alquiler')
     
     if(continuar):
-        print("Dame un ID de cliente")
+        print("Introduzca un ID de cliente")
         scan=paquete.Utiles.escanerDni()
         if(scan!=None):
             idCliente = ET.SubElement(alquiler, 'ID_Cliente')
@@ -43,7 +43,7 @@ def crear(alquileres,root):
             print('Se cancelara la creacion de este alquiler')
     
     if(continuar):
-        print("Dame una fecha de inicio")
+        print("Introduzca una fecha de inicio")
         fInicio=paquete.Utiles.escanerFecha()
         if(fInicio!=None ):
             if(paquete.Utiles.confirmarFecha(fInicio)):#Comprobamos que la fecha es superior o igual al dia de hoy
@@ -60,7 +60,7 @@ def crear(alquileres,root):
             continuar=False
             print('Se cancelara la creacion de este alquiler')
     if(continuar):
-        print("Dame una fecha de finalizacion")
+        print("Introduzca una fecha de finalizacion")
         fFinal=paquete.Utiles.escanerFecha()
         if(fFinal!=None ):
             if(paquete.Utiles.fechaDevolucionSuperior(fInicio,fFinal)!=None):#Comprobamos que la fecha es superior a la de inicio
@@ -82,7 +82,7 @@ def crear(alquileres,root):
             print('Se cancelara la creacion de este alquiler')
     
     if(continuar):
-        print("Dame un kilometraje inicial") 
+        print("Introduzca un kilometraje inicial") 
         scan=paquete.Utiles.escanerNumericoDecimal()
         if(scan!=None):
             if(comprobarKilometraje(scan,root)):#Comprobamos que el kilometraje es superior o igual al kilometraje final en el resto de alquileres de ese vehiculo
@@ -136,7 +136,7 @@ def finalizarAlquiler(alquileres,root):
         if(nodoVehiculo==None):
             print("A pesar de que el vehiculo ya no existe puedes finalizar el alquiler")
         tarifa=nodo[0].attrib['tarifa']#Obtenemos la tarifa del vehiculo buscado
-        print("Dame una fecha de devolucion") 
+        print("Introduzca una fecha de devolucion") 
         scan=paquete.Utiles.escanerFecha()
         if(scan!=None):
             if(paquete.Utiles.fechaDevolucionSuperior(nodo[2].text,scan)!=None):#Comprobamos que la fecha de devolucion es duperior a la de inicio
@@ -147,7 +147,7 @@ def finalizarAlquiler(alquileres,root):
         else:
             continuar=False
         if(continuar):
-            print("Dame un kilometraje final")
+            print("Introduzca un kilometraje final")
             scan=paquete.Utiles.escanerNumericoDecimal()
             if(scan!=None):
                 if(comprobarKilometraje(scan, root)):#Comprobamos que el kilometraje final es superior al inicial
@@ -166,7 +166,7 @@ def finalizarAlquiler(alquileres,root):
             if(precio!=None):
                 precioFinal=float(tarifa)*float(precio)#Volvemos a calcular el precio final
         if(continuar):
-            print("¿Seguro que quieres finalizar el alquiler?")
+            print("¿Seguro que quieres finalizar el alquiler?(Si o no)")
             if(paquete.Utiles.confirmacion()):
                 if(nodoVehiculo!=None):
                     nodoVehiculo[4].text='Disponible'#Ponemos el vehiculo en disponible 
@@ -209,7 +209,7 @@ def modificar(alquileres,root):
             print("Introcuce el campo que quieres modificar\n1.ID Alquiler\n2.ID Vehiculo\n3.ID Cliente\n4.Fecha Inicio\n5.Fecha Final\n6.Fecha Devolucion\n7.Kilometraje Inicial\n8.Kilometraje Final\n9.Precio Final\n10.Recargo\n0.Salir")
             opcion=input()
             if(opcion=="1"):#Este Switch es el que nos permite elegir que campo queremos modificar
-                print("Dame una ID de alquiler") 
+                print("Introduzca una ID de alquiler") 
                 scan=paquete.Utiles.escanerNumerico()
                 if(scan!=None):
                     if(buscarPosicionId(alquileres,scan)==None):
@@ -218,7 +218,7 @@ def modificar(alquileres,root):
                     else:
                         print("Ya existe un alquiler con ese ID")
             elif(opcion=="2"):
-                print("Dame una matricula de vehiculo") 
+                print("Introduzca una matricula de vehiculo") 
                 scan=paquete.Utiles.escanerMatricula()
                 if(scan!=None): 
                     nodoVehiculo=paquete.GestorVehiculo.buscarMatricula(scan, root[0])
@@ -232,12 +232,12 @@ def modificar(alquileres,root):
                     else:
                         print ('No existe ese vehiculo')
             elif(opcion=="3"):
-                print("Dame una DNI de cliente") 
+                print("Introduzca una DNI de cliente") 
                 scan=paquete.Utiles.escanerDni()
                 if(scan!=None):
                     idCliente=scan
             elif(opcion=="4"):
-                print("Dame una fecha de inicio") 
+                print("Introduzca una fecha de inicio") 
                 scan=paquete.Utiles.escanerFecha()
                 if(scan!=None):
                     if(fechaFinal!=None):
@@ -257,7 +257,7 @@ def modificar(alquileres,root):
                         else:
                             print("La fecha de inicio es mayor que la final, cambia antes la final a una mayor") 
             elif(opcion=="5"):
-                print("Dame una fecha final") 
+                print("Introduzca una fecha final") 
                 scan=paquete.Utiles.escanerFecha()
                 if(scan!=None):
                     if(fechaInicio!=None):
@@ -277,7 +277,7 @@ def modificar(alquileres,root):
                         else:
                             print("La fecha de inicio es mayor que la final, cambia antes la final a una mayor") 
             elif(opcion=="6"):
-                print("Dame una fecha de devolucion") 
+                print("Introduzca una fecha de devolucion") 
                 scan=paquete.Utiles.escanerFecha()
                 if(scan!=None):
                     if(fechaInicio!=None):
@@ -291,22 +291,22 @@ def modificar(alquileres,root):
                         else:
                             print("La fecha de devolucion no puede ser inferior a la de inicio")  
             elif(opcion=="7"):
-                print("Dame un kilometraje inicial") 
+                print("Introduzca un kilometraje inicial") 
                 scan=paquete.Utiles.escanerNumericoDecimal()
                 if(scan!=None):
                     kilometrajeInicial=scan
             elif(opcion=="8"):
-                print("Dame un kilometraje final") 
+                print("Introduzca un kilometraje final") 
                 scan=paquete.Utiles.escanerNumericoDecimal()
                 if(scan!=None):
                     kilometrajeFinal=scan
             elif(opcion=="9"):
-                print("Dame un precio final") 
+                print("Introduzca un precio final") 
                 scan=paquete.Utiles.escanerNumericoDecimal()
                 if(scan!=None):
                     precioFinal=scan
             elif(opcion=="10"):
-                print("Dame un recargo") 
+                print("Introduzca un recargo") 
                 scan=paquete.Utiles.escanerNumericoDecimal()
                 if(scan!=None):
                     recargo=scan
@@ -318,7 +318,7 @@ def modificar(alquileres,root):
             continuar=False
             
     if(nodo!=None):
-        print("¿Quieres guardar los cambios realizados?\n Si o No")
+        print("¿Quieres guardar los cambios realizados?(Si o no)")
         if(paquete.Utiles.confirmacion()):#Confirmamos que quieres realizar los cambios
             print("Los cambios realizados tomaran efecto")#Cambiamos los campos que hayan sido cambiados
             if(idAlquiler != None):
@@ -418,14 +418,26 @@ def buscarPosicionMatriculaDni(alquileres,vehiculo,dni):
     if(ninguno):
         print("No se ha encontrado ningun alquiler con esa Matricula y Dni")
     else:
-        print(opciones)
-        print ("Elige el alquiler que quieres seleccionar")
-        scan=paquete.Utiles.escanerNumerico()#Elegimos el alquiler con el que deseamos trabajar de los que han sido mostrados
-        if(scan!=None):
-            if(int(scan) in set(opciones)):
-                for x in alquileres:#Recorremos todos los alquileres en busca de concordancias
-                    if(x == alquileres[int(scan)]):
-                        return x
+        contador=0
+        salir=True
+        while(contador<3 and salir):
+            contador+=1
+            print(opciones)
+            print ("Elige el alquiler que quieres seleccionar")
+            scan=paquete.Utiles.escanerNumerico()#Elegimos el alquiler con el que deseamos trabajar de los que han sido mostrados
+            if(scan!=None):
+                if(int(scan) in set(opciones)):
+                    salir=False
+                    for x in alquileres:#Recorremos todos los alquileres en busca de concordancias
+                        if(x == alquileres[int(scan)]):
+                            return x
+                elif(contador<3):
+                    print("Introduce un numero entre las opciones dadas")
+                else:
+                    print("Numero maximo de intentos alcanzado")
+            else:
+                salir=False
+        
     return None
 def buscarPosicionId(alquileres,idAlquiler):
     '''
