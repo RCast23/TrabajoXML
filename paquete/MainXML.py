@@ -1,4 +1,4 @@
-from paquete import BaseDeDatos, GestorAlquiler, GestorVehiculo,Utiles
+import BaseDeDatos, GestorAlquiler, GestorVehiculo, Utiles
 
 def submenuAlquiler(rootAlquiler):
     '''

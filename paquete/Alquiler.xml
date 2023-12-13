@@ -9,5 +9,17 @@
       <Estado_Vehiculo>Disponible</Estado_Vehiculo>
     </Vehiculo>
   </Vehiculos>
-  <Alquileres/>
+  <Alquileres>
+    <Alquiler alquilerID="1">
+      <ID_Vehiculo matricula="1234AAA" tarifa="12.00">1</ID_Vehiculo>
+      <ID_Cliente>12341234A</ID_Cliente>
+      <Fecha_Inicio>02-02-2024</Fecha_Inicio>
+      <Fecha_Final>05-02-2024</Fecha_Final>
+      <Fecha_Devolucion>-</Fecha_Devolucion>
+      <Kilometraje_Inicial>12.00</Kilometraje_Inicial>
+      <Kilometraje_Final>-</Kilometraje_Final>
+      <Precio_Final>36.0</Precio_Final>
+      <Recargo>De momento 0</Recargo>
+    </Alquiler>
+  </Alquileres>
 </EmpresaAlquiler>

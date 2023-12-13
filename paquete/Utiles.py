@@ -333,8 +333,11 @@ def escanerFecha():
                 continuar=False 
         #Si continuar sigue siendo true se castea a datetime y se devuelve la string de la fecha
         if(continuar):
-            x = datetime.datetime(int(anno), int(mes), int(dia))
-            return x.strftime("%d-%m-%Y")
+            try:
+                x = datetime.datetime(int(anno), int(mes), int(dia))
+                return x.strftime("%d-%m-%Y")
+            except:
+                print("La fecha introducida no es una fecha real")
         intentos+=1
         print('Porfavor introduce una fecha correcta (Dia 1-31 mes 1-12 anno 2000-3000)')
     print("Has superado el numero de intentos")
