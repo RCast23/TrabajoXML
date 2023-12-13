@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 
-def comprobarArchivo(arbol,root):
+def comprobarArchivo(root):
     '''
     Metodo que se usa para cargar los datos del archivo XML o crearlo si no existe
     :param arbol: Arbol del XML del archivo a cargar
@@ -12,7 +12,7 @@ def comprobarArchivo(arbol,root):
         arbol = ET.parse('Alquiler.xml')
         root = arbol.getroot()
         print("Arbol XML cargado")
-        return arbol, root
+        return root
     
     #Si al cargar salta la excepcion por que no existe se crea un nuevo archivo y un nuevo arbol
     except:
@@ -22,7 +22,7 @@ def comprobarArchivo(arbol,root):
         alquileres = ET.SubElement(root,'Alquileres')
         alquileres.text=''
         print("Arbol XML creado")
-        return arbol, root
+        return root
 
 
 def guardarArchivo(root):

@@ -11,12 +11,15 @@ def crear(root):
     
     #Variable para comprobar que si el alta debe parar o seguir 
     check = True
-    
+    vehiculo = ET.Element('Vehiculo', {'vehiculoID':paquete.Utiles.autoasignarIDVehiculo(root)})
     #Se escanea la matricula y si el valor devuelto es None o ya hay un vehiculo con esa matricula se para el alta
     print("Introduzca una matricula")
     scanMatricula = paquete.Utiles.escanerMatricula()
     if(scanMatricula == None or buscarMatricula(scanMatricula, root[0]) != None):
         check = False
+    else:
+        matricula = ET.SubElement(vehiculo, 'Matricula')
+        matricula.text = scanMatricula 
         
     #Se escanea la descripcion del vehiculo y si el valor devuelto es None se para el alta
     if(check):
@@ -24,6 +27,9 @@ def crear(root):
         scanMarcaModelo = paquete.Utiles.escanerTexto()
         if(scanMarcaModelo == None):
             check = False
+        else:
+            marcaYmodelo = ET.SubElement(vehiculo, 'Descripcion')
+            marcaYmodelo.text = scanMarcaModelo
     
     #Se escanea el anno de fabricacion del vehiculo y si el valor devuelto es None se para el alta
     if(check):
@@ -31,6 +37,9 @@ def crear(root):
         scanAnno = paquete.Utiles.escanerYear()
         if(scanAnno == None):
             check = False
+        else:
+            annoDeFabricacion = ET.SubElement(vehiculo, 'Anno_De_Fabricacion')
+            annoDeFabricacion.text = scanAnno
     
     #Se escanea la tarifa de alquiler del vehiculo y si el valor devuelto es None se para el alta
     if(check):
@@ -38,21 +47,17 @@ def crear(root):
         scanTarifa = paquete.Utiles.escanerNumericoDecimal()
         if(scanTarifa == None):
             check = False
+        else:
+            tarifa = ET.SubElement(vehiculo, 'Tarifa')
+            tarifa.text = scanTarifa
     
     #Si todos los datos han sido introducidos correctamente se crea el nuevo vehiculo y se guardan
     if(check):
-        vehiculo = ET.SubElement(root[0], 'Vehiculo', {'vehiculoID':paquete.Utiles.autoasignarIDVehiculo(root)})
-        matricula = ET.SubElement(vehiculo, 'Matricula')
-        matricula.text = scanMatricula 
-        marcaYmodelo = ET.SubElement(vehiculo, 'Descripcion')
-        marcaYmodelo.text = scanMarcaModelo
-        annoDeFabricacion = ET.SubElement(vehiculo, 'Anno_De_Fabricacion')
-        annoDeFabricacion.text = scanAnno
-        tarifa = ET.SubElement(vehiculo, 'Tarifa')
-        tarifa.text = scanTarifa
         estadoVehiculo = ET.SubElement(vehiculo, 'Estado_Vehiculo')
         #El vehiculo creado tendra el estado Disponible de forma predeterminada
         estadoVehiculo.text = 'Disponible'
+        print("append")
+        root[0].append(vehiculo)
         print("Vehiculo creado")
     else:
         print('No se ha creado vehiculo')
@@ -177,7 +182,11 @@ def buscarVehiculo(root):
     '''
     print("Introduzca la matricula del vehiculo")
     matricula = escanerMatricula();
-    return buscarMatricula(matricula, root)
+    print(matricula)
+    if(matricula==None):
+        print("No se ha encontrado el vehiculo")
+    else:
+        return buscarMatricula(matricula, root)
 
     
 def buscarMatricula(matricula, root):
@@ -190,7 +199,6 @@ def buscarMatricula(matricula, root):
     #Variable para elegir el vehiculo
     i = 0;
     try:
-        
         #Se crea un bucle para comprobar el campo 0 de todos los vehiculos y 
         #si coincide con la introducida se devuelve ese vehiculo
         while(True):

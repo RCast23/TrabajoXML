@@ -1,5 +1,0 @@
--Comprobar que la fecha del alquiler no sea anterior al año de fabricacion*
--Comprobar si el coche esta disponible--hay que porbarlo
--pensar
--------------------------------------------------------------------------------------------------
-Preguntas:

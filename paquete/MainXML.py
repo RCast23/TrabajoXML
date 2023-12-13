@@ -92,7 +92,10 @@ def submenuVehiculo(root):
                 
         #Opcion para buscar un vehiculo
         elif (opcion == '2'):
-            Utiles.recorrer(GestorVehiculo.buscarVehiculo(root[0]))
+            vehiculo = GestorVehiculo.buscarVehiculo(root[0])
+            if(vehiculo!=None):
+                Utiles.recorrer()
+            
             
         #Opcion para modificar un vehiculo
         elif(opcion=='3'):
@@ -130,9 +133,8 @@ def submenuVehiculo(root):
 
 print('Inicio del programa')
 #Se crean variables para el arbol XML y la raiz y se intenta cargar el arbol. Si falla crea uno nuevo
-arbol = ""
 root = ""
-arbol,root=BaseDeDatos.comprobarArchivo(arbol,root)
+root=BaseDeDatos.comprobarArchivo(root)
 BaseDeDatos.guardarArchivo(root)
 
 #Bucle de opciones del menu principal
