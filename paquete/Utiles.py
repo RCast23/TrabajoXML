@@ -5,14 +5,18 @@ def confirmacion():
     Metodo para confirmar si se quiere confirmar una operacion
     :return Devuelve un un boolean. El valor sera True si escribe 'si' y False si escribe 'no'
     '''
+    cont = 0
     while(True):
         inputConfirmacion = input()
         if(inputConfirmacion.lower() == 'si'):
             return True
-        elif(inputConfirmacion.lower() == 'no'):
+        elif(inputConfirmacion.lower() == 'no' or cont == 2):
+            if(cont==2):
+                print("\nSe ha superado el numero de intentos")
             return False
         else:
-            print("Valor incorrecto, pruebe otra vez")
+            print("\nValor incorrecto, pruebe otra vez")
+        cont+=1
         
 def recorrer(nodo):
     '''
@@ -25,7 +29,7 @@ def recorrer(nodo):
     attrValue=''
     if(nodo.tag=='Alquiler' or nodo.tag=='Vehiculo'):
         print('====='*10)
-    print("Nodo:",nodo.tag)
+    print("\nNodo:",nodo.tag)
     #Para recorrer los atributos. Los atributos estan en un diccionario
     
     for attr in nodo.attrib:
@@ -151,10 +155,10 @@ def escanerID(root):
             if(comprobarIDVehiculo(scan,root)):
                 return scan
             else:
-                print("El ID introducido ya esta asigando a otro vehiculo o se encuentra en el registro de alquileres")
+                print("\nEl ID introducido ya esta asigando a otro vehiculo o se encuentra en el registro de alquileres")
         else:
-            print('Porfavor introduce numeros no decimales')
-    print("Has superado el numero de intentos")
+            print('\nPorfavor introduce numeros no decimales')
+    print("\nHas superado el numero de intentos")
     return None
 
 def escanerTexto():
@@ -170,8 +174,8 @@ def escanerTexto():
         if(scan.isspace()==False):
             return scan
         intentos+=1
-        print('Porfavor introduce algun caracter')
-    print("Has superado el numero de intentos")
+        print('\nPorfavor introduce algun caracter')
+    print("\nHas superado el numero de intentos")
     return None
 
 def escanerAlfanumerico():
@@ -187,8 +191,8 @@ def escanerAlfanumerico():
         if(scan.isspace()==False and scan.isalnum() ):
             return scan
         intentos+=1
-        print('Porfavor introduce alfanumericos')
-    print("Has superado el numero de intentos")
+        print('\nPorfavor introduce alfanumericos')
+    print("\nHas superado el numero de intentos")
     return None
 
 def escanerAlfabetico():
@@ -204,8 +208,8 @@ def escanerAlfabetico():
         if(scan.isspace()==False and scan.isalpha() ):
             return scan
         intentos+=1
-        print('Porfavor introduce alfabeticos')
-    print("Has superado el numero de intentos")
+        print('\nPorfavor introduce alfabeticos')
+    print("\nHas superado el numero de intentos")
     return None
 
 def escanerNumerico():
@@ -221,8 +225,8 @@ def escanerNumerico():
         if(scan.isspace()==False and scan.isnumeric() ):
             return scan
         intentos+=1
-        print('Porfavor introduce numeros no decimales')
-    print("Has superado el numero de intentos")
+        print('\nPorfavor introduce numeros no decimales')
+    print("\nHas superado el numero de intentos")
     return None
 
 def escanerNumericoDecimal():
@@ -258,12 +262,12 @@ def escanerNumericoDecimal():
                 
                 #Si el segundo campo tiene mas de 2 valores se pide que se vuelva a introducir
                 else:
-                    print('Porfavor introduce solo 2 decimales')
+                    print('\nPorfavor introduce solo 2 decimales')
             else:
-                print('Formato de decimales incorrecto')
+                print('\nFormato de decimales incorrecto')
         else:
-            print('Porfavor introduce numeros y los decimales con punto')
-    print("Has superado el numero de intentos")
+            print('\nPorfavor introduce numeros y los decimales con punto')
+    print("\nHas superado el numero de intentos")
     return None
 
 def escanerMatricula():
@@ -281,8 +285,8 @@ def escanerMatricula():
                 return scan.upper()
             
         intentos+=1
-        print('Porfavor introduce una matricula (Cuatro numeros y tres letras)')
-    print("Has superado el numero de intentos")
+        print('\nPorfavor introduce una matricula (Cuatro numeros y tres letras)')
+    print("\nHas superado el numero de intentos")
     return None
 
 def escanerDni():
@@ -300,8 +304,8 @@ def escanerDni():
                 return scan.upper()
             
         intentos+=1
-        print('Porfavor introduce un DNI (Ocho numeros y una letra)')
-    print("Has superado el numero de intentos")
+        print('\nPorfavor introduce un DNI (Ocho numeros y una letra)')
+    print("\nHas superado el numero de intentos")
     return None
 
 def escanerFecha():
@@ -315,19 +319,19 @@ def escanerFecha():
         #Se crea un boolean para comprobar si se debe continuar introduciendo datos
         continuar=True
         #Se introduce un dia y se comprueba que sea un numero entre 1 y 31, si no continuar se cambia a false
-        print("Introduzca un dia")
+        print("\nIntroduzca un dia")
         dia=input()
         if(dia.isspace() or dia.isnumeric()==False or int(dia)>31 or int(dia)<=0):
             continuar=False
         #Se introduce un mes y se comprueba que continuar sea true y que sea un numero entre 1 y 12, si no continuar se cambia a false
         if(continuar):
-            print("Introduzca un mes")
+            print("\nIntroduzca un mes")
             mes=input()
             if(mes.isspace() or mes.isnumeric()==False or int(mes)>12 or int(mes)<=0 or continuar==False):
                 continuar=False   
         #Se introduce un anno y se comprueba que continuar sea true y que sea un numero entre 2000 y 3000, si no continuar se cambia a false
         if(continuar):
-            print("Introduzca un anno") 
+            print("\nIntroduzca un anno") 
             anno=input()
             if(anno.isspace() or anno.isnumeric()==False or int(anno)>3000 or int(anno)<2000 or continuar==False):
                 continuar=False 
@@ -337,10 +341,10 @@ def escanerFecha():
                 x = datetime.datetime(int(anno), int(mes), int(dia))
                 return x.strftime("%d-%m-%Y")
             except:
-                print("La fecha introducida no es una fecha real")
+                print("\nLa fecha introducida no es una fecha real")
         intentos+=1
-        print('Porfavor introduce una fecha correcta (Dia 1-31 mes 1-12 anno 2000-3000)')
-    print("Has superado el numero de intentos")
+        print('\nPorfavor introduce una fecha correcta (Dia 1-31 mes 1-12 anno 2000-3000)')
+    print("\nHas superado el numero de intentos")
     return None
 
 def escanerYear():
@@ -357,8 +361,8 @@ def escanerYear():
         if(anno.isnumeric() and len(anno)==4 and int(anno) <=hoy.year and int(anno)>1886):
             return anno+''
         intentos+=1
-        print("Porfavor introduce un anno correcto (4 digitos entre 1886 y el anno actual)")
-    print("Has superado el numero de intentos")
+        print("\nPorfavor introduce un anno correcto (4 digitos entre 1886 y el anno actual)")
+    print("\nHas superado el numero de intentos")
     return None
 
 def escanerEstadoVehiculo():
@@ -370,7 +374,7 @@ def escanerEstadoVehiculo():
     intentos=0
     while(intentos<3):
         #Se crea un bucle con todas las opciones para el estado
-        print("Introduzca el nuevo estado del vehiculo:\n1.Disponible\n2.Ocupado\n3.Averiado\n4.Otro")
+        print("\nIntroduzca el nuevo estado del vehiculo:\n1.Disponible\n2.Ocupado\n3.Averiado\n4.Otro")
         numOpcion = escanerNumerico();
         
         if(numOpcion=='1'):
@@ -383,13 +387,13 @@ def escanerEstadoVehiculo():
             return 'Averiado'
         
         elif(numOpcion=='4'):
-            print('Introduzca el nuevo estado del vehiculo')
+            print('\nIntroduzca el nuevo estado del vehiculo')
             return escanerAlfabetico()
         
         else:
-            print('Opcion no valida')
+            print('\nOpcion no valida')
             
-    print('Has superado el numero de intentos')
+    print('\nHas superado el numero de intentos')
     return None
         
 

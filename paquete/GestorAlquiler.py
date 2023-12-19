@@ -13,7 +13,7 @@ def crear(alquileres,root):
     alquiler = ET.Element('Alquiler',{'alquilerID': Utiles.autoasignarIDAlquier(root)})#Creamos un nuevo elemento sobre el cual trabajaremos
     #-----------------------------------------
     if(continuar):
-        print("Introduzca una matricula de vehiculo") 
+        print("\nIntroduzca una matricula de vehiculo") 
         scan= Utiles.escanerMatricula()
         if(scan!=None): 
             nodo= GestorVehiculo.buscarMatricula(scan, root[0])#Comprobamos que el vehiculo existe
@@ -23,27 +23,27 @@ def crear(alquileres,root):
                     idVehiculo.text =nodo.attrib['vehiculoID']
                 else:
                     continuar=False
-                    print("Lo sentimos pero ese vehiculo no esta disponible actualmente")
+                    print("\nLo sentimos pero ese vehiculo no esta disponible actualmente")
             else:
                 continuar=False
-                print ('No existe ese vehiculo')
-                print('Se cancelara la creacion de este alquiler')
+                print ('\nNo existe ese vehiculo')
+                print('\nSe cancelara la creacion de este alquiler')
         else:
             continuar=False
-            print('Se cancelara la creacion de este alquiler')
+            print('\nSe cancelara la creacion de este alquiler')
     
     if(continuar):
-        print("Introduzca un ID de cliente")
+        print("\nIntroduzca un ID de cliente")
         scan= Utiles.escanerDni()
         if(scan!=None):
             idCliente = ET.SubElement(alquiler, 'ID_Cliente')
             idCliente.text =scan
         else:
             continuar=False
-            print('Se cancelara la creacion de este alquiler')
+            print('\nSe cancelara la creacion de este alquiler')
     
     if(continuar):
-        print("Introduzca una fecha de inicio")
+        print("\nIntroduzca una fecha de inicio")
         fInicio= Utiles.escanerFecha()
         if(fInicio!=None ):
             if( Utiles.confirmarFecha(fInicio)):#Comprobamos que la fecha es superior o igual al dia de hoy
@@ -52,15 +52,15 @@ def crear(alquileres,root):
                     fechaInicio.text =fInicio
                 else:
                     continuar=False
-                    print("Lo sentimos pero el vehiculo esta ocupado en esa fecha")
+                    print("\nLo sentimos pero el vehiculo esta ocupado en esa fecha")
             else:
                 continuar=False
-                print("No puedes introducir una fecha que sea inferior a hoy")
+                print("\nNo puedes introducir una fecha que sea inferior a hoy")
         else:
             continuar=False
-            print('Se cancelara la creacion de este alquiler')
+            print('\nSe cancelara la creacion de este alquiler')
     if(continuar):
-        print("Introduzca una fecha de finalizacion")
+        print("\nIntroduzca una fecha de finalizacion")
         fFinal= Utiles.escanerFecha()
         if(fFinal!=None ):
             if( Utiles.fechaDevolucionSuperior(fInicio,fFinal)!=None):#Comprobamos que la fecha es superior a la de inicio
@@ -72,17 +72,17 @@ def crear(alquileres,root):
                     fechaDevolucion.text ='-'
                 else:
                     continuar=False
-                    print("Lo sentimos pero el vehiculo esta ocupado en esa fecha")
+                    print("\nLo sentimos pero el vehiculo esta ocupado en esa fecha")
             else:
-                print('Se cancelara la creacion de este alquiler')
-                print('Porque has introducido una fecha final inferior a la de inicio')
+                print('\nSe cancelara la creacion de este alquiler')
+                print('\nPorque has introducido una fecha final inferior a la de inicio')
                 continuar=False
         else:
             continuar=False
-            print('Se cancelara la creacion de este alquiler')
+            print('\nSe cancelara la creacion de este alquiler')
     
     if(continuar):
-        print("Introduzca un kilometraje inicial") 
+        print("\nIntroduzca un kilometraje inicial") 
         scan= Utiles.escanerNumericoDecimal()
         if(scan!=None):
             if(comprobarKilometraje(scan,root)):#Comprobamos que el kilometraje es superior o igual al kilometraje final en el resto de alquileres de ese vehiculo
@@ -100,13 +100,13 @@ def crear(alquileres,root):
                 recargo.text ='De momento 0'
                 
                 alquileres.append(alquiler) 
-                print('Has añadido un nuevo alquiler a la lista de alquileres')
+                print('\nHas añadido un nuevo alquiler a la lista de alquileres')
             else:
                 continuar=False
-                print('El kilometraje inicial es inferior a un kilometraje final anterior')
+                print('\nEl kilometraje inicial es inferior a un kilometraje final anterior')
         else:
             continuar=False
-            print('Se cancelara la creacion de este alquiler')
+            print('\nSe cancelara la creacion de este alquiler')
     
     return 0
 def finalizarAlquiler(alquileres,root):
@@ -121,11 +121,11 @@ def finalizarAlquiler(alquileres,root):
     precioFinal=None
     recargo=None
     continuar=True
-    print("Introduce la matricula del vehiculo que quieres ver")
+    print("\nIntroduce la matricula del vehiculo que quieres ver")
     vehiculo= Utiles.escanerMatricula()
     nodoVehiculo= GestorVehiculo.buscarMatricula(vehiculo, root[0])
     if(vehiculo!=None):
-        print("Introduce el dni del cliente que quieres ver")
+        print("\nIntroduce el dni del cliente que quieres ver")
         dni= Utiles.escanerDni()
         if(dni!=None):
             nodo=buscarPosicionMatriculaDni(alquileres,vehiculo,dni)
@@ -133,26 +133,26 @@ def finalizarAlquiler(alquileres,root):
     
     if(nodo!=None):
         if(nodoVehiculo==None):
-            print("A pesar de que el vehiculo ya no existe puedes finalizar el alquiler")
+            print("\nA pesar de que el vehiculo ya no existe puedes finalizar el alquiler")
         tarifa=nodo[0].attrib['tarifa']#Obtenemos la tarifa del vehiculo buscado
-        print("Introduzca una fecha de devolucion") 
+        print("\nIntroduzca una fecha de devolucion") 
         scan= Utiles.escanerFecha()
         if(scan!=None):
             if( Utiles.fechaDevolucionSuperior(nodo[2].text,scan)!=None):#Comprobamos que la fecha de devolucion es duperior a la de inicio
                 fechaDevolucion=scan
             else:
                 continuar=False
-                print("La fecha de devolucion no puede ser inferior a la de inicio")
+                print("\nLa fecha de devolucion no puede ser inferior a la de inicio")
         else:
             continuar=False
         if(continuar):
-            print("Introduzca un kilometraje final")
+            print("\nIntroduzca un kilometraje final")
             scan= Utiles.escanerNumericoDecimal()
             if(scan!=None):
                 if(comprobarKilometraje(scan, root)):#Comprobamos que el kilometraje final es superior al inicial
                     kilometrajeFinal=scan
                 else:
-                    print('El kilometraje introducido es inferior al maximo kilometraje introducido')
+                    print('\nEl kilometraje introducido es inferior al maximo kilometraje introducido')
                     continuar=False
             else:
                 continuar=False
@@ -165,7 +165,7 @@ def finalizarAlquiler(alquileres,root):
             if(precio!=None):
                 precioFinal=float(tarifa)*float(precio)#Volvemos a calcular el precio final
         if(continuar):
-            print("¿Seguro que quieres finalizar el alquiler?(Si o no)")
+            print("\n¿Seguro que quieres finalizar el alquiler?(Si o no)")
             if( Utiles.confirmacion()): 
                 nodo[4].text=fechaDevolucion
                 nodo[6].text=kilometrajeFinal
@@ -182,10 +182,10 @@ def modificar(alquileres,root):
     :param root:Un diccionario que contiene todos los alquileres y vehiculos
     '''
     nodo=None
-    print("Introduce la matricula del vehiculo que quieres ver")
+    print("\nIntroduce la matricula del vehiculo que quieres ver")
     vehiculo= Utiles.escanerMatricula()
     if(vehiculo!=None):
-        print("Introduce el dni del cliente que quieres ver")
+        print("\nIntroduce el dni del cliente que quieres ver")
         dni= Utiles.escanerDni()
         if(dni!=None):
             nodo=buscarPosicionMatriculaDni(alquileres,vehiculo,dni)
@@ -203,19 +203,19 @@ def modificar(alquileres,root):
     recargo=None
     while(continuar):#Este bucle nos permite modificar todos los datos de un mismo alquiler hasta que queramos finalizar y nos pedira confirmacion para que los cambios se realicen
         if(nodo!=None):
-            print("Introcuce el campo que quieres modificar\n1.ID Alquiler\n2.ID Vehiculo\n3.ID Cliente\n4.Fecha Inicio\n5.Fecha Final\n6.Fecha Devolucion\n7.Kilometraje Inicial\n8.Kilometraje Final\n9.Precio Final\n10.Recargo\n0.Salir")
+            print("\nIntrocuce el campo que quieres modificar\n1.ID Alquiler\n2.ID Vehiculo\n3.ID Cliente\n4.Fecha Inicio\n5.Fecha Final\n6.Fecha Devolucion\n7.Kilometraje Inicial\n8.Kilometraje Final\n9.Precio Final\n10.Recargo\n0.Salir")
             opcion=input()
             if(opcion=="1"):#Este Switch es el que nos permite elegir que campo queremos modificar
-                print("Introduzca una ID de alquiler") 
+                print("\nIntroduzca una ID de alquiler") 
                 scan= Utiles.escanerNumerico()
                 if(scan!=None):
                     if(buscarPosicionId(alquileres,scan)==None):
-                        print("No he encontrado otro alquiler con ID igual, es decir el ID introducido es valido")
+                        print("\nNo he encontrado otro alquiler con ID igual, es decir el ID introducido es valido")
                         idAlquiler=scan
                     else:
-                        print("Ya existe un alquiler con ese ID")
+                        print("\nYa existe un alquiler con ese ID")
             elif(opcion=="2"):
-                print("Introduzca una matricula de vehiculo") 
+                print("\nIntroduzca una matricula de vehiculo") 
                 scan= Utiles.escanerMatricula()
                 if(scan!=None): 
                     nodoVehiculo= GestorVehiculo.buscarMatricula(scan, root[0])
@@ -225,16 +225,16 @@ def modificar(alquileres,root):
                             matricula=nodoVehiculo[0].text
                             tarifa=nodoVehiculo[3].text
                         else:
-                            print("Lo sentimos pero ese vehiculo no esta disponible actualmente")
+                            print("\nLo sentimos pero ese vehiculo no esta disponible actualmente")
                     else:
-                        print ('No existe ese vehiculo')
+                        print ('\nNo existe ese vehiculo')
             elif(opcion=="3"):
-                print("Introduzca una DNI de cliente") 
+                print("\nIntroduzca una DNI de cliente") 
                 scan= Utiles.escanerDni()
                 if(scan!=None):
                     idCliente=scan
             elif(opcion=="4"):
-                print("Introduzca una fecha de inicio") 
+                print("\nIntroduzca una fecha de inicio") 
                 scan= Utiles.escanerFecha()
                 if(scan!=None):
                     if(fechaFinal!=None):
@@ -242,19 +242,19 @@ def modificar(alquileres,root):
                             if( Utiles.comprobarDisponibilidad(scan, root,nodo.attrib['alquilerID'])):#Comprobamos que el vehiculo esta disponible en esa fecha
                                 fechaInicio=scan
                             else:
-                                print("Lo sentimos pero el vehiculo esta ocupado en esa fecha")
+                                print("\nLo sentimos pero el vehiculo esta ocupado en esa fecha")
                         else:
-                            print("La fecha de inicio es mayor que la final, cambia antes la final a una mayor") 
+                            print("\nLa fecha de inicio es mayor que la final, cambia antes la final a una mayor") 
                     else:
                         if( Utiles.fechaDevolucionSuperior(scan,nodo[3].text)!=None):#Comprobamos que introduces una feha inferior a la final
                             if( Utiles.comprobarDisponibilidad(scan, root,nodo.attrib['alquilerID'])):#Comprobamos que el vehiculo esta disponible en esa fecha
                                 fechaInicio=scan
                             else:
-                                print("Lo sentimos pero el vehiculo esta ocupado en esa fecha")
+                                print("\nLo sentimos pero el vehiculo esta ocupado en esa fecha")
                         else:
-                            print("La fecha de inicio es mayor que la final, cambia antes la final a una mayor") 
+                            print("\nLa fecha de inicio es mayor que la final, cambia antes la final a una mayor") 
             elif(opcion=="5"):
-                print("Introduzca una fecha final") 
+                print("\nIntroduzca una fecha final") 
                 scan= Utiles.escanerFecha()
                 if(scan!=None):
                     if(fechaInicio!=None):
@@ -262,62 +262,62 @@ def modificar(alquileres,root):
                             if( Utiles.comprobarDisponibilidad(scan, root,nodo.attrib['alquilerID'])):#Comprobamos que el vehiculo esta disponible en esa fecha
                                 fechaFinal=scan
                             else:
-                                print("Lo sentimos pero el vehiculo esta ocupado en esa fecha")
+                                print("\nLo sentimos pero el vehiculo esta ocupado en esa fecha")
                         else:
-                            print("La fecha de inicio es mayor que la final, cambia antes la final a una mayor") 
+                            print("\nLa fecha de inicio es mayor que la final, cambia antes la final a una mayor") 
                     else:
                         if( Utiles.fechaDevolucionSuperior(nodo[2].text,scan)!=None):#Comprobamos que introduces una feha superior a la inicial
                             if( Utiles.comprobarDisponibilidad(scan, root,nodo.attrib['alquilerID'])):#Comprobamos que el vehiculo esta disponible en esa fecha
                                 fechaFinal=scan
                             else:
-                                print("Lo sentimos pero el vehiculo esta ocupado en esa fecha")
+                                print("\nLo sentimos pero el vehiculo esta ocupado en esa fecha")
                         else:
-                            print("La fecha de inicio es mayor que la final, cambia antes la final a una mayor") 
+                            print("\nLa fecha de inicio es mayor que la final, cambia antes la final a una mayor") 
             elif(opcion=="6"):
-                print("Introduzca una fecha de devolucion") 
+                print("\nIntroduzca una fecha de devolucion") 
                 scan= Utiles.escanerFecha()
                 if(scan!=None):
                     if(fechaInicio!=None):
                         if( Utiles.fechaDevolucionSuperior(fechaInicio,scan)!=None):#Comprobamos que la fecha es superior a la inicial
                             fechaDevolucion=scan
                         else:
-                            print("La fecha de devolucion no puede ser inferior a la de inicio") 
+                            print("\nLa fecha de devolucion no puede ser inferior a la de inicio") 
                     else:
                         if( Utiles.fechaDevolucionSuperior(nodo[2].text,scan)!=None):#Comprobamos que la fecha es superior a la inicial
                             fechaDevolucion=scan
                         else:
-                            print("La fecha de devolucion no puede ser inferior a la de inicio")  
+                            print("\nLa fecha de devolucion no puede ser inferior a la de inicio")  
             elif(opcion=="7"):
-                print("Introduzca un kilometraje inicial") 
+                print("\nIntroduzca un kilometraje inicial") 
                 scan= Utiles.escanerNumericoDecimal()
                 if(scan!=None):
                     kilometrajeInicial=scan
             elif(opcion=="8"):
-                print("Introduzca un kilometraje final") 
+                print("\nIntroduzca un kilometraje final") 
                 scan= Utiles.escanerNumericoDecimal()
                 if(scan!=None):
                     kilometrajeFinal=scan
             elif(opcion=="9"):
-                print("Introduzca un precio final") 
+                print("\nIntroduzca un precio final") 
                 scan= Utiles.escanerNumericoDecimal()
                 if(scan!=None):
                     precioFinal=scan
             elif(opcion=="10"):
-                print("Introduzca un recargo") 
+                print("\nIntroduzca un recargo") 
                 scan= Utiles.escanerNumericoDecimal()
                 if(scan!=None):
                     recargo=scan
             elif(opcion=="0"):
                 continuar=False
             else:
-                print("Escribe un numero dentro de las opciones posibles")
+                print("\nEscribe un numero dentro de las opciones posibles")
         else:
             continuar=False
             
     if(nodo!=None):
-        print("¿Quieres guardar los cambios realizados?(Si o no)")
+        print("\n¿Quieres guardar los cambios realizados?(Si o no)")
         if( Utiles.confirmacion()):#Confirmamos que quieres realizar los cambios
-            print("Los cambios realizados tomaran efecto")#Cambiamos los campos que hayan sido cambiados
+            print("\nLos cambios realizados tomaran efecto")#Cambiamos los campos que hayan sido cambiados
             if(idAlquiler != None):
                 nodo.attrib['alquilerID']=idAlquiler
             if(idVehiculo!=None):
@@ -346,54 +346,54 @@ def buscarMostrarTodosVehiculo(alquileres):
     Esta funcion se encarga de mostras todos los alquileres que tengan la matricula de un vehiculo que se le pedira al usuario
     :param alquileres:Un diccionario con todos los alquileres
     '''
-    print("Introduce la matricula de los alquileres que quieres ver")
+    print("\nIntroduce la matricula de los alquileres que quieres ver")
     vehiculo= Utiles.escanerMatricula()
     if(vehiculo!=None):
         ninguno=True#Variable para que informe de que no ha encontrado nada
         for x in alquileres:#Recorremos todos los alquileres en busca de concordancias
             if(x[0].attrib['matricula'].lower()==vehiculo.lower()):
-                print("He ecnontrado: ")
+                print("\nHe ecnontrado: ")
                 Utiles.recorrer(x)
                 ninguno=False
         if(ninguno):
-                print("No se ha encontrado ningun alquiler con esa matricula")
+                print("\nNo se ha encontrado ningun alquiler con esa matricula")
     return 0
 def buscarMostrarTodosDni(alquileres):
     '''
     Esta funcion se encarga de mostras todos los alquileres que tengan el DNI de un cliente que se le pedira al usuario
     :param alquileres:Un diccionario con todos los alquileres
     '''
-    print("Introduce el dni de los alquileres que quieres ver")
+    print("\nIntroduce el dni de los alquileres que quieres ver")
     dni= Utiles.escanerDni()
     if(dni!=None):
         ninguno=True#Variable para que informe de que no ha encontrado nada
         for x in alquileres:#Recorremos todos los alquileres en busca de concordancias
             if(x[1].text.lower()==dni.lower()):
-                print("He ecnontrado: ")
+                print("\nHe ecnontrado: ")
                 Utiles.recorrer(x)
                 ninguno=False
         if(ninguno):
-                print("No se ha encontrado ningun alquiler con ese Dni")
+                print("\nNo se ha encontrado ningun alquiler con ese Dni")
     return 0
 def buscarMostrarMatriculaDni(alquileres):
     '''
     Esta funcion se encarga de mostrar todos los alquileres que contengan un DNI y matricula concretos que se le pediran al usuario
     :param alquileres:Un diccionario con todos los alquileres
     '''
-    print("Introduce la matricula del vehiculo que quieres ver")
+    print("\nIntroduce la matricula del vehiculo que quieres ver")
     vehiculo= Utiles.escanerMatricula()
     if(vehiculo!=None):
-        print("Introduce el dni del cliente que quieres ver")
+        print("\nIntroduce el dni del cliente que quieres ver")
         dni= Utiles.escanerDni()
         if(dni!=None):
             ninguno=True#Variable para que informe de que no ha encontrado nada
             for x in alquileres:#Recorremos todos los alquileres en busca de concordancias
                 if( x[0].attrib['matricula'].lower()==vehiculo.lower() and x[1].text.lower()==dni.lower()):
-                    print("He ecnontrado: ")
+                    print("\nHe ecnontrado: ")
                     Utiles.recorrer(x)
                     ninguno=False
             if(ninguno):
-                print("No se ha encontrado ningun alquiler con esa Matricula y Dni")
+                print("\nNo se ha encontrado ningun alquiler con esa Matricula y Dni")
     return 0
 def buscarPosicionMatriculaDni(alquileres,vehiculo,dni):
     '''
@@ -413,14 +413,14 @@ def buscarPosicionMatriculaDni(alquileres,vehiculo,dni):
             ninguno=False
         cont+=1
     if(ninguno):
-        print("No se ha encontrado ningun alquiler con esa Matricula y Dni")
+        print("\nNo se ha encontrado ningun alquiler con esa Matricula y Dni")
     else:
         contador=0
         salir=True
         while(contador<3 and salir):
             contador+=1
             print(opciones)
-            print ("Elige el alquiler que quieres seleccionar")
+            print ("\nElige el alquiler que quieres seleccionar")
             scan= Utiles.escanerNumerico()#Elegimos el alquiler con el que deseamos trabajar de los que han sido mostrados
             if(scan!=None):
                 if(int(scan) in set(opciones)):
@@ -429,9 +429,9 @@ def buscarPosicionMatriculaDni(alquileres,vehiculo,dni):
                         if(x == alquileres[int(scan)]):
                             return x
                 elif(contador<3):
-                    print("Introduce un numero entre las opciones dadas")
+                    print("\nIntroduce un numero entre las opciones dadas")
                 else:
-                    print("Numero maximo de intentos alcanzado")
+                    print("\nNumero maximo de intentos alcanzado")
             else:
                 salir=False
         

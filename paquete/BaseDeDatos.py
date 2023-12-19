@@ -11,7 +11,7 @@ def comprobarArchivo(root):
     try:
         arbol = ET.parse('Alquiler.xml')
         root = arbol.getroot()
-        print("Arbol XML cargado")
+        print("\nArbol XML cargado")
         return root
     
     #Si al cargar salta la excepcion por que no existe se crea un nuevo archivo y un nuevo arbol
@@ -21,7 +21,7 @@ def comprobarArchivo(root):
         vehiculos.text=''
         alquileres = ET.SubElement(root,'Alquileres')
         alquileres.text=''
-        print("Arbol XML creado")
+        print("\nArbol XML creado")
         return root
 
 
