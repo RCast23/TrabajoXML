@@ -1,5 +1,13 @@
 <?xml version="1.0" ?>
 <EmpresaAlquiler>
-  <Vehiculos/>
+  <Vehiculos>
+    <Vehiculo vehiculoID="1">
+      <Matricula>1234ASD</Matricula>
+      <Descripcion>adsfsadf</Descripcion>
+      <Anno_De_Fabricacion>2000</Anno_De_Fabricacion>
+      <Tarifa>12.00</Tarifa>
+      <Estado_Vehiculo>Disponible</Estado_Vehiculo>
+    </Vehiculo>
+  </Vehiculos>
   <Alquileres/>
 </EmpresaAlquiler>

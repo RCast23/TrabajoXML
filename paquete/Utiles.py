@@ -39,13 +39,14 @@ def recorrer(nodo):
             print(attrName,"/ ",attrValue)
         
     if(attrName!='vehiculoID' and attrName!='alquilerID'):
-        if(attrName!='matricula' and attrName!='tarifa'):
-            print(nodo.text)
+        if(attrName!='matricula' and attrName!='tarifa' ):
+            if(nodo.text!=None):
+                print(nodo.text)
         else:
             print(nodo.attrib['matricula'])
     
     for n in nodo:
-        print()
+        #print()
         recorrer(n)
     return 0
 
