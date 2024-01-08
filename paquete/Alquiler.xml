@@ -1,13 +1,18 @@
 <?xml version="1.0" ?>
 <EmpresaAlquiler>
   <Vehiculos>
-    <Vehiculo vehiculoID="1">
-      <Matricula>1234ASD</Matricula>
-      <Descripcion>adsfsadf</Descripcion>
-      <Anno_De_Fabricacion>2000</Anno_De_Fabricacion>
-      <Tarifa>12.00</Tarifa>
-      <Estado_Vehiculo>Disponible</Estado_Vehiculo>
-    </Vehiculo>
-  </Vehiculos>
-  <Alquileres/>
+    </Vehiculos>
+  <Alquileres>
+    <Alquiler alquilerID="1">
+      <ID_Vehiculo matricula="1234AAA" tarifa="12.00">1</ID_Vehiculo>
+      <ID_Cliente>12341234A</ID_Cliente>
+      <Fecha_Inicio>31-12-2023</Fecha_Inicio>
+      <Fecha_Final>05-01-2024</Fecha_Final>
+      <Fecha_Devolucion>-</Fecha_Devolucion>
+      <Kilometraje_Inicial>12.00</Kilometraje_Inicial>
+      <Kilometraje_Final>-</Kilometraje_Final>
+      <Precio_Final>60.0</Precio_Final>
+      <Recargo>De momento 0</Recargo>
+    </Alquiler>
+  </Alquileres>
 </EmpresaAlquiler>

@@ -94,7 +94,7 @@ def submenuVehiculo(root):
         elif (opcion == '2'):
             vehiculo = GestorVehiculo.buscarVehiculo(root[0])
             if(vehiculo!=None):
-                Utiles.recorrer()
+                Utiles.recorrer(vehiculo)
             
             
         #Opcion para modificar un vehiculo
